@@ -3,7 +3,6 @@ import Logo from 'assets/images/logo.png';
 import Search from 'components/Search';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import Avatar from 'assets/images/avatar-default.png';
 import useAuth from 'hooks/useAuth';
 
 const Header = () => {
