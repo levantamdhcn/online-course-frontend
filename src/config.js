@@ -1,7 +1,7 @@
 const config = {
   url: window.location.origin.includes('localhost')
-    ? 'http://online-courses-web.herokuapp.com'
-    : window.location.origin
+    ? window.location.origin
+    : 'http://online-courses-web.herokuapp.com'
 };
 
 export default config;
