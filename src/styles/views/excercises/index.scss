@@ -1,0 +1,93 @@
+@import './exerciseDoing.scss';
+@import './testCases.scss';
+.exercise {
+  &-header {
+    background-color: #33485f;
+    height: 50px;
+    color: $white;
+    &-left {
+      display: flex;
+      align-items: center;
+      p {
+        font-size: 16px;
+      }
+      span {
+        margin-right: 20px;
+        cursor: pointer;
+        background-color: $white;
+      }
+    }
+    &-middle {
+      ul {
+        display: flex;
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border: 1px solid #707070;
+          border-radius: 4px;
+          font-weight: 600;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.8;
+          }
+          &.active {
+            background-color: $mainColor;
+          }
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  &-body {
+    display: flex;
+    .exercise-nav-left {
+      width: 50px;
+      height: calc(100vh - 50px);
+      background-color: #1d2631;
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        li {
+          cursor: pointer;
+          padding: 11px 14px 13px 11px;
+          span {
+            background-color: $white;
+            width: 25px;
+            height: 28px;
+          }
+          &.active {
+            background-color: $mainColor;
+          }
+        }
+      }
+    }
+    .do-exercise {
+      display: flex;
+      width: 100%;
+      .exercise-info {
+        flex: 1;
+        padding: 0 35px;
+        h1 {
+          color: $blackColor;
+          font-size: 17px;
+          font-weight: 600;
+          &.question-title {
+            padding-top: 40px;
+          }
+        }
+      }
+      .__dbk__container.Vertical {
+        background-color: #263238;
+        height: calc(100vh - 50px);
+      }
+    }
+  }
+}

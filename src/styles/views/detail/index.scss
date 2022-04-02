@@ -1,0 +1,45 @@
+@import './basicDetail';
+@import './feature';
+@import './circullum/index.scss';
+
+.course-detail {
+  padding-top: 70px;
+  padding-bottom: 80px;
+  background-color: $lightColor;
+}
+
+.course-detail-element {
+  padding: 32px;
+  border-radius: 8px;
+  background-color: $white;
+}
+
+.course-overview-wrapper {
+  .course-overview {
+    margin-bottom: 10px;
+    line-height: 1.8;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
+.course-overview-title {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: $textColorDark;
+  font-weight: 600;
+}
+
+.course-requirements {
+  &-item {
+    display: flex;
+    align-items: center;
+    margin: 1px 0 14px 0;
+    span {
+      margin-right: 10px;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+.exercise-doing {
+  flex: 1;
+}
+.editor-container {
+  width: 100%;
+  // background-color: #263238;
+}
+.editor-heading {
+  padding: 8px 0 8px 29px;
+  background-color: #36393d;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  div.reset-btn {
+    padding: 3px 10px;
+    background-color: #6e6e6e;
+    border-radius: 4px;
+    cursor: pointer;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    span {
+      background-color: $white;
+      margin-right: 5px;
+    }
+    &:hover {
+      background-color: $mainColor;
+    }
+  }
+}
+
+.language-selector {
+  position: relative;
+  .selection-wrapper {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    &.active {
+      display: block;
+    }
+    border: 1px solid $borderColor;
+    background-color: #36393d;
+    top: 35px;
+    left: 0;
+    right: 0;
+    border-radius: 4px;
+    .selection {
+      &:hover {
+        background-color: #6e6e6e;
+      }
+      cursor: pointer;
+      padding-left: 10px;
+      border-bottom: 1px solid $textColorGray;
+    }
+  }
+  .current-language {
+    cursor: pointer;
+    padding: 3px 10px 3px 10px;
+    border: 1px solid $borderColor;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 88px;
+    span {
+      width: 8px;
+      height: 8px;
+      background-color: $white;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.search-wrapper {
+  flex: 1;
+  position: relative;
+  span {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+  }
+  input {
+    border: 1px solid $borderColor;
+    padding: 10px 15px 10px 40px;
+    border-radius: 30px;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

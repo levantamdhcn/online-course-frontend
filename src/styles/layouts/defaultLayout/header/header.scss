@@ -1,0 +1,120 @@
+.header {
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 5px 30px rgb(0 22 84 / 10%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: $white;
+}
+
+.logo img {
+  max-width: 120px;
+  padding: 17px 15px 17px 0;
+  margin-right: 16px;
+}
+
+.header {
+  &-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &-search {
+    flex: 1;
+    .search-wrapper {
+      width: 100%;
+      input {
+        width: 100%;
+      }
+    }
+  }
+  &-nav-item {
+    padding: 25px 12px;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.active {
+      color: $mainColor;
+    }
+  }
+  &-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .button-group {
+      .btn:first-child {
+        margin-right: 10px;
+      }
+    }
+    .my-course {
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 30px;
+    }
+    img.avatar {
+      border: 1px solid $borderColor;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.setting-modal-wrapper {
+  position: relative;
+  .setting-modal {
+    animation: floatToBottom 0.3s;
+    box-shadow: 0 -4px 32px rgb(0 0 0 / 20%);
+    background-color: $white;
+    padding: 8px 24px;
+    border-radius: 10px;
+    position: absolute;
+    width: 230px;
+    top: 50px;
+    right: 0;
+    .profile-preview {
+      display: flex;
+      align-items: center;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 12px;
+      }
+      .profile-name {
+        font-weight: 600;
+        color: #292929;
+        font-size: 16px;
+      }
+      .profile-link {
+        color: #757575;
+        font-size: 14px;
+      }
+    }
+    .modal-options {
+      margin-top: 10px;
+      .option {
+        &:hover {
+          color: #292929;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        cursor: pointer;
+        font-weight: 500;
+        color: #666666;
+        font-size: 15px;
+        padding: 10px 0;
+      }
+    }
+  }
+}

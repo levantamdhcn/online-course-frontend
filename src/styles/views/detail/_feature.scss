@@ -1,0 +1,21 @@
+.feature-item {
+  padding: 10px 0;
+  &-left {
+    display: flex;
+    align-items: center;
+    span {
+      margin-right: 10px;
+      background-color: $textColorDark;
+    }
+  }
+  &-value {
+    font-weight: 600;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.feature-list {
+  display: flex;
+  flex-direction: column;
+}

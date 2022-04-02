@@ -1,0 +1,103 @@
+.profile {
+  &-heading {
+    margin: 20px 0;
+    font-size: 30px;
+    color: #333;
+    font-weight: 600;
+  }
+
+  &-top {
+    h1 {
+      font-size: 22px;
+      padding: 10px 0;
+      margin-bottom: 22px;
+      color: #333;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid $borderColor;
+  }
+
+  &-middle {
+    .grid.grid-cols-12.gap-4 {
+      padding: 16px 0 20px 0;
+    }
+    .custom-input {
+      &-label {
+        font-size: 16px;
+        color: #000;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+      &-field {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-radius: unset;
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+      }
+      .desc {
+        font-size: 14px;
+        color: #757575;
+        margin: 14px 0;
+      }
+    }
+  }
+
+  .image-input {
+    float: right;
+
+    &.editting {
+      &:hover {
+        span {
+          opacity: 1;
+        }
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #000;
+        opacity: 0.6;
+      }
+      span {
+        display: block;
+      }
+      input {
+        display: block;
+      }
+    }
+    position: relative;
+    input {
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+    span {
+      display: none;
+      position: absolute;
+      top: 25%;
+      left: 15px;
+      width: 49px;
+      height: 36px;
+      background-color: $white;
+      opacity: 0.6;
+    }
+  }
+}

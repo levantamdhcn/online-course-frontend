@@ -1,0 +1,108 @@
+.track-list {
+  .track-list-header {
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .track-list-wrapper {
+    overflow-y: auto;
+    height: calc(100vh - 48px);
+    padding-bottom: 50px;
+    .accordion-title {
+      background-color: #f2f2f2;
+    }
+    .accordion-label {
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      .track-info {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: $textColorGray;
+        .divider {
+          border-left: 1px solid $textColorGray;
+          height: 14px;
+          width: 1px;
+          margin: 0 5px;
+        }
+      }
+    }
+    .accordion-content {
+      padding: 0;
+    }
+  }
+}
+
+.exercise-wrapper {
+  cursor: pointer;
+  &.disable {
+    cursor: not-allowed;
+    background-color: #f1f1f1;
+    opacity: 0.6;
+  }
+  &.current {
+    background-color: #fee6ed;
+  }
+  .exercise-info {
+    padding: 10px 20px;
+    &-desc {
+      display: flex;
+      align-items: center;
+      p {
+        margin-left: 5px;
+      }
+      padding: 8px 0;
+      span {
+        background-color: #4a5874;
+      }
+    }
+  }
+  .exercise-status {
+    float: right;
+  }
+
+  .quiz-list-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+
+    padding: 23px 20px;
+    p {
+      margin-right: 5px;
+    }
+    .quiz-list {
+      display: flex;
+      align-items: center;
+      .quiz-item {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $white;
+        color: #666666;
+        font-size: 14px;
+        &.disable {
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+        span.icon-check {
+          width: 14px;
+          height: 11px;
+        }
+        &.active {
+          background-color: $active;
+          span {
+            background-color: $white;
+          }
+        }
+      }
+    }
+  }
+}

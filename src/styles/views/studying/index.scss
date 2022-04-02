@@ -1,0 +1,164 @@
+@import './videoViewer.scss';
+@import './trackList';
+
+.studying {
+  height: 100vh;
+  overflow: hidden;
+  &-header {
+    height: 50px;
+    width: 100%;
+    background-color: #29303b;
+  }
+}
+
+.studying-header {
+  color: $white;
+  &-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo {
+      height: 30px;
+      margin-right: 16px;
+    }
+    span {
+      background-color: $white;
+      margin-right: 25px;
+      cursor: pointer;
+    }
+    .course-name {
+      font-weight: 600;
+    }
+  }
+  &-right {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.progress {
+  margin-right: 5px;
+}
+
+.course-progress-count {
+  span {
+    font-weight: 600;
+  }
+}
+
+.lecture-name {
+  margin: 48px 0px 8px 0px;
+  padding: 0 8.5%;
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+}
+
+.lecture-update {
+  padding: 0 8.5%;
+}
+
+.comments-wrapper {
+  margin-top: 30px;
+  padding: 0 8.5%;
+}
+
+.comment {
+  &-author-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  &-create {
+    display: flex;
+    align-items: center;
+  }
+  &-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    input {
+      border-top: none;
+      border-bottom: none;
+      border-right: none;
+      border-bottom: 1px solid #999999;
+      margin-bottom: 10px;
+      width: 100%;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &-buttons {
+      float: right;
+      button {
+        &:last-child {
+          margin-left: 10px;
+          &.deactive {
+            background-color: #ccc;
+            cursor: default;
+          }
+        }
+        &:first-child {
+          &:hover {
+            background-color: #ebebeb;
+          }
+        }
+      }
+    }
+  }
+}
+
+.comment-list-wrapper {
+  padding-top: 48px;
+  margin-top: 8px;
+  padding-bottom: 80px;
+}
+
+.comment-item-wrapper {
+  display: flex;
+  .comment-section {
+    width: 100%;
+    .comment-create {
+      margin-bottom: 20px;
+    }
+  }
+  .comment-body {
+    width: max-content;
+    background-color: #f2f3f5;
+    border-radius: 18px;
+    min-width: 120px;
+    padding: 9px 12px;
+    .comment-author-name {
+      font-weight: 600;
+      color: $blackColor;
+      font-size: 14px;
+    }
+  }
+  .comment-actions {
+    display: flex;
+    align-items: center;
+    margin: 14px 0;
+    span.comment-reaction {
+      position: relative;
+    }
+    span {
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      margin: 0 4px;
+      font-size: 13px;
+      color: $mainColor;
+      &:last-child {
+        font-size: 14px;
+        color: $textColor;
+        &:hover {
+          text-decoration: none;
+          cursor: default;
+        }
+      }
+    }
+  }
+}

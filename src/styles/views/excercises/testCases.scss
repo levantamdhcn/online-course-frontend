@@ -1,0 +1,117 @@
+.test-case-container {
+  position: relative;
+  background-color: #263238;
+  height: 100%;
+  z-index: 1000;
+}
+
+.test-case-heading {
+  background-color: #232432;
+  padding: 8px 10px;
+  color: $white;
+  font-weight: 600;
+}
+
+.test-case-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #232432;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+  button {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    min-width: 100px;
+    span {
+      background-color: $white;
+      margin-right: 5px;
+    }
+    &:hover {
+      opacity: 0.6;
+    }
+    font-size: 14px;
+    &:first-child {
+      margin-right: 10px;
+    }
+  }
+  .btn.btn-submit {
+    background-color: #1faa24;
+    border: none;
+    color: $white;
+    &.disable {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+  text-align: right;
+}
+
+.test-case-body {
+  display: flex;
+  height: calc(100% - 50px);
+}
+.test-case-tabs {
+  display: flex;
+  ul {
+    height: 100%;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+  overflow: scroll;
+  .test-case-tab {
+    cursor: pointer;
+
+    padding: 10px 0 10px 10px;
+    background-color: #232432;
+    color: #999;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+    transition: all 0.6s;
+    span {
+      background-color: $white;
+      margin-right: 5px;
+    }
+    p {
+      font-weight: 500;
+    }
+    &:hover {
+      background-color: #3b3c54;
+      color: $white;
+    }
+    &.active {
+      background-color: #3b3c54;
+      color: $white;
+    }
+  }
+}
+.test-case-current-content {
+  background-color: #3b3c54;
+  width: 100%;
+  height: 100%;
+  padding: 8px 15px 15px 15px;
+  .tabs-list {
+    overflow: scroll;
+    height: 100%;
+    .tab-item {
+      display: flex;
+      align-items: center;
+      p {
+        flex: 33.33333%;
+        &:first-child {
+          margin-right: 20px;
+          color: #3498db;
+        }
+        &:last-child {
+          color: #d4d4d4;
+        }
+      }
+    }
+  }
+}

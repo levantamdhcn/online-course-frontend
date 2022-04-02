@@ -1,0 +1,159 @@
+@import './var';
+@import './icon';
+@import './layouts/index.scss';
+@import './components/index.scss';
+@import './views/index.scss';
+@import './input';
+@import './views/auth/index.scss';
+@import './views/studying/index.scss';
+@import './views/excercises/index.scss';
+@import './views/profile/index.scss';
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  color: $textColor;
+}
+
+@keyframes floatToBottom {
+  from {
+    opacity: 0;
+    top: 30px;
+  }
+  to {
+    opacity: 1;
+    top: 50px;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  opacity: 0.6;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  opacity: 0.6;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+.hover-effect {
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.pt-80 {
+  padding-top: 80px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.px-80 {
+  padding: 80px 0;
+}
+
+.pb-50 {
+  padding-bottom: 50px;
+}
+
+.p-32 {
+  padding: 32px;
+}
+
+.main-color {
+  color: $mainColor !important;
+}
+
+.btn {
+  padding: 8px 20px;
+  border: 1px solid $borderColor;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn.btn-primary {
+  background-color: $mainColor;
+  color: $white;
+  border: none;
+}
+
+.btn.btn-dark {
+  background-color: $bgDark;
+  color: $white;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn.btn-light {
+  background-color: white;
+  color: $mainColor;
+  &:hover {
+    background-color: $mainColor;
+    color: $white;
+  }
+}
+
+.arrow-btn {
+  z-index: 1000;
+  position: absolute;
+  top: calc(50% - 16px);
+  width: 40px;
+  height: 40px;
+  background-color: $white;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 10%);
+}
+
+.arrow-prev {
+  left: 10px;
+}
+.arrow-next {
+  right: 30px;
+}
+
+.scroll-wrapper {
+  overflow: scroll;
+  height: 100vh;
+}
+
+.reaction-wrapper {
+  background-color: $white;
+  border: 1px solid $borderColor;
+  border-radius: 30px;
+  padding: 8px;
+  position: absolute;
+  top: -60px;
+  display: flex;
+  .zama-emoji {
+    margin-right: 10px;
+  }
+}
+
+.__dbk__gutter.Vertical.Dark {
+  z-index: 1000;
+}

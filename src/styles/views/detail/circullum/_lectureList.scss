@@ -1,0 +1,43 @@
+.lectures-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.lectures-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 15px;
+  border-bottom: 1px solid $lightBorderColor;
+  &-left {
+    display: flex;
+    align-items: center;
+    line-height: 21px;
+    color: $lightGrey;
+    span {
+      margin-right: 5px;
+      line-height: 21px;
+      background-color: $lightGrey;
+    }
+  }
+  &-index {
+    display: flex;
+    align-items: center;
+    margin-right: 32px;
+    line-height: 21px;
+  }
+  &-name {
+    color: #343a40;
+    font-weight: 600;
+  }
+  &-right {
+    width: 30px;
+    height: 30px;
+    background-color: #d7dfef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
