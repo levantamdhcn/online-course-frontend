@@ -22,9 +22,14 @@ const Login = () => {
   };
 
   const responseGoogle = async (response) => {
-    const res = await axios.post(`${config.url}/auth/google`, { tokenId: response.tokenId });
+    try {
+      console.log(response);
+      const res = await axios.post(`${config.url}/auth/google`, { tokenId: response.tokenId });
 
-    loginWithGoogle(res.data);
+      loginWithGoogle(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const responseFacebook = async (response) => {
@@ -95,24 +100,12 @@ const Login = () => {
             callback={responseFacebook}
             onClick={responseFacebook}
           />
-          {/* <div className="auth-option-item connect-via-facebook hover-effect">
-            <span className="icon-facebook"></span>
-            <span>Facebook</span>
-          </div> */}
           <GoogleLogin
             clientId="552476244389-i27g7s11jkoo862j4e7oh1dmukkmhto9.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
-            onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
           />
-          {/* <div
-            className="auth-option-item connect-via-google hover-effect"
-            onClick={loginWithGoogle}
-          >
-            <span className="icon-google"></span>
-            <span>Google</span>
-          </div> */}
         </div>
         <div className="text-center mt-4">
           Don't have an account ?{' '}
