@@ -8,6 +8,7 @@
 @import './views/studying/index.scss';
 @import './views/excercises/index.scss';
 @import './views/profile/index.scss';
+@import "./views/admin/index.scss";
 body {
   margin: 0;
   padding: 0;
@@ -89,6 +90,7 @@ body {
   border-radius: 4px;
   font-weight: 600;
   transition: all 0.3s;
+  min-width: 80px;
 }
 
 .btn.btn-primary {

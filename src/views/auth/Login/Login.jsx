@@ -22,10 +22,9 @@ const Login = () => {
   };
 
   const responseGoogle = async (response) => {
+    console.log(response);
     try {
-      console.log(response);
       const res = await axios.post(`${config.url}/auth/google`, { tokenId: response.tokenId });
-
       loginWithGoogle(res.data);
     } catch (error) {
       console.log(error);
@@ -104,7 +103,10 @@ const Login = () => {
             clientId="552476244389-i27g7s11jkoo862j4e7oh1dmukkmhto9.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
+            onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
+            // uxMode={'redirect'}
+            // redirectUri={'http://localhost:3000'}
           />
         </div>
         <div className="text-center mt-4">

@@ -7,10 +7,9 @@ import useAuth from 'hooks/useAuth';
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const history = useHistory();
   const { isAuthenticated } = useAuth();
-  const { user } = useAuth();
 
   return (
     <>

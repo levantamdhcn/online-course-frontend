@@ -72,6 +72,9 @@
   &-search {
     mask-image: url('../assets/_icon/search.svg');
   }
+  &-logo {
+    mask-image: url('../assets/_icon/logo.svg');
+  }
   &-camera {
     mask-image: url('../assets/_icon/camera.svg');
   }
@@ -107,6 +110,9 @@
   }
   &-user {
     mask-image: url('../assets/_icon/user.svg');
+  }
+  &-user-filled {
+    mask-image: url('../assets/_icon/user-filled.svg');
   }
   &-check {
     mask-image: url('../assets/_icon/check.svg');
@@ -155,5 +161,14 @@
   }
   &-camera-filled {
     mask-image: url('../assets/_icon/camera-filled.svg');
+  }
+  &-course {
+    mask-image: url('../assets/_icon/course.svg');
+  }
+  &-lecture {
+    mask-image: url('../assets/_icon/lecturesvg.svg');
+  }
+  &-log-out {
+    mask-image: url('../assets/_icon/log-out.svg');
   }
 }

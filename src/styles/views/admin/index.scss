@@ -1,0 +1,100 @@
+.admin-page {
+    display: flex;
+    background-color: #F7F7FC;
+}
+
+.admin-nav {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.admin-nav {
+    &-top {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        span {
+            width: 30px;
+            height: 30px;
+            background-color: $mainColor;
+        }
+    }
+    &-middle {
+        flex: 8;
+    }
+    &-bottom {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        span {
+            width: 20px;
+            height: 20px;
+            background-color: $mainColor;
+        }
+    }
+    &-item {
+        position: relative;
+        transition: all 0.3s;
+        padding: 15px 15px 10px 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        color: $mainColor;
+        padding-bottom: 5px;
+        span {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-color: #9499AC;
+        }
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+        &.active, &:hover {
+            color: $mainColor;
+            span {
+                background-color: $mainColor;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                width: 2px;
+                height: 100%;
+                left: 0;
+                background-color: $mainColor;
+            }
+        }
+    }
+
+}
+
+.admin-page-children {
+    width: 100%;
+    padding: 16px 24px 16px 12px;
+    .search-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .custom-input-field {
+            width: 35%;
+            border-radius: 8px;
+            background: #EAEBF1;
+        }
+    }
+}
+
+img.avatar {
+    border: 1px solid $borderColor;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
