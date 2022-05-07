@@ -3,6 +3,8 @@ import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import CreateCourseModal from '../CreateCourseModal';
+import CourseList from './CourseList';
+import CreateLectureModal from './CreateLectureModal';
 
 const Lecture = () => {
   const [lectures, setLectures] = useState(null);
@@ -19,9 +21,10 @@ const Lecture = () => {
       <div className="search-bar">
         <input type="text" className="custom-input-field" placeholder="Tìm kiếm..." />
       </div>
-      <button className="btn btn-primary" onClick={() => toggleAddLecture(true)}>
+      <button className="btn btn-primary float-right" onClick={() => toggleAddLecture(true)}>
         Thêm bài giảng
       </button>
+      <CourseList />
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -92,7 +95,7 @@ const Lecture = () => {
         title={'Thêm bài giảng'}
         toggleShow={toggleAddLecture}
         show={addLecture}
-        children={<CreateCourseModal />}
+        children={<CreateLectureModal onClose={() => toggleAddLecture(false)} />}
       ></ModalWrapper>
     </div>
   );

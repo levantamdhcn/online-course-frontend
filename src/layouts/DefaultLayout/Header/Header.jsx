@@ -7,9 +7,8 @@ import useAuth from 'hooks/useAuth';
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { logout, user } = useAuth();
   const history = useHistory();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
 
   return (
     <>
@@ -59,6 +58,11 @@ const Header = () => {
                       >
                         Cài đặt
                       </div>
+                      {user.admin && (
+                        <div className="option" onClick={() => history.push(`/admin`)}>
+                          Admin
+                        </div>
+                      )}
                       <div className="option" onClick={() => logout()}>
                         Đăng xuất
                       </div>

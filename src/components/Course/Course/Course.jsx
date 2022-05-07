@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Course = ({ image, title, views, time, lectures }) => {
+const Course = ({ image, title, views, time, lectures, id }) => {
   return (
-    <Link className="card" to="/course/html-css">
+    <Link className="card" to={`/course/${id}`}>
       <div className="card-header">{image}</div>
       <div className="card-body">
         <div className="card-title">{title}</div>

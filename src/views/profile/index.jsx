@@ -10,6 +10,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [file, setFile] = useState(null);
 
+
   const { username } = useParams();
 
   useEffect(() => {

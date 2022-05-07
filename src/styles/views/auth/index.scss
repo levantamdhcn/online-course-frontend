@@ -4,6 +4,7 @@
   padding: 16px 32px;
   border-radius: 8px;
   box-shadow: var(--shadow);
+
   .btn-submit {
     width: 100%;
     padding: 17px 26px;
@@ -15,6 +16,7 @@
   text-align: center;
   margin-bottom: 8px;
   font-size: 32px;
+
   span {
     color: $mainColor;
   }
@@ -22,9 +24,11 @@
 
 .auth-function {
   text-align: right;
+
   a {
     color: $mainColor;
     font-size: 14px;
+
     &:hover {
       color: $dark;
     }
@@ -37,6 +41,7 @@
     position: relative;
     margin: 20px 0;
     line-height: 21px;
+
     &::before {
       content: ' ';
       position: absolute;
@@ -45,6 +50,7 @@
       right: 0;
       border-bottom: 1px solid #e1e5f2;
     }
+
     span {
       position: relative;
       background: #fff;
@@ -55,9 +61,43 @@
       border-radius: 0;
     }
   }
+
   &-list {
     display: flex;
+    align-items: center;
+
+    &>button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      min-height: 60px;
+    }
+
+    p {
+      margin: 0 5px;
+    }
+
+    &>span {
+      width: 50%;
+      min-height: 60px;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: $white;
+          margin-right: 10px;
+        }
+      }
+    }
   }
+
   &-item {
     flex: 1;
     display: flex;
@@ -68,18 +108,22 @@
     color: $white;
     font-size: 16px;
     font-weight: 500;
+
     &:first-child {
       margin-right: 20px;
     }
+
     span {
       &:first-child {
         background-color: $white;
         margin-right: 8px;
       }
     }
+
     &.connect-via-facebook {
       background-color: #3b5998;
     }
+
     &.connect-via-google {
       background-color: #ca3537;
     }

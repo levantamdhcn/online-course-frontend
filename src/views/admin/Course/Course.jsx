@@ -3,9 +3,14 @@ import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import CreateCourseModal from '../CreateCourseModal';
+import { useHistory } from 'react-router-dom';
 
 const Course = () => {
   const [courses, setCourses] = useState(null);
+  const [addCourse, toggleAddCourse] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
   useEffect(() => {
     const getCourses = async () => {
       const response = await axios.get(`${config.url}/course`);
@@ -13,11 +18,24 @@ const Course = () => {
     };
     getCourses();
   }, []);
+
+  const handleDeleteCourse = async (id) => {
+    try {
+      setLoading(true);
+      const res = await axios.delete(`${config.url}/course/${id}`);
+      if (res.data) {
+        setLoading(false);
+      }
+    } catch (error) {}
+  };
   return (
     <div>
       <div className="search-bar">
         <input type="text" className="custom-input-field" placeholder="Tìm kiếm..." />
       </div>
+      <button className="btn btn-primary" onClick={() => toggleAddCourse(true)}>
+        Thêm bài giảng
+      </button>
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -70,7 +88,13 @@ const Course = () => {
                     <td class="px-6 py-4">{course.demand}</td>
                     <td class="px-6 py-4 text-right">
                       <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        Edit
+                        Sửa
+                      </button>
+                      <button
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        onClick={() => handleDeleteCourse(course._id)}
+                      >
+                        Xóa
                       </button>
                     </td>
                   </tr>
@@ -79,6 +103,12 @@ const Course = () => {
           </tbody>
         </table>
       </div>
+      <ModalWrapper
+        title={'Thêm khóa học'}
+        toggleShow={toggleAddCourse}
+        show={addCourse}
+        children={<CreateCourseModal onClose={() => toggleAddCourse(false)} />}
+      ></ModalWrapper>
     </div>
   );
 };

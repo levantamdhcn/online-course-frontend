@@ -1,35 +1,46 @@
+import axios from 'axios';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import config from '../../../config';
 
-const features = [
-  {
-    icon: 'user',
-    name: 'Student Enrolled',
-    value: 1740
-  },
-  {
-    icon: 'play',
-    name: 'Lectures',
-    value: 10
-  },
-  {
-    icon: 'quiz',
-    name: 'Exercise',
-    value: 40
-  },
-  {
-    icon: 'clock',
-    name: 'Duration',
-    value: `${60} hours`
-  },
-  {
-    icon: 'rank',
-    name: 'Skill level',
-    value: 'Beginner'
-  }
-];
+const CourseFeature = ({ course, enrolled, studentCount }) => {
+  const features = [
+    {
+      icon: 'user',
+      name: 'Student Enrolled',
+      value: studentCount
+    },
+    {
+      icon: 'play',
+      name: 'Lectures',
+      value: course.lectures
+    },
+    {
+      icon: 'quiz',
+      name: 'Exercise',
+      value: 40
+    },
+    {
+      icon: 'clock',
+      name: 'Duration',
+      value: course.hours
+    }
+  ];
 
-const CourseFeature = () => {
+  const history = useHistory();
+
+  const handleEnroll = () => {
+    try {
+      const res = axios.post(`${config.url}/enroll`, {
+        id: course._id
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="course-feature-wrapper ">
       <div className="course-overview-title">Course Features</div>
@@ -49,10 +60,23 @@ const CourseFeature = () => {
         <div className="feature-item"></div>
       </ul>
       <div className="feature-bottom">
-        <Link to="/" className="btn btn-primary rounded-2xl hover-effect">
-          Enroll Now
-          <span className="icon-arrow-right"></span>
-        </Link>
+        {enrolled ? (
+          <button
+            className="btn btn-primary rounded-2xl hover-effect flex items-center justify-between h-12"
+            onClick={() => history.push(`/learning/${course._id}`)}
+          >
+            Tiếp tục học
+            <span className="icon-arrow-right ml-2 bg-white"></span>
+          </button>
+        ) : (
+          <button
+            className="btn btn-primary rounded-2xl hover-effect flex items-center justify-between h-12"
+            onClick={handleEnroll}
+          >
+            Đăng ký ngay
+            <span className="icon-arrow-right ml-2 bg-white"></span>
+          </button>
+        )}
       </div>
     </div>
   );

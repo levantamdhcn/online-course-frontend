@@ -6,6 +6,7 @@ import LoadingScreen from 'components/LoadingScreen';
 import AuthLayout from 'layouts/AuthLayout/AuthLayout';
 import GuestGuard from 'components/GuestGuard';
 import AuthGuard from 'components/AuthGuard';
+import AdminGuard from 'components/AdminGuard';
 
 export const renderRoutes = (routes = []) => {
   return (
@@ -59,7 +60,7 @@ export const routes = [
     component: lazy(() => import('views/auth/SignUp/SignUp'))
   },
   {
-    path: '/course/html-css',
+    path: '/course/:id',
     exact: true,
     layout: DefaultLayout,
     component: lazy(() => import('views/detail/index'))
@@ -70,13 +71,13 @@ export const routes = [
     component: lazy(() => import('views/admin/index'))
   },
   {
-    path: '/learning/html-css/',
+    path: '/learning/:id/',
     guard: AuthGuard,
     routes: [
       {
         exact: true,
         guard: AuthGuard,
-        path: '/learning/html-css/',
+        path: '/learning/:id/',
         component: lazy(() => import('views/studying/index'))
       },
       {

@@ -1,9 +1,14 @@
-import useAuth from 'hooks/useAuth';
 import React from 'react';
+import axios from 'axios';
+import config from '../../../config'
+import useAuth from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 const SignUp = () => {
+  const { login, loginWithGoogle } = useAuth();
   const {
     register,
     handleSubmit,
@@ -16,15 +21,33 @@ const SignUp = () => {
     const { fullname, email, username, password } = data;
     registerAction(fullname, email, username, password);
   };
+
+  const responseGoogle = async (response) => {
+    console.log(response);
+    try {
+      const res = await axios.post(`${config.url}/auth/google`, { tokenId: response.tokenId });
+      loginWithGoogle(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const responseFacebook = async (response) => {
+    const { accessToken, userID } = response;
+    const res = await axios.post(`${config.url}/auth/facebook`, { accessToken, userID });
+
+    loginWithGoogle(res.data);
+  };
+
   return (
     <div className="login-form">
       <div className="auth-form-title">
-        Sign <span>Up</span>
+        Đăng <span>Ký</span>
       </div>
       <form className="form-wrapper" onSubmit={handleSubmit(onsubmit)}>
         <div className="custom-input">
           <label className="custom-input-label">
-            Full Name
+            Tên người dùng
             <span className="icon-require-mark"></span>
           </label>
           <input
@@ -57,7 +80,7 @@ const SignUp = () => {
         </div>
         <div className="custom-input">
           <label className="custom-input-label">
-            Full Name
+            Họ và tên
             <span className="icon-require-mark"></span>
           </label>
           <input
@@ -73,7 +96,7 @@ const SignUp = () => {
         </div>
         <div className="custom-input">
           <label className="custom-input-label">
-            Password <span className="icon-require-mark"></span>
+            Mật khẩu <span className="icon-require-mark"></span>
           </label>
           <input
             type={'password'}
@@ -91,27 +114,38 @@ const SignUp = () => {
           {errors['password'] && <p className="error-msg">{errors.password.message}</p>}
         </div>
         <button className="btn btn-primary btn-submit hover-effect" type="submit">
-          Sign Up
+          Đăng ký
         </button>
       </form>
       <div className="auth-option-wrapper">
         <div className="auth-option-title">
-          <span>Or Sign Up Via</span>
+          <span>Hoặc đăng ký bằng</span>
         </div>
         <div className="auth-option-list">
-          <div className="auth-option-item connect-via-facebook hover-effect">
-            <span className="icon-facebook"></span>
-            <span>Facebook</span>
-          </div>
-          <div className="auth-option-item connect-via-google hover-effect">
-            <span className="icon-google"></span>
-            <span>Google</span>
-          </div>
+          <FacebookLogin
+            appId="388735613092166"
+            textButton={"Facebook"}
+            autoLoad={false}
+            fields="name,email,picture"
+            callback={responseFacebook}
+            icon={<span className='icon icon-facebook'></span>}
+            onClick={responseFacebook}
+          />
+          <p>Hoặc</p>
+          <GoogleLogin
+            clientId="552476244389-i27g7s11jkoo862j4e7oh1dmukkmhto9.apps.googleusercontent.com"
+            buttonText="Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+            // uxMode={'redirect'}
+            // redirectUri={'http://localhost:3000'}
+          />
         </div>
         <div className="text-center mt-4">
-          Have You Already An Account?{' '}
+          Bạn đã có tài khoản?{' '}
           <Link to="/login" className="main-color">
-            Login
+            Đăng nhập
           </Link>
         </div>
       </div>

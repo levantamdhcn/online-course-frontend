@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className="login-form">
       <div className="auth-form-title">
-        Sign <span>In</span>
+        Đăng <span>Nhập</span>
       </div>
       <form className="form-wrapper" onSubmit={handleSubmit(onsubmit)}>
         <div className="custom-input">
@@ -63,7 +63,7 @@ const Login = () => {
         </div>
         <div className="custom-input">
           <label className="custom-input-label">
-            Password <span className="icon-require-mark"></span>
+            Mật khẩu <span className="icon-require-mark"></span>
           </label>
           <input
             type={'password'}
@@ -81,27 +81,30 @@ const Login = () => {
           {errors['password'] && <p className="error-msg">{errors.password.message}</p>}
         </div>
         <button className="btn btn-primary btn-submit hover-effect" type="submit">
-          Login
+          Đăng nhập
         </button>
       </form>
       <div className="auth-function">
-        <Link to="/forgot">Forget Password ?</Link>
+        <Link to="/forgot">Quên mật khẩu ?</Link>
       </div>
       <div className="auth-option-wrapper">
         <div className="auth-option-title">
-          <span>Or Login Via</span>
+          <span>Hoặc đăng nhập bằng</span>
         </div>
         <div className="auth-option-list">
           <FacebookLogin
             appId="388735613092166"
+            textButton={"Facebook"}
             autoLoad={false}
             fields="name,email,picture"
             callback={responseFacebook}
+            icon={<span className='icon icon-facebook'></span>}
             onClick={responseFacebook}
           />
+          <p>Hoặc</p>
           <GoogleLogin
             clientId="552476244389-i27g7s11jkoo862j4e7oh1dmukkmhto9.apps.googleusercontent.com"
-            buttonText="Login"
+            buttonText="Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
@@ -110,9 +113,9 @@ const Login = () => {
           />
         </div>
         <div className="text-center mt-4">
-          Don't have an account ?{' '}
+          Chưa có tài khoản?{' '}
           <button onClick={() => history.push('/register')} className="main-color" type="submit">
-            Sign up
+            Đăng ký
           </button>
         </div>
       </div>

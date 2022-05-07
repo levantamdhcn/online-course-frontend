@@ -1,10 +1,9 @@
-import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
-import React, { useEffect, useState } from 'react';
+
+import React from 'react';
 import Course from './Course';
-import CreateCourseModal from './CreateCourseModal';
 import AdminNav from './Navbar';
 import User from './User';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Lecture from './Lecture';
 
 function useQuery() {

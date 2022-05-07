@@ -1,8 +1,21 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import config from '../../../config';
 
-const BasicDetail = ({ thumb, name, lectures, studentCount, overview }) => {
-  const history = useHistory()
+const BasicDetail = ({ course, thumb, name, lectures, studentCount, overview, enrolled }) => {
+  const history = useHistory();
+
+  const handleEnroll = () => {
+    try {
+      const res = axios.post(`${config.url}/enroll`, {
+        id: course._id
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="basic-detail">
       <div className="container mx-auto px-44">
@@ -27,7 +40,23 @@ const BasicDetail = ({ thumb, name, lectures, studentCount, overview }) => {
               </div>
               <div className="course-desc">{overview}</div>
             </div>
-            <div className="btn btn-primary hover-effect" onClick={() => history.push("/learning/html-css")}>Enroll Now</div>
+            {enrolled ? (
+              <button
+                className="btn btn-primary rounded-2xl hover-effect flex items-center justify-between h-12"
+                onClick={() => history.push(`/learning/${course._id}`)}
+              >
+                Tiếp tục học
+                <span className="icon-arrow-right ml-2 bg-white"></span>
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary rounded-2xl hover-effect flex items-center justify-between h-12"
+                onClick={handleEnroll}
+              >
+                Đăng ký ngay
+                <span className="icon-arrow-right ml-2 bg-white"></span>
+              </button>
+            )}
           </div>
         </div>
       </div>
