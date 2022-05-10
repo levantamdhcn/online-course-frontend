@@ -6,7 +6,6 @@ import LoadingScreen from 'components/LoadingScreen';
 import AuthLayout from 'layouts/AuthLayout/AuthLayout';
 import GuestGuard from 'components/GuestGuard';
 import AuthGuard from 'components/AuthGuard';
-import AdminGuard from 'components/AdminGuard';
 
 export const renderRoutes = (routes = []) => {
   return (
@@ -58,6 +57,12 @@ export const routes = [
     guard: GuestGuard,
     layout: AuthLayout,
     component: lazy(() => import('views/auth/SignUp/SignUp'))
+  },
+  {
+    path: '/courses',
+    exact: true,
+    layout: DefaultLayout,
+    component: lazy(() => import('views/courses/index'))
   },
   {
     path: '/course/:id',

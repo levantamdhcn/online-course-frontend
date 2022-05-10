@@ -35,7 +35,6 @@ const CourseFeature = ({ course, enrolled, studentCount }) => {
       const res = axios.post(`${config.url}/enroll`, {
         id: course._id
       });
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }

@@ -64,6 +64,7 @@ const CourseDetail = () => {
                 overview={course.description}
                 enrolled={enrolled}
                 course={course}
+                setEnrolled={setEnrolled}
               />
             </div>
           </div>

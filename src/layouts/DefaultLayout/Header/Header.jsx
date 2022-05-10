@@ -7,6 +7,7 @@ import useAuth from 'hooks/useAuth';
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [currentTab, setCurrentTab] = useState('home');
   const history = useHistory();
   const { isAuthenticated, logout, user } = useAuth();
 
@@ -14,18 +15,30 @@ const Header = () => {
     <>
       <div className="header mx-auto px-44">
         <div className="header-left">
-          <div className="logo">
-            <Link to="/">
-              <img src={Logo} alt="logo" />
-            </Link>
+          <div className="logo" onClick={() => history.push('/')}>
+            <span className="icon icon-logo size-icon-7 mr-4 color-main cursor-pointer"></span>
           </div>
           <div className="header-nav flex">
-            <Link to="/" className="header-nav-item">
+            <div
+              className={`cursor-pointer header-nav-item ${currentTab === 'home' ? 'active' : ''}`}
+              onClick={() => {
+                setCurrentTab('home');
+                history.push('/');
+              }}
+            >
               Home
-            </Link>
-            <Link to="./" className="header-nav-item active">
+            </div>
+            <div
+              className={`header-nav-item cursor-pointer ${
+                currentTab === 'courses' ? 'active' : ''
+              }`}
+              onClick={() => {
+                setCurrentTab('courses');
+                history.push('/courses');
+              }}
+            >
               Courses
-            </Link>
+            </div>
           </div>
         </div>
         <div className="header-search">

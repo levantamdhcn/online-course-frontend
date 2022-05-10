@@ -3,7 +3,16 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 
-const BasicDetail = ({ course, thumb, name, lectures, studentCount, overview, enrolled }) => {
+const BasicDetail = ({
+  course,
+  thumb,
+  name,
+  lectures,
+  studentCount,
+  overview,
+  enrolled,
+  setEnrolled
+}) => {
   const history = useHistory();
 
   const handleEnroll = () => {
@@ -11,7 +20,9 @@ const BasicDetail = ({ course, thumb, name, lectures, studentCount, overview, en
       const res = axios.post(`${config.url}/enroll`, {
         id: course._id
       });
-      console.log(res.data);
+      if (res.data._id) {
+        setEnrolled(true);
+      }
     } catch (error) {
       console.log(error);
     }

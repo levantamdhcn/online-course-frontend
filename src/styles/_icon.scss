@@ -11,6 +11,9 @@
   mask-size: cover;
 
   //class color here
+  &.color-main {
+    background-color: $mainColor;
+  }
   &.active {
     background-color: $active;
   }
@@ -65,6 +68,11 @@
     width: 36px;
     min-width: 36px;
     height: 36px;
+  }
+  &.size-icon-8 {
+    width: 72px;
+    min-width: 72px;
+    height: 72px;
   }
 }
 
