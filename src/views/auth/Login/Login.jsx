@@ -1,5 +1,5 @@
 import useAuth from 'hooks/useAuth';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import FacebookLogin from 'react-facebook-login';
 const Login = () => {
   const history = useHistory();
   const { login, loginWithGoogle } = useAuth();
+  const [error, setError] = useState(null)
 
   const {
     register,
@@ -18,7 +19,12 @@ const Login = () => {
   } = useForm();
 
   const onsubmit = async (data) => {
-    await login(data.email, data.password);
+    try {
+      setError(null);
+      await login(data.email, data.password);
+    } catch (error) {
+      setError(error.response.data.message);
+    }
   };
 
   const responseGoogle = async (response) => {
@@ -44,6 +50,9 @@ const Login = () => {
         Đăng <span>Nhập</span>
       </div>
       <form className="form-wrapper" onSubmit={handleSubmit(onsubmit)}>
+        <div className='text-center'>
+          <span className='text-red-500 font-medium'>{error && error}</span>
+        </div>
         <div className="custom-input">
           <label className="custom-input-label">
             Email

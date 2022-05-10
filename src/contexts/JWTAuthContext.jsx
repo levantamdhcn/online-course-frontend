@@ -5,7 +5,8 @@ import config from '../config';
 
 const initialAuthState = {
   isAuthenticated: false,
-  user: null
+  user: null,
+  authError: null,
 };
 
 const isValidToken = (accessToken) => {

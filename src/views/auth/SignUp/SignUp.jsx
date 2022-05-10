@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import config from '../../../config'
 import useAuth from 'hooks/useAuth';
@@ -9,6 +9,7 @@ import FacebookLogin from 'react-facebook-login';
 
 const SignUp = () => {
   const { loginWithGoogle } = useAuth();
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -18,12 +19,16 @@ const SignUp = () => {
   const { register: registerAction } = useAuth();
 
   const onsubmit = (data) => {
-    const { fullname, email, username, password } = data;
-    registerAction(fullname, email, username, password);
+    try {
+      setError(null);
+      const { fullname, email, username, password } = data;
+      registerAction(fullname, email, username, password);
+    } catch (error) {
+      setError(error.response.data.message);
+    } 
   };
 
   const responseGoogle = async (response) => {
-    console.log(response);
     try {
       const res = await axios.post(`${config.url}/auth/google`, { tokenId: response.tokenId });
       loginWithGoogle(res.data);
@@ -45,6 +50,9 @@ const SignUp = () => {
         Đăng <span>Ký</span>
       </div>
       <form className="form-wrapper" onSubmit={handleSubmit(onsubmit)}>
+        <div className='text-center'>
+          <span className='text-red-500 font-medium'>{error && error}</span>
+        </div>
         <div className="custom-input">
           <label className="custom-input-label">
             Tên người dùng
