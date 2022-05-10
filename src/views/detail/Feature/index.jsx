@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import config from '../../../config';
 
 const CourseFeature = ({ course, enrolled, studentCount }) => {
@@ -35,6 +34,7 @@ const CourseFeature = ({ course, enrolled, studentCount }) => {
       const res = axios.post(`${config.url}/enroll`, {
         id: course._id
       });
+      console.log(res)
     } catch (error) {
       console.log(error);
     }

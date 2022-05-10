@@ -1,8 +1,6 @@
 import axios from 'axios';
 import config from '../../../../config';
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 const required = {
   title: 'Tiêu đề',
@@ -34,8 +32,6 @@ const CreateLectureModal = ({ onClose }) => {
   });
   const [error, setError] = useState('');
 
-  const history = useHistory();
-
   const handleSubmit = async () => {
     const { title, description, file, tags } = form;
 
@@ -52,12 +48,14 @@ const CreateLectureModal = ({ onClose }) => {
       formData.append('videoFile', file);
       formData.append('tags', tags);
       const res = await axios.post(`${config.url}/youtube/upload`, formData);
+      console.log(res)
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div className="create-course-modal">
+      {error}
       <div className="custom-input">
         <div className="custom-input-label">Tiêu đề</div>
         <input
@@ -99,7 +97,7 @@ const CreateLectureModal = ({ onClose }) => {
       <div className="button-group float-right">
         {!user ? (
           <button className="btn btn-primary  mr-4">
-            <a href={url ? url : ''} target="_blank">
+            <a href={url ? url : ''}>
               Đăng nhập
             </a>
           </button>

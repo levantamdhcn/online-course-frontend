@@ -1,7 +1,6 @@
 import axios from 'axios';
 import config from '../../config';
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import LoadingScreen from 'components/LoadingScreen';
 
 const required = {
@@ -11,22 +10,22 @@ const required = {
 };
 
 const CreateCourseModal = ({ onClose }) => {
-  const [url, setUrl] = useState(null);
-  const [user, setUser] = useState(null);
+  // const [url, setUrl] = useState(null);
+  // const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const auth = async () => {
-      const response = await axios.get(`${config.url}/youtube/auth`);
+  // useEffect(() => {
+  //   const auth = async () => {
+  //     const response = await axios.get(`${config.url}/youtube/auth`);
 
-      if (response.data.name && response.data.pic) {
-        console.log(!response.data.name);
-        setUser(response.data);
-      } else {
-        setUrl(response.data);
-      }
-    };
-    auth();
-  }, []);
+  //     if (response.data.name && response.data.pic) {
+  //       console.log(!response.data.name);
+  //       setUser(response.data);
+  //     } else {
+  //       setUrl(response.data);
+  //     }
+  //   };
+  //   auth();
+  // }, []);
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -34,8 +33,6 @@ const CreateCourseModal = ({ onClose }) => {
     demands: ''
   });
   const [error, setError] = useState('');
-
-  const history = useHistory();
 
   const handleSubmit = async () => {
     let { title, description, file, demands } = form;
@@ -72,6 +69,7 @@ const CreateCourseModal = ({ onClose }) => {
   return (
     <>
       <div className="create-course-modal">
+        {error}
         <div className="custom-input">
           <div className="custom-input-label">Tiêu đề</div>
           <input

@@ -3,14 +3,13 @@ import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import CreateCourseModal from '../CreateCourseModal';
-import { useHistory } from 'react-router-dom';
+import LoadingScreen from "components/LoadingScreen"
 
 const Course = () => {
   const [courses, setCourses] = useState(null);
   const [addCourse, toggleAddCourse] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const history = useHistory();
   useEffect(() => {
     const getCourses = async () => {
       const response = await axios.get(`${config.url}/course`);
@@ -28,6 +27,9 @@ const Course = () => {
       }
     } catch (error) {}
   };
+  if(!loading) {
+    return(<LoadingScreen />)
+  }
   return (
     <div>
       <div className="search-bar">

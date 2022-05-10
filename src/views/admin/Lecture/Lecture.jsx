@@ -2,7 +2,6 @@ import axios from 'axios';
 import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
-import CreateCourseModal from '../CreateCourseModal';
 import CourseList from './CourseList';
 import CreateLectureModal from './CreateLectureModal';
 

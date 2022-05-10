@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Category from 'components/Course/Category/Category';
 import React from 'react';
-import CourseImage from 'assets/images/course.jpg';
 import Slider from 'react-slick';
 import axios from 'axios';
 import config from '../../../../config';

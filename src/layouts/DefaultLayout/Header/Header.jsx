@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Logo from 'assets/images/logo.png';
 import Search from 'components/Search';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
 

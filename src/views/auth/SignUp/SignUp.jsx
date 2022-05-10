@@ -8,7 +8,7 @@ import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
 const SignUp = () => {
-  const { login, loginWithGoogle } = useAuth();
+  const { loginWithGoogle } = useAuth();
   const {
     register,
     handleSubmit,
