@@ -99,12 +99,13 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       });
-      const { accessToken, user } = response.data;
-      setSession(accessToken);
+      const { access_token, refresh_token } = response.data;
+      setSession(access_token);
+      const user = await axios.get(`${config.url}auth/currentUser`);
       dispatch({
         type: 'LOGIN',
         payload: {
-          user,
+          user: user.data,
           isAuthenticated: true
         }
       });
@@ -150,13 +151,13 @@ export const AuthProvider = ({ children }) => {
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
 
-        const res = await axios.get(`${config.url}/auth/initialize`);
+        const res = await axios.get(`${config.url}/auth/currentUser`);
 
         dispatch({
           type: 'INITIALISE',
           payload: {
             isAuthenticated: true,
-            user: res?.data?.user
+            user: res?.data
           }
         });
       }

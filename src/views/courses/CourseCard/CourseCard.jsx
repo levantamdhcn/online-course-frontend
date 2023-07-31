@@ -8,7 +8,7 @@ const CourseCard = ({ course }) => {
   const [studentCount, setStudentCount] = useState(0);
   useEffect(() => {
     const getStudentCount = async () => {
-      const res = await axios.get(`${config.url}/enroll/total/${course._id}`);
+      const res = await axios.get(`${config.url}/enrollment/total/${course._id}`);
 
       if (res.data) {
         setStudentCount(res.data);

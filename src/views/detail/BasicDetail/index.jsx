@@ -17,7 +17,7 @@ const BasicDetail = ({
 
   const handleEnroll = () => {
     try {
-      const res = axios.post(`${config.url}/enroll`, {
+      const res = axios.post(`${config.url}/enrollment`, {
         id: course._id
       });
       if (res.data._id) {

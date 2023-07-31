@@ -23,7 +23,7 @@ const Courses = () => {
           <div className="category mb-20" key={el._id}>
             <h1 className="mb-4 text-2xl font-bold">{el.name}</h1>
             <div className="grid grid-cols-4 gap-8">
-              {el.courses.map((course) => (
+              {el?.courses?.map((course) => (
                 <CourseCard course={course} />
               ))}
             </div>
