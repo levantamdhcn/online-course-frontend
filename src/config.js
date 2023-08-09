@@ -1,6 +1,6 @@
 const config = {
-  // url: 'https://online-courses-web.herokuapp.com'
-  url: window.location.origin.includes('localhost') ? 'http://localhost:5000/api' : 'https://api-elearning-portal.up.railway.app/api',
+  // url: 'http://localhost:5000/api'
+  url: window.location.origin.includes('localhost') ? 'http://35.231.125.71/api' : 'https://api-elearning-portal.up.railway.app/api',
 };
 
 export default config;

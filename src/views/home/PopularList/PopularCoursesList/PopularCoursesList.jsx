@@ -28,7 +28,7 @@ const PopularCoursesList = () => {
     try {
       setLoading(true);
       const getCourse = async () => {
-        const res = await axios.get(`${config.url}/course`);
+        const res = await axios.get(`${config.url}/course/popular`);
         if (res.data) {
           setCourses(res.data);
           setLoading(false);

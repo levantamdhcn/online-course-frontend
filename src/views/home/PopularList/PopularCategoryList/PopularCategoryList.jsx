@@ -6,30 +6,37 @@ import axios from 'axios';
 import config from '../../../../config';
 import LoadingScreen from 'components/LoadingScreen';
 
-const settings = {
-  accessibility: false,
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  arrows: false,
-  autoplay: false,
-  cssEase: 'linear'
-};
-
 const PopularCategoryList = () => {
   const categoryRef = useRef();
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const settings = {
+    accessibility: false,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: false,
+    cssEase: 'linear'
+  };
+
   useEffect(() => {
     try {
       setLoading(true);
       const getCourse = async () => {
-        const res = await axios.get(`${config.url}/course`);
+        const res = await axios.get(`${config.url}/category/popular`);
         if (res.data) {
           setCourses(res.data);
+          if(res.data.length >= 3) {
+            settings.slidesToShow = 3;
+          } else if(res.data.length >= 2) {
+            settings.slidesToShow = 2;
+          } else {
+            settings.slidesToShow = 1;
+          }
           setLoading(false);
         }
       };
@@ -52,7 +59,7 @@ const PopularCategoryList = () => {
                       title={el.name}
                       views={el.views}
                       time={el.hours}
-                      courses={el.lectures}
+                      courses={el.courses.length}
                     />
                   </div>
                 );

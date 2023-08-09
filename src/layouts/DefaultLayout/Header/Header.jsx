@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import Search from 'components/Search';
 import { useHistory } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [currentTab, setCurrentTab] = useState('home');
+  const { pathname } = useLocation();
   const history = useHistory();
   const { isAuthenticated, logout, user } = useAuth();
+
+  console.log('currentTab', currentTab);
 
   return (
     <>
@@ -18,7 +22,7 @@ const Header = () => {
           </div>
           <div className="header-nav flex">
             <div
-              className={`cursor-pointer header-nav-item ${currentTab === 'home' ? 'active' : ''}`}
+              className={`cursor-pointer header-nav-item ${pathname === '/' ? 'active' : ''}`}
               onClick={() => {
                 setCurrentTab('home');
                 history.push('/');
@@ -28,11 +32,13 @@ const Header = () => {
             </div>
             <div
               className={`header-nav-item cursor-pointer ${
-                currentTab === 'courses' ? 'active' : ''
+                pathname.includes('courses') ? 'active' : ''
               }`}
               onClick={() => {
                 setCurrentTab('courses');
-                history.push('/courses');
+                setTimeout(() => {
+                  history.push('/courses');
+                }, 500);
               }}
             >
               Courses

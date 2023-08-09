@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import config from '../../config';
 import CourseCard from './CourseCard';
+import Course from 'components/Course/Course/Course';
 
 const Courses = () => {
   const [categories, setCategories] = useState(null);
@@ -16,6 +17,8 @@ const Courses = () => {
     getCategories();
   }, []);
 
+  console.log('categories', categories);
+
   return (
     <div className="mx-auto px-44 pt-40">
       {categories &&
@@ -24,7 +27,14 @@ const Courses = () => {
             <h1 className="mb-4 text-2xl font-bold">{el.name}</h1>
             <div className="grid grid-cols-4 gap-8">
               {el?.courses?.map((course) => (
-                <CourseCard course={course} />
+                <Course
+                  id={course._id}
+                  image={<img src={course.image} alt="course" />}
+                  title={course.name}
+                  views={course.views}
+                  time={course.hours}
+                  lectures={course.lectures} 
+                />
               ))}
             </div>
           </div>

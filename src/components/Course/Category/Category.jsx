@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Category = ({ image, title, courses }) => {
   return (
     <Link className="card" to="/course/html-css">
-      <div className="card-header">{image}</div>
+      {/* <div className="card-header">{image}</div> */}
       <div className="card-body">
         <div className="card-title">{title}</div>
         <div className="card-info">
