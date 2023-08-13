@@ -42,7 +42,7 @@ const PopularCategoryList = () => {
       };
       getCourse();
     } catch (error) {}
-  }, []);
+  }, [settings]);
 
   return (
     <>

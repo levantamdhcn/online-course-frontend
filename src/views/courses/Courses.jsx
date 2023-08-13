@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import config from '../../config';
-import CourseCard from './CourseCard';
 import Course from 'components/Course/Course/Course';
 
 const Courses = () => {

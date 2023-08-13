@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       });
-      const { access_token, refresh_token } = response.data;
+      const { access_token } = response.data;
       setSession(access_token);
       const user = await axios.get(`${config.url}/auth/currentUser`);
       dispatch({
