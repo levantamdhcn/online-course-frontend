@@ -42,7 +42,8 @@ const PopularCategoryList = () => {
       };
       getCourse();
     } catch (error) {}
-  }, [settings]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
