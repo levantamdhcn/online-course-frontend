@@ -27,7 +27,7 @@ const CourseDetail = () => {
 
   useEffect(() => {
     const checkEnroll = async () => {
-      const res = await axios.post(`${config.url}/enrollment/check/${course._id}`);
+      const res = await axios.post(`${config.url}/enrollment/check/${course?._id}`);
       if (res.data) {
         setEnrolled(res.data.enrolled);
       }

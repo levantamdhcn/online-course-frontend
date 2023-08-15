@@ -46,7 +46,7 @@ export const routes = [
     component: lazy(() => import('views/auth/Login/Login'))
   },
   {
-    path: '/profile/:username',
+    path: '/profile/:id',
     exact: true,
     layout: DefaultLayout,
     component: lazy(() => import('views/profile/index'))
@@ -88,7 +88,7 @@ export const routes = [
       {
         exact: true,
         guard: AuthGuard,
-        path: '/learning/html-css/exercise/1',
+        path: '/learning/:subjectId/exercise/:exerciseId',
         component: lazy(() => import('views/excercises/index'))
       }
     ]

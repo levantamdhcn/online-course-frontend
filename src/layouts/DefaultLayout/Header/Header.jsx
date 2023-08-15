@@ -71,7 +71,7 @@ const Header = () => {
                     <div className="modal-options">
                       <div
                         className="option"
-                        onClick={() => history.push(`/profile/${user && user.username}`)}
+                        onClick={() => history.push(`/profile/${user && user._id}`)}
                       >
                         Cài đặt
                       </div>

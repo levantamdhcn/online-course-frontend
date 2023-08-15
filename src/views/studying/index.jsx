@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Logo from 'assets/images/logo.png';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import VideoViewer from './VideoViewer/VideoViewer';
@@ -6,6 +6,10 @@ import TrackList from './TrackList';
 import ListComments from './Comments/ListComments';
 import Avatar from 'assets/images/avatar.jpg';
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
+import config from '../../config';
+import moment from 'moment';
 
 const courseLearningInfo = {
   id: 1,
@@ -288,6 +292,37 @@ const courseLearningInfo = {
 
 const Studying = () => {
   const history = useHistory()
+  const { id } = useParams();
+
+  const [subjects, setSubjects] = useState([]);
+  const [currentSubject, setCurrentSubject] = useState(null);
+
+  useEffect(() => {
+    const getSubject = async () => {
+      const res = await axios.get(`${config.url}/subject/course/${id}`);
+      if(res.data) {
+        setSubjects(res.data);
+      }
+    }
+
+    getSubject();
+  }, [id])
+
+  useEffect(() => {
+    if(subjects.length > 0) {
+      setCurrentSubject(subjects[0]);
+    }
+  }, [subjects]);
+
+  const handleActiveSubject = useCallback((_id) => {
+    const subject = subjects.find(el => el._id === _id);
+    if(subject) {
+      setCurrentSubject(subject);
+    }
+  }, [subjects]);
+  
+  const completedSubject = subjects.filter(el => el.isCompleted).length;
+
   return (
     <div className="studying">
       <div className="studying-header">
@@ -301,8 +336,8 @@ const Studying = () => {
           <div className="studying-header-right">
             <div className="progress">
               <CircularProgressbar
-                value={75}
-                text={`${75}%`}
+                value={Math.round(completedSubject/subjects.length)}
+                text={`${Math.round(completedSubject/subjects.length)}%`}
                 styles={buildStyles({
                   textSize: '35px',
                   textColor: '#ffffff',
@@ -312,7 +347,7 @@ const Studying = () => {
               />
             </div>
             <div className="course-progress-count">
-              Hoàn thành <span>100/145</span> bài học
+              Hoàn thành <span>{completedSubject}/{subjects.length}</span> bài học
             </div>
           </div>
         </div>
@@ -324,9 +359,9 @@ const Studying = () => {
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12">
                 <div className="scroll-wrapper">
-                  <VideoViewer videoId={'ypvjxw5qBK0'} />
-                  <div className="lecture-name">Làm được gì sau khóa học?</div>
-                  <div className="lecture-update">Cập nhật tháng 2 năm 2022</div>
+                  <VideoViewer videoId={currentSubject?.video} />
+                  <div className="lecture-name">{currentSubject?.name}</div>
+                  <div className="lecture-update">Cập nhật {moment(currentSubject?.updatedAt || '').lang('vi').format('HH:mm, DD/MM/YYYY')}</div>
                   <ListComments avatar={Avatar} />
                 </div>
               </div>
@@ -335,7 +370,7 @@ const Studying = () => {
           <div className="col-span-3">
             <div className="track-list">
               <div className="track-list-header">Nội dung khóa học</div>
-              <TrackList lectureSection={courseLearningInfo?.lectureSection} />
+              <TrackList handleActiveSubject={handleActiveSubject} subjects={subjects} />
             </div>
           </div>
         </div>

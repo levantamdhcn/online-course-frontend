@@ -6,10 +6,10 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 
-const Editor = () => {
+const Editor = ({ sampleCode }) => {
   const [showSelectLangugage, setShowSelectLanguage] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState('javascript');
-  const [currentCode, setCurrentCode] = useState('');
+  const [currentCode, setCurrentCode] = useState(sampleCode);
 
   const handleChange = (editor, data, value) => {
     setCurrentCode(value);

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
+import config from '../../config';
 
 const Lecture = ({
+  _id,
   index,
   name,
   isCompleted,
@@ -9,14 +12,30 @@ const Lecture = ({
   isOpen,
   exerciseList,
   currentLecture,
-  setCurrentLecture
+  setCurrentLecture,
+  handleActiveSubject
 }) => {
   const history = useHistory();
+
+  const [exercises, setExercises] = useState([]);
+
+  useEffect(() => {
+    const getExercises = async () => {
+      const res = await axios.get(`${config.url}/exercise/subject/${_id}`);
+      if(res.data) {
+        setExercises(res.data);
+      }
+    }
+
+    getExercises();
+  }, [_id]);
+
   return (
     <div
       className={`exercise-wrapper ${!isOpen ? 'disable' : ''} ${
         currentLecture === index ? 'current' : ''
       }`}
+      onClick={() => handleActiveSubject(_id)}
     >
       <div className="exercise-info" onClick={() => setCurrentLecture(index)}>
         <h3 className="exercise-info-title">
@@ -36,13 +55,13 @@ const Lecture = ({
         <div className="quiz-list-wrapper shadow-md">
           <p>Bài tập: </p>
           <ul className="quiz-list">
-            {exerciseList?.map((item, index) => {
+            {exercises?.map((item, index) => {
               let isOpenEx = false;
               if (isOpen) {
                 if (index === 0) {
                   isOpenEx = true;
                 } else {
-                  isOpenEx = exerciseList[index - 1].isCompleted;
+                  isOpenEx = exercises[index - 1].isCompleted;
                 }
               }
               return (
@@ -51,12 +70,12 @@ const Lecture = ({
                   className={`quiz-item ${!isOpenEx ? 'disable' : ''} ${
                     item.isCompleted ? 'active' : ''
                   }`}
-                  onClick={() => history.push('/learning/html-css/exercise/1')}
+                  onClick={() => history.push(`/learning/${_id}/exercise/${item._id}`)}
                 >
                   {item.isCompleted ? (
                     <span className="icon-check icon-color-active"></span>
                   ) : (
-                    <span>{item.id + 1}</span>
+                    <span>{item.position + 1}</span>
                   )}
                 </li>
               );
