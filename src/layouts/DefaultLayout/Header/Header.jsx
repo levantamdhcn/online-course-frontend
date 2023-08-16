@@ -76,8 +76,8 @@ const Header = () => {
                         Cài đặt
                       </div>
                       {user.admin && (
-                        <div className="option" onClick={() => history.push(`/admin`)}>
-                          Admin
+                        <div className="option" onClick={() => history.push(`/admin?tab=user`)}>
+                          Quản trị hệ thống
                         </div>
                       )}
                       <div className="option" onClick={() => logout()}>

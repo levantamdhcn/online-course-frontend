@@ -29,7 +29,7 @@ const AdminNav = () => {
       <div className="admin-nav-top">
         <div className="setting-modal-wrapper">
           <img
-            src={user.avatar}
+            src={user?.avatar}
             alt="avatar"
             className="avatar"
             onClick={() => setIsOpenModal((prev) => !prev)}
@@ -37,16 +37,16 @@ const AdminNav = () => {
           {isOpenModal && (
             <div className="setting-modal" style={{ left: 0, zIndex: 1000 }}>
               <div className="profile-preview">
-                <img src={user.avatar} alt="avatar" />
+                <img src={user?.avatar} alt="avatar" />
                 <div>
-                  <div className="profile-name">{user.fullname}</div>
-                  <div className="profile-link">{user.username}</div>
+                  <div className="profile-name">{user?.fullname}</div>
+                  <div className="profile-link">{user?.username}</div>
                 </div>
               </div>
               <div className="modal-options">
                 <div
                   className="option"
-                  onClick={() => history.push(`/profile/${user && user.username}`)}
+                  onClick={() => history.push(`/profile/${user && user?._id}`)}
                 >
                   Cài đặt
                 </div>

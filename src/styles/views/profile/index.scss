@@ -101,3 +101,13 @@
     }
   }
 }
+
+.goback-btn {
+  position: fixed;
+  left: 19%;
+  top: 18%;
+  cursor: pointer;
+  &:hover {
+    scale: 1.2;
+  }
+}

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import LoadingScreen from 'components/LoadingScreen';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Profile = () => {
   const [editting, setEditting] = useState('');
@@ -10,6 +11,8 @@ const Profile = () => {
   const [data, setData] = useState(user);
   const [isLoading, setIsLoading] = useState(true);
   const [file, setFile] = useState(null);
+
+  const history = useHistory();
 
   const { id } = useParams();
 
@@ -54,10 +57,6 @@ const Profile = () => {
     }
   }
 
-  const handleResetField = (field) => {
-
-  }
-
   const handleChangeField = (field, newData) => {
     setData({
       ...data,
@@ -74,6 +73,9 @@ const Profile = () => {
           <div className="px-44 pt-24">
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-6 col-start-3">
+                <div className='goback-btn' onClick={history.goBack}>
+                  <span className='icon icon-arrow-left'></span>
+                </div>
                 <div className="profile-heading">Cài đặt</div>
                 <div className="profile-top">
                   <h1>Thông tin cá nhân</h1>
