@@ -14,8 +14,14 @@
   &.color-main {
     background-color: $mainColor;
   }
-  &.active {
-    background-color: $active;
+  &.color-error {
+    background-color: $red;
+  }
+  &.color-active {
+    background-color: $active !important;
+  }
+  &.color-success {
+    background-color: $active !important;
   }
 
   &.mr {
@@ -136,6 +142,9 @@
   }
   &-close {
     mask-image: url('../assets/_icon/close.svg');
+  }
+  &-error {
+    mask-image: url('../assets/_icon/error.svg');
   }
   &-google {
     mask-image: url('../assets/_icon/google.svg');

@@ -6,10 +6,9 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 
-const Editor = ({ sampleCode }) => {
+const Editor = ({ currentCode, setCurrentCode }) => {
   const [showSelectLangugage, setShowSelectLanguage] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState('javascript');
-  const [currentCode, setCurrentCode] = useState(sampleCode);
 
   const handleChange = (editor, data, value) => {
     setCurrentCode(value);
@@ -19,10 +18,14 @@ const Editor = ({ sampleCode }) => {
     setShowSelectLanguage(false);
   };
 
+  const resetCurrentCode = () => {
+    setCurrentCode('');
+  }
+
   return (
     <div className="editor-container">
       <div className="editor-heading">
-        <div className="reset-btn">
+        <div className="reset-btn" onClick={resetCurrentCode}>
           <span className="icon-revert"></span>
           Reset
         </div>

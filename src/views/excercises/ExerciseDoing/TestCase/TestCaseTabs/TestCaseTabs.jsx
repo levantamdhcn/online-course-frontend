@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
-const TestCaseTab = ({ cases }) => {
-  const [data, setData] = useState({
-    input: cases?.[0]?.paramValue?.join(', '),
-    message: ''
-  });
+const TestCaseTab = ({ cases, data, setData, errorTab, passedTab }) => {
   // eslint-disable-next-line
   const [currentTab, setCurrentTab] = useState(1);
   const tabsName = [
@@ -33,7 +29,12 @@ const TestCaseTab = ({ cases }) => {
                     message: ''
                   })}
                 >
-                  Test case {idx + 1}
+                  <span>Test case {idx + 1}</span>
+                  {
+                    errorTab.includes(idx) ? (
+                      <span className="icon icon-error size-icon-4 color-error"></span>
+                    ) : passedTab.includes(idx) ? <span className="icon icon-check size-icon-4 color-active"></span> : ''
+                  }
                 </li>
               )
             })

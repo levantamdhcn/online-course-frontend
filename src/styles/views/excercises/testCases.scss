@@ -75,8 +75,10 @@
     margin-bottom: 1px;
     transition: all 0.6s;
     span {
-      background-color: $white;
-      margin-right: 5px;
+      &:last-child {
+        margin-left: 10px;
+        margin-bottom: 3px;
+      }
     }
     p {
       font-weight: 500;
@@ -89,6 +91,8 @@
       background-color: #3b3c54;
       color: $white;
     }
+    display: flex;
+    align-items: center;
   }
 }
 .test-case-current-content {
