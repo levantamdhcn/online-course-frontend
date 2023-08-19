@@ -6,15 +6,18 @@ import CourseList from './CourseList';
 import CreateLectureModal from './CreateLectureModal';
 
 const Lecture = () => {
+  const [value, setValue] = useState(null);
   const [lectures, setLectures] = useState(null);
   const [addLecture, toggleAddLecture] = useState(false);
   useEffect(() => {
     const getLectures = async () => {
-      const response = await axios.get(`${config.url}/course`);
+      const response = await axios.get(`${config.url}/subject/course/${value._id}`);
+      console.log('response', response.data);
       setLectures(response.data);
     };
     getLectures();
-  }, []);
+  }, [value]);
+
   return (
     <div>
       <div className="search-bar">
@@ -23,7 +26,7 @@ const Lecture = () => {
       <button className="btn btn-primary float-right" onClick={() => toggleAddLecture(true)}>
         Thêm bài giảng
       </button>
-      <CourseList />
+      <CourseList value={value} setValue={setValue} />
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

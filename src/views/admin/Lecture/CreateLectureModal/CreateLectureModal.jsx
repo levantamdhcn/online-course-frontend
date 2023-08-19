@@ -19,7 +19,7 @@ const CreateLectureModal = ({ onClose }) => {
         console.log(!response.data.name);
         setUser(response.data);
       } else {
-        setUrl(response.data);
+        setUrl(response.data.url);
       }
     };
     auth();
@@ -97,7 +97,7 @@ const CreateLectureModal = ({ onClose }) => {
       <div className="button-group float-right">
         {!user ? (
           <button className="btn btn-primary  mr-4">
-            <a href={url ? url : ''}>
+            <a href={url ? url : ''} target="_blank" rel="noreferrer">
               Đăng nhập
             </a>
           </button>

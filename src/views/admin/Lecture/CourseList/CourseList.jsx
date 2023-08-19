@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 
-const CourseList = () => {
-  const [value, setValue] = useState(null);
+const CourseList = ({ value, setValue }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [courses, setCourses] = useState(null);
   useEffect(() => {

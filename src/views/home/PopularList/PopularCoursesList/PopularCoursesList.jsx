@@ -41,7 +41,7 @@ const PopularCoursesList = () => {
   return (
     <>
       <div className="px-44 pt-20 pb-50">
-        <div className="popular-list-title mb-4">Featured Courses</div>
+        <div className="popular-list-title mb-4">Khóa học phổ biến</div>
         <div className="popular-list">
           <Slider {...settings} ref={sliderRef}>
             {courses &&

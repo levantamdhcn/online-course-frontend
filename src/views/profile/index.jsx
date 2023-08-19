@@ -4,8 +4,10 @@ import axios from 'axios';
 import config from '../../config';
 import LoadingScreen from 'components/LoadingScreen';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import useAuth from 'hooks/useAuth';
 
 const Profile = () => {
+  const { user: currenUser } = useAuth();
   const [editting, setEditting] = useState('');
   const [user, setUser] = useState(null);
   const [data, setData] = useState(user);
@@ -21,6 +23,11 @@ const Profile = () => {
       try {
         const res = await axios.get(`${config.url}/user/${id}`);
 
+        if(!currenUser || !currenUser.admin ) {
+          history.push('/');
+        } else if(currenUser?._id !== res.data?._id) {
+          history.push('/');
+        };
         setUser(res.data);
         setData(res.data);
       } catch (error) {
@@ -62,6 +69,39 @@ const Profile = () => {
       ...data,
       [field]: newData,
     })
+  }
+  
+  const handleUpdateAvatar = async () => {
+    const formData = new FormData();
+
+    if(!file) setEditting('');
+    data.avatar = file;
+
+    for (const key in data) {
+      if (!!data[key]) {
+        formData.append(key, data[key]);
+      }
+      else {
+        if(key === 'email') {
+          alert(`Email name can not be empty.`);
+          return;
+        }
+        if(key === 'username') {
+          alert(`Username can not be empty.`);
+          return;
+        }
+      }
+    }
+    try {
+      const res = await axios.put(`${config.url}/user/${user._id}`, formData);
+      if(res.data){
+        setUser(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEditting('');
+    }
   }
 
   return (
@@ -158,7 +198,7 @@ const Profile = () => {
                           Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.
                         </div>
                         <div className={`image-input ${editting && 'editting'}`}>
-                          <img src={file ? file : data?.avatar} alt="" className="profile-avatar" />
+                          <img src={file ? URL.createObjectURL(file) : user?.avatar} alt="" className="profile-avatar" />
                           {editting === 'avatar' && <span className="icon-camera-filled"></span>}
                           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                         </div>
@@ -170,8 +210,7 @@ const Profile = () => {
                           <button
                             className="btn btn-primary mr-4"
                             onClick={() => {
-                              setEditting('');
-                              handleSubmitImage();
+                              handleUpdateAvatar();
                             }}
                           >
                             Lưu

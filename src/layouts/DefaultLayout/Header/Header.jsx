@@ -28,7 +28,7 @@ const Header = () => {
                 history.push('/');
               }}
             >
-              Home
+              Trang chủ
             </div>
             <div
               className={`header-nav-item cursor-pointer ${
@@ -41,7 +41,7 @@ const Header = () => {
                 }, 500);
               }}
             >
-              Courses
+              Khóa học
             </div>
           </div>
         </div>
@@ -80,7 +80,10 @@ const Header = () => {
                           Quản trị hệ thống
                         </div>
                       )}
-                      <div className="option" onClick={() => logout()}>
+                      <div className="option" onClick={() => {
+                        logout();
+                        history.push('/');
+                      }}>
                         Đăng xuất
                       </div>
                     </div>
@@ -96,7 +99,7 @@ const Header = () => {
                 }}
                 className="btn btn-light"
               >
-                Sign in
+                Đăng nhập
               </button>
               <button
                 onClick={() => {
@@ -104,7 +107,7 @@ const Header = () => {
                 }}
                 className="btn btn-dark"
               >
-                Sign up
+                Đăng ký
               </button>
             </div>
           )}

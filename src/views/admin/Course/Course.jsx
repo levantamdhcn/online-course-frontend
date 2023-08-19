@@ -15,19 +15,32 @@ const Course = () => {
       const response = await axios.get(`${config.url}/course`);
       setCourses(response.data);
     };
-    getCourses();
+    try {
+      setLoading(true);
+      getCourses();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const handleDeleteCourse = async (id) => {
     try {
       setLoading(true);
       const res = await axios.delete(`${config.url}/course/${id}`);
+      const course = await axios.get(`${config.url}/course`);
       if (res.data) {
+        setCourses(course.data);
         setLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
-  if(!loading) {
+  if(loading) {
     return(<LoadingScreen />)
   }
   return (

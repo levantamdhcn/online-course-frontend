@@ -27,15 +27,16 @@ const CreateCourseModal = ({ onClose }) => {
   //   auth();
   // }, []);
   const [form, setForm] = useState({
+    name: '',
     title: '',
     description: '',
-    file: null,
+    image: null,
     demands: ''
   });
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    let { title, description, file, demands } = form;
+    const formData = new FormData();
 
     for (const key in form) {
       if ((!form[key] || form[key] === '') && required[key]) {
@@ -43,24 +44,27 @@ const CreateCourseModal = ({ onClose }) => {
         return;
       }
     }
-    try {
-      let imageFormData = new FormData();
-      imageFormData.append('data', file);
 
-      const imageRes = await axios.post(`${config.url}/cloudinary/upload`, imageFormData);
-      demands = demands.split(',');
-
-      if (imageRes.data) {
-        setLoading(true);
-        const courseData = {
-          name: title,
-          description: description,
-          image: imageRes.data,
-          demand: demands
-        };
-        const res = axios.post(`${config.url}/course`, courseData);
-        console.log(res);
+    for (const key in form) {
+      if (!!form[key]) {
+        formData.append(key, form[key]);
       }
+      else {
+        if(key === 'title') {
+          setError(`Tiêu đề không được để trống.`);
+          return;
+        }
+        if(key === 'description') {
+          setError(`Mô tả không được để trống.`);
+          return;
+        }
+      }
+    }
+
+    try {
+      setLoading(true);
+      const res = await axios.post(`${config.url}/course`, formData);
+      console.log('res', res);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -70,6 +74,15 @@ const CreateCourseModal = ({ onClose }) => {
     <>
       <div className="create-course-modal">
         {error}
+        <div className="custom-input">
+          <div className="custom-input-label">Tên khóa học</div>
+          <input
+            type={'text'}
+            className="custom-input-field"
+            placeholder="Tên khóa học"
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
+        </div>
         <div className="custom-input">
           <div className="custom-input-label">Tiêu đề</div>
           <input
@@ -93,7 +106,7 @@ const CreateCourseModal = ({ onClose }) => {
           <input
             className="custom-input-file"
             type={'file'}
-            onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
+            onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
           />
         </div>
         <div className="custom-input">

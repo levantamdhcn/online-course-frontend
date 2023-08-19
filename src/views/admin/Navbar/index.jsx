@@ -50,7 +50,13 @@ const AdminNav = () => {
                 >
                   Cài đặt
                 </div>
-                <div className="option" onClick={() => logout()}>
+                <div
+                  className="option"
+                  onClick={() => {
+                    logout();
+                    history.push('/');
+                  }}
+                >
                   Đăng xuất
                 </div>
               </div>

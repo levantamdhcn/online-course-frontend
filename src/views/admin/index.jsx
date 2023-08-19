@@ -14,6 +14,7 @@ function useQuery() {
 
 const AdminDashboard = () => {
   const query = useQuery();
+  console.log('tab', query.get('tab') === 'course')
   return (
     <div className="admin-page">
       <AdminNav />

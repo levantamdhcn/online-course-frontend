@@ -6,6 +6,7 @@ import LoadingScreen from 'components/LoadingScreen';
 import AuthLayout from 'layouts/AuthLayout/AuthLayout';
 import GuestGuard from 'components/GuestGuard';
 import AuthGuard from 'components/AuthGuard';
+import AdminGuard from 'components/AdminGuard';
 
 export const renderRoutes = (routes = []) => {
   return (
@@ -73,6 +74,7 @@ export const routes = [
   {
     path: '/admin',
     exact: true,
+    guard: AdminGuard,
     component: lazy(() => import('views/admin/index'))
   },
   {
