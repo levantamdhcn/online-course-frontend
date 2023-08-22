@@ -1,21 +1,17 @@
-import axios from 'axios';
-import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import CourseList from './CourseList';
 import CreateLectureModal from './CreateLectureModal';
+import useSubject from 'hooks/useSubject';
+import UpdateLectureModal from './UpdateLectureModal';
 
 const Lecture = () => {
+  const { getSubject, deleteSubject, subjects } = useSubject();
   const [value, setValue] = useState(null);
-  const [lectures, setLectures] = useState(null);
   const [addLecture, toggleAddLecture] = useState(false);
+  const [editLecture, toggleEditLecture] = useState(false);
   useEffect(() => {
-    const getLectures = async () => {
-      const response = await axios.get(`${config.url}/subject/course/${value._id}`);
-      console.log('response', response.data);
-      setLectures(response.data);
-    };
-    getLectures();
+    getSubject(value?._id);
   }, [value]);
 
   return (
@@ -52,9 +48,9 @@ const Lecture = () => {
             </tr>
           </thead>
           <tbody>
-            {lectures &&
-              lectures.length > 0 &&
-              lectures.map((course) => {
+            {subjects &&
+              subjects.length > 0 &&
+              subjects.map((course) => {
                 return (
                   <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -83,9 +79,18 @@ const Lecture = () => {
                     </td>
                     <td class="px-6 py-4">{course.demand}</td>
                     <td class="px-6 py-4 text-right">
-                      <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        Edit
+                      <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => toggleEditLecture(true)}>
+                        Cập nhật
                       </button>
+                      <button class="ml-2 font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => deleteSubject(course._id)}>
+                        Xóa
+                      </button>
+                      <ModalWrapper
+                        title={'Sửa bài giảng'}
+                        toggleShow={toggleEditLecture}
+                        show={editLecture}
+                        children={<UpdateLectureModal courseId={value?._id} onClose={() => toggleEditLecture(false)} lecture={course}/>}
+                      ></ModalWrapper>
                     </td>
                   </tr>
                 );
@@ -97,7 +102,7 @@ const Lecture = () => {
         title={'Thêm bài giảng'}
         toggleShow={toggleAddLecture}
         show={addLecture}
-        children={<CreateLectureModal onClose={() => toggleAddLecture(false)} />}
+        children={<CreateLectureModal courseId={value?._id} onClose={() => toggleAddLecture(false)} />}
       ></ModalWrapper>
     </div>
   );

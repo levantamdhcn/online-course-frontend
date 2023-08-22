@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TestCaseTab from './TestCaseTabs/TestCaseTabs';
 
-const TestCases = ({ cases, handleRunTest }) => {
+const TestCases = ({ cases, handleRunTest, handleSubmit }) => {
   // eslint-disable-next-line
   const [passed, setPassed] = useState(false);
   const [passedTab, setPassedTab] = useState([]);
@@ -36,6 +36,12 @@ const TestCases = ({ cases, handleRunTest }) => {
     }
   } 
 
+  const submit = () => {
+    debugger
+    if(errorTab.length > 0) return;
+    handleSubmit(true);
+  }
+
   return (
     <div className="test-case-container">
       <h1 className="test-case-heading">TEST CASE</h1>
@@ -47,7 +53,7 @@ const TestCases = ({ cases, handleRunTest }) => {
           <span className="icon-control-forward"></span>
           Chạy thử
         </button>
-        <button className={`btn btn-submit`}>
+        <button className={`btn btn-submit ${errorTab.length > 0 ? 'disabled' : ''}`} onClick={submit}>
           <span className="icon-save"></span>
           Nộp bài
         </button>

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import config from '../../../../config';
 import React, { useState, useEffect } from 'react';
+import { DotLoader } from 'react-spinners';
+import useSubject from 'hooks/useSubject';
 
 const required = {
   title: 'Tiêu đề',
@@ -8,8 +10,11 @@ const required = {
   file: 'Video'
 };
 
-const CreateLectureModal = ({ onClose }) => {
+const CreateLectureModal = ({ courseId, onClose }) => {
+  const { getSubject } = useSubject();
   const [url, setUrl] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [videoUploadType, setVideoUploadType] = useState('upload');
   const [user, setUser] = useState(null);
   useEffect(() => {
     const auth = async () => {
@@ -27,13 +32,14 @@ const CreateLectureModal = ({ onClose }) => {
   const [form, setForm] = useState({
     title: '',
     description: '',
-    file: null,
+    video: null,
+    image: null,
     tags: ''
   });
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    const { title, description, file, tags } = form;
+    const { title, description, video, image, tags } = form;
 
     for (const key in form) {
       if ((!form[key] || form[key] === '') && required[key]) {
@@ -42,17 +48,59 @@ const CreateLectureModal = ({ onClose }) => {
       }
     }
     try {
-      let formData = new FormData();
-      formData.append('title', title);
-      formData.append('description', description);
-      formData.append('videoFile', file);
-      formData.append('tags', tags);
-      const res = await axios.post(`${config.url}/youtube/upload`, formData);
-      console.log(res)
+      if(videoUploadType === 'upload') {
+        setUploading(true);
+        let formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('videoFile', video);
+        formData.append('imageFile', image);
+        formData.append('tags', tags);
+        const res = await axios.post(`${config.url}/youtube/upload`, formData);
+
+        const newSubject = {
+          name: title,
+          content: description,
+          video: res.data.video.id,
+          thumbnail: res?.data?.thumbnail?.items?.[0]?.high?.url
+        };
+
+        await axios.post(`${config.url}/subject/${courseId}`, newSubject);
+      } else {
+        const newSubject = {
+          name: title,
+          content: description,
+          video: form.video,
+        };
+
+        await axios.post(`${config.url}/subject/${courseId}`, newSubject);
+      }
+
+      getSubject(courseId);
     } catch (error) {
       console.log(error);
+    } finally {
+      setUploading(false);
+      setTimeout(() => {
+        onClose();
+      }, 400);
     }
   };
+
+  const handleClose = async () => {
+    try {
+      await axios.put(`${config.url}/youtube/unauth`);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      onClose();
+    }
+  };
+
+  const handleChooseUploadType = (type) => {
+    setVideoUploadType(type);
+  }
+
   return (
     <div className="create-course-modal">
       {error}
@@ -73,18 +121,51 @@ const CreateLectureModal = ({ onClose }) => {
         />
       </div>
       <div className="custom-input">
-        <div className="custom-input-label">Video</div>
-        <input
-          className="custom-input-file"
-          type={'file'}
-          onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-        />
-        <img
-          style={{ width: '35px', borderRadius: '50%', float: 'right' }}
-          src={user ? user.pic : ''}
-          alt=""
-        />
+        <div className='mb-2'>
+          <input type="radio" id="html" name="fav_language" value="HTML" onInput={() => handleChooseUploadType('upload')}/>
+          <label for="html" className='ml-2'>Tải video lên Youtube</label><br/> 
+        </div>
+        <div>
+          <input type="radio" id="css" name="fav_language" value="CSS" onInput={() => handleChooseUploadType('video_id')} />
+          <label for="css" className='ml-2'>Nhập ID của video</label><br/>
+        </div>
       </div>
+      {videoUploadType === 'upload' ? (
+        <>
+          <div className="custom-input">
+            <div className="custom-input-label">Thumbnail</div>
+            <input
+              className="custom-input-file"
+              type={'file'}
+              onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
+            />
+          </div>
+          <div className="custom-input">
+            <div className="custom-input-label">Video</div>
+            <input
+              className="custom-input-file"
+              type={'file'}
+              onChange={(e) => setForm({ ...form, video: e.target.files[0] })}
+            />
+            <img
+              style={{ width: '35px', borderRadius: '50%', float: 'right' }}
+              src={user ? user?.pic : ''}
+              alt=""
+            />
+          </div>
+        </>
+      ) : (
+        <div className="custom-input">
+          <div
+            className="custom-input-label"
+            onChange={(e) => setForm({ ...form, video: e.target.value })}
+          >
+            Video
+          </div>
+          <input type={'text'} className="custom-input-field" />
+        </div>
+      )}
+
       <div className="custom-input">
         <div
           className="custom-input-label"
@@ -94,17 +175,21 @@ const CreateLectureModal = ({ onClose }) => {
         </div>
         <input type={'text'} className="custom-input-field" />
       </div>
-      <div className="button-group float-right">
+      <div className="button-group flex justify-end">
         {!user ? (
           <button className="btn btn-primary  mr-4">
-            <a href={url ? url : ''} target="_blank" rel="noreferrer">
+            <a href={url ? url : ''} rel="noreferrer">
               Đăng nhập
             </a>
           </button>
         ) : (
           <>
-            <button className="btn btn-primary  mr-4" onClick={handleSubmit}>
-              Thêm
+            <button
+              className="btn btn-primary mr-4 flex items-center justify-center"
+              onClick={handleSubmit}
+            >
+              <span className="mr-2">Thêm</span>
+              {uploading && <DotLoader size={15} color="#fff" />}
             </button>
             <button
               className="btn btn-dark"
@@ -115,7 +200,7 @@ const CreateLectureModal = ({ onClose }) => {
                   file: null,
                   tags: ''
                 });
-                onClose();
+                handleClose();
               }}
             >
               Hủy

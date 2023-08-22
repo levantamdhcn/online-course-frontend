@@ -25,10 +25,10 @@ const ModalCreateUser = ({ onClose }) => {
   });
 
   const handleSubmit = async () => {
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i.test(data.email)) {
-      setError('Email không hợp lệ: test@example.com');
-      return;
-    }
+    // if (!/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i.test(data.email)) {
+    //   setError('Email không hợp lệ: test@example.com');
+    //   return;
+    // }
     const formData = new FormData();
     data.admin = selectedOption.value;
     console.log('avatar', data.avatar);
@@ -55,7 +55,6 @@ const ModalCreateUser = ({ onClose }) => {
     try {
       setLoading(true);
       const res = await axios.post(`${config.url}/auth/register`, formData);
-      console.log('res', res.data);
       await initialise();
       // setData(prev => ({
       //   ...prev,
@@ -67,6 +66,8 @@ const ModalCreateUser = ({ onClose }) => {
     } catch (error) {
       console.log(error.message)
       setLoading(false);
+    } finally {
+      onClose();
     }
   };
 
@@ -97,21 +98,12 @@ const ModalCreateUser = ({ onClose }) => {
           />
         </div>
         <div className="custom-input">
-          <div className="custom-input-label">Email</div>
+          <div className="custom-input-label">Mật khẩu</div>
           <input
             type={'password'}
             placeholder="Mật khẩu"
             className="custom-input-field"
-            onChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-        </div>
-        <div className="custom-input">
-          <div className="custom-input-label">Email</div>
-          <input
-            type={'text'}
-            placeholder="Email"
-            className="custom-input-field"
-            onChange={(e) => setData({ ...data, email: e.target.value })}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
           />
         </div>
         <div className="custom-input">

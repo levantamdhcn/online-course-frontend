@@ -4,8 +4,10 @@ import Splitter, { SplitDirection } from '@devbookhq/splitter';
 import TestCases from './TestCase';
 import axios from 'axios';
 import config from '../../../config';
+import useSubject from 'hooks/useSubject';
 
-const ExerciseDoing = ({ exercise }) => {
+const ExerciseDoing = ({ exercise, subjectId }) => {
+  const { updateSubject } = useSubject();
   const [currentCode, setCurrentCode] = useState(exercise?.sampleCode);
 
   useEffect(() => {
@@ -26,11 +28,16 @@ const ExerciseDoing = ({ exercise }) => {
       console.log(error);
     }
   }
+
+  const handleSubmit = (status) => {
+    updateSubject(subjectId, { isCompleted: status });
+  }
+
   return (
     <>
       <Splitter direction={SplitDirection.Vertical}>
         <Editor currentCode={currentCode} setCurrentCode={setCurrentCode} />
-        <TestCases cases={exercise?.testCases} handleRunTest={handleRunTest}/>
+        <TestCases cases={exercise?.testCases} handleRunTest={handleRunTest} handleSubmit={handleSubmit}/>
       </Splitter>
     </>
   );

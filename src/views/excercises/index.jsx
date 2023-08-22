@@ -88,7 +88,7 @@ const DoExercise = ({ handleRunTest }) => {
         <div className="do-exercise">
           <Splitter direction={SplitDirection.Horizontal}>
             <ExerciseInfo exercise={exercise} />
-            <ExerciseDoing exercise={exercise} handleRunTest={handleRunTest} />
+            <ExerciseDoing exercise={exercise} handleRunTest={handleRunTest} subjectId={subjectId}/>
           </Splitter>
         </div>
       </div>

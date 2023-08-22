@@ -23,11 +23,15 @@ const Profile = () => {
       try {
         const res = await axios.get(`${config.url}/user/${id}`);
 
-        if(!currenUser || !currenUser.admin ) {
+        if (
+          !currenUser &&
+          !currenUser?.admin &&
+          currenUser?._id !== res.data?._id
+        ) {
           history.push('/');
-        } else if(currenUser?._id !== res.data?._id) {
-          history.push('/');
-        };
+          return <> </>;
+        }
+  
         setUser(res.data);
         setData(res.data);
       } catch (error) {
@@ -39,17 +43,6 @@ const Profile = () => {
 
     getUser();
   }, [id]);
-
-  const handleSubmitImage = async () => {
-    const formData = new FormData();
-    formData.append('data', file);
-    const res = await axios.post(`${config.url}/upload`, formData, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-  };
 
   const handleUpdateField = async () => {
     try {
@@ -93,7 +86,7 @@ const Profile = () => {
       }
     }
     try {
-      const res = await axios.put(`${config.url}/user/${user._id}`, formData);
+      const res = await axios.put(`${config.url}/user/${user?._id}`, formData);
       if(res.data){
         setUser(res.data);
       }

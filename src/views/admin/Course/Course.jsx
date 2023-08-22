@@ -4,42 +4,30 @@ import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import CreateCourseModal from '../CreateCourseModal';
 import LoadingScreen from "components/LoadingScreen"
+import UpdateCourseModal from './UpdateCourseModal/UpdateCourseModal';
+import useCourse from 'hooks/useCourse';
 
 const Course = () => {
-  const [courses, setCourses] = useState(null);
+  const { courses, deleteCourse,getCourse } = useCourse();
   const [addCourse, toggleAddCourse] = useState(false);
+  const [editCourse, toggleEditCourse] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  
   useEffect(() => {
-    const getCourses = async () => {
-      const response = await axios.get(`${config.url}/course`);
-      setCourses(response.data);
-    };
-    try {
-      setLoading(true);
-      getCourses();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    getCourse();
+  }, [])
 
   const handleDeleteCourse = async (id) => {
     try {
       setLoading(true);
-      const res = await axios.delete(`${config.url}/course/${id}`);
-      const course = await axios.get(`${config.url}/course`);
-      if (res.data) {
-        setCourses(course.data);
-        setLoading(false);
-      }
+      deleteCourse(id);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
+  
   if(loading) {
     return(<LoadingScreen />)
   }
@@ -49,7 +37,7 @@ const Course = () => {
         <input type="text" className="custom-input-field" placeholder="Tìm kiếm..." />
       </div>
       <button className="btn btn-primary" onClick={() => toggleAddCourse(true)}>
-        Thêm bài giảng
+        Thêm khóa học
       </button>
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -102,15 +90,22 @@ const Course = () => {
                     </td>
                     <td class="px-6 py-4">{course.demand}</td>
                     <td class="px-6 py-4 text-right">
-                      <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        Sửa
+                      <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => toggleEditCourse(true)}>
+                        Cập nhật
                       </button>
                       <button
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        class="ml-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
                         onClick={() => handleDeleteCourse(course._id)}
                       >
                         Xóa
                       </button>
+
+                      <ModalWrapper
+                        title={'Cập nhật khóa học'}
+                        toggleShow={toggleEditCourse}
+                        show={editCourse}
+                        children={<UpdateCourseModal onClose={() => toggleEditCourse(false)} course={course}/>}
+                      ></ModalWrapper>
                     </td>
                   </tr>
                 );

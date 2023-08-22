@@ -6,11 +6,17 @@ import 'styles/index.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'react-circular-progressbar/dist/styles.css';
+import { SubjectProvider } from 'contexts/SubjectContext';
+import { CourseProvider } from 'contexts/CourseContext';
 
 const App = () => {
   return (
     <AuthProvider>
-      <Router>{renderRoutes(routes)}</Router>
+      <CourseProvider>
+        <SubjectProvider>
+          <Router>{renderRoutes(routes)}</Router>
+        </SubjectProvider>
+      </CourseProvider>
     </AuthProvider>
   );
 };

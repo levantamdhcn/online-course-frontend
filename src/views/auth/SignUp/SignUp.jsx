@@ -59,15 +59,15 @@ const SignUp = () => {
             <span className="icon-require-mark"></span>
           </label>
           <input
-            name={'fullname'}
+            name={'username'}
             type="text"
             placeholder={'Enter your full name'}
             className="custom-input-field"
-            {...register('fullname', {
+            {...register('username', {
               required: 'Đây là trường bắt buộc'
             })}
           />
-          {errors['fullname'] && <p className="error-msg">{errors.fullname.message}</p>}
+          {errors['username'] && <p className="error-msg">{errors.username.message}</p>}
         </div>
         <div className="custom-input">
           <label className="custom-input-label">
@@ -92,15 +92,15 @@ const SignUp = () => {
             <span className="icon-require-mark"></span>
           </label>
           <input
-            name={'username'}
+            name={'fullname'}
             type="text"
-            placeholder={'Enter your username'}
+            placeholder={'Enter your fullname'}
             className="custom-input-field"
-            {...register('username', {
+            {...register('fullname', {
               required: 'Đây là trường bắt buộc'
             })}
           />
-          {errors['username'] && <p className="error-msg">{errors.username.message}</p>}
+          {errors['fullname'] && <p className="error-msg">{errors.fullname.message}</p>}
         </div>
         <div className="custom-input">
           <label className="custom-input-label">

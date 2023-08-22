@@ -4,20 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import ModalCreateUser from './ModalCreateUser';
+import useAuth from 'hooks/useAuth';
 
 const User = () => {
+  const { users } = useAuth();
   const history = useHistory();
   const [addUser, toggleAddUser] = useState(false);
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await axios.get(`${config.url}/user`);
-      console.log('response', response);
-      setUsers(response.data);
-    };
-    getUsers();
-  }, []);
 
   return (
     <>
@@ -30,7 +22,7 @@ const User = () => {
         </button>
         <div
           class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8 overflow-y-scroll"
-          style={{ maxHeight: 600 }}
+          style={{ maxHeight: 780 }}
         >
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 row fixed-header">
@@ -92,7 +84,7 @@ const User = () => {
                       <td class="px-6 py-4 text-right">
                         <button
                           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          onClick={() => history.push(`/profile/${user._id}`)}
+                          onClick={() => history.push(`/profile/${user && user._id}`)}
                         >
                           Edit
                         </button>

@@ -54,7 +54,7 @@ const Header = () => {
               <div className="my-course">Khóa học của tôi</div>
               <div className="setting-modal-wrapper">
                 <img
-                  src={user.avatar}
+                  src={user?.avatar}
                   alt="avatar"
                   className="avatar"
                   onClick={() => setIsOpenModal((prev) => !prev)}
@@ -62,20 +62,20 @@ const Header = () => {
                 {isOpenModal && (
                   <div className="setting-modal">
                     <div className="profile-preview">
-                      <img src={user.avatar} alt="avatar" />
+                      <img src={user?.avatar} alt="avatar" />
                       <div>
-                        <div className="profile-name">{user.fullname}</div>
-                        <div className="profile-link">{user.username}</div>
+                        <div className="profile-name">{user?.fullname}</div>
+                        <div className="profile-link">{user?.username}</div>
                       </div>
                     </div>
                     <div className="modal-options">
                       <div
                         className="option"
-                        onClick={() => history.push(`/profile/${user && user._id}`)}
+                        onClick={() => history.push(`/profile/${user && user?._id}`)}
                       >
                         Cài đặt
                       </div>
-                      {user.admin && (
+                      {user?.admin && (
                         <div className="option" onClick={() => history.push(`/admin?tab=user`)}>
                           Quản trị hệ thống
                         </div>

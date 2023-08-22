@@ -2,11 +2,14 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import config from '../config';
+import LoadingScreen from 'components/LoadingScreen';
 
 const initialAuthState = {
   isAuthenticated: false,
   user: null,
+  users: [],
   authError: null,
+  isInitialised: false,
 };
 
 const isValidToken = (accessToken) => {
@@ -33,11 +36,13 @@ const setSession = (accessToken) => {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'INITIALISE': {
-      const { isAuthenticated, user } = action.payload;
+      const { isAuthenticated, user, users } = action.payload;
       return {
         ...state,
         isAuthenticated,
-        user
+        isInitialised: true,
+        user,
+        users
       };
     }
     case 'LOGIN': {
@@ -123,12 +128,12 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (fullname, email, username, password) => {
     try {
-      const response = await axios.post(`${config.url}/auth/register`, {
-        fullname,
-        email,
-        username,
-        password
-      });
+      const formData = new FormData();
+      formData.append('fullname', fullname);
+      formData.append('email', email);
+      formData.append('username', username);
+      formData.append('password', password);
+      const response = await axios.post(`${config.url}/auth/register`, formData);
       const { accessToken, user } = response.data;
 
       window.localStorage.setItem('accessToken', accessToken);
@@ -152,13 +157,24 @@ export const AuthProvider = ({ children }) => {
         setSession(accessToken);
 
         const res = await axios.get(`${config.url}/auth/currentUser`);
+        const users = await axios.get(`${config.url}/user`);
 
         dispatch({
           type: 'INITIALISE',
           payload: {
             isAuthenticated: true,
-            user: res?.data
+            user: res?.data,
+            users: users.data,
           }
+        });
+      } else {
+        dispatch({
+          type: 'INITIALISE',
+          payload: {
+            isAuthenticated: false,
+            user: null,
+            users: [],
+          },
         });
       }
     } catch (error) {
@@ -166,7 +182,8 @@ export const AuthProvider = ({ children }) => {
         type: 'INITIALISE',
         payload: {
           isAuthenticated: false,
-          user: null
+          user: null,
+          users: [],
         }
       });
     }
@@ -175,6 +192,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     initialise();
   }, []);
+
+  if (!state.isInitialised) {
+    return <LoadingScreen />;
+  }
 
   return (
     <AuthContext.Provider
