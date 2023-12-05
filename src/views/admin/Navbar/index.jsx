@@ -17,10 +17,15 @@ const navItems = [
     link: 'lecture',
     logo: 'lecture',
     label: 'Bài giảng'
+  },
+  {
+    link: 'exercise',
+    logo: 'exercise',
+    label: 'Bài tập'
   }
 ];
 
-const AdminNav = () => {
+const AdminNav = ({ tab, setTab }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const history = useHistory();
   const { user, logout } = useAuth();
@@ -67,9 +72,13 @@ const AdminNav = () => {
       <div className="admin-nav-middle">
         {navItems.map((el) => {
           return (
-            <Link to={`?tab=${el.link}`} key={el.label} className="admin-nav-item">
+            <div
+              key={el.label}
+              className={`admin-nav-item ${tab === el.link ? 'active' : ''}`}
+              onClick={() => setTab(el.link)}
+            >
               <span className={`icon icon-${el.logo} hover-effect`}></span>
-            </Link>
+            </div>
           );
         })}
       </div>

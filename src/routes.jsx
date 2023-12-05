@@ -75,7 +75,21 @@ export const routes = [
     path: '/admin',
     exact: true,
     guard: AdminGuard,
-    component: lazy(() => import('views/admin/index'))
+    component: lazy(() => import('views/admin/index')),
+    routes: [
+      {
+        exact: true,
+        guard: AuthGuard,
+        path: '/admin',
+        component: lazy(() => import('views/admin/index'))
+      },
+      {
+        exact: true,
+        guard: AuthGuard,
+        path: '/admin/lecture',
+        component: lazy(() => import('views/admin/Exercise/AddPage'))
+      }
+    ]
   },
   {
     path: '/learning/:id/',

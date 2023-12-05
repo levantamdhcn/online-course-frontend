@@ -1,27 +1,39 @@
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import Course from './Course';
 import AdminNav from './Navbar';
 import User from './User';
-import { useLocation } from 'react-router-dom';
 import Lecture from './Lecture';
-
-function useQuery() {
-  const { search } = useLocation();
-
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
+import { TABS } from './constant';
+import { List as ExerciseList } from './Exercise';
 
 const AdminDashboard = () => {
-  const query = useQuery();
-  console.log('tab', query.get('tab') === 'course')
+  const [tab, setTab] = useState(TABS.user);
+
+  const handleSetTab = useCallback((tab) => {
+    setTab(tab);
+  }, [])
+
+  const getTab = useCallback(() => {
+    switch(tab) {
+      case TABS.course:
+        return <Course />;
+      case TABS.lecture:
+        return <Lecture />;
+      case TABS.user:
+        return <User />;
+      case TABS.exercise:
+        return <ExerciseList />;
+      default: 
+        return <User />;
+    }
+  }, [tab]);
+
   return (
     <div className="admin-page">
-      <AdminNav />
+      <AdminNav tab={tab} setTab={handleSetTab} />
       <div className="admin-page-children">
-        {query.get('tab') === 'user' && <User />}
-        {query.get('tab') === 'course' && <Course />}
-        {query.get('tab') === 'lecture' && <Lecture />}
+        {getTab()}  
       </div>
     </div>
   );

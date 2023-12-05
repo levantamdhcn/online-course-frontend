@@ -1,6 +1,4 @@
-import axios from 'axios';
-import config from '../../../config';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import ModalCreateUser from './ModalCreateUser';

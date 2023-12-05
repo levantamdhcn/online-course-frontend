@@ -76,7 +76,7 @@ const Header = () => {
                         Cài đặt
                       </div>
                       {user?.admin && (
-                        <div className="option" onClick={() => history.push(`/admin?tab=user`)}>
+                        <div className="option" onClick={() => history.push(`/admin`)}>
                           Quản trị hệ thống
                         </div>
                       )}

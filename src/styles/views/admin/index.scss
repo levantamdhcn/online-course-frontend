@@ -40,6 +40,9 @@
         }
     }
     &-item {
+        &.item {
+            background-color: $mainColor;
+        }
         position: relative;
         transition: all 0.3s;
         padding: 15px 15px 10px 20px;
