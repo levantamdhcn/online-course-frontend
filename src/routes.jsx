@@ -1,18 +1,21 @@
 import DefaultLayout from './layouts/DefaultLayout';
 import { Fragment, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { lazy } from 'react';
 import LoadingScreen from 'components/LoadingScreen';
 import AuthLayout from 'layouts/AuthLayout/AuthLayout';
 import GuestGuard from 'components/GuestGuard';
 import AuthGuard from 'components/AuthGuard';
-import AdminGuard from 'components/AdminGuard';
+import AdminLayout from 'layouts/AdminLayout';
 
 export const renderRoutes = (routes = []) => {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Switch>
         {routes?.map((route, i) => {
+          if(route.redirect) {
+            return <Redirect to={route.redirect}/>
+          }
           const Guard = route.guard || Fragment;
           const Layout = route.layout || Fragment;
           const Component = route.component;
@@ -73,23 +76,40 @@ export const routes = [
   },
   {
     path: '/admin',
-    exact: true,
-    guard: AdminGuard,
-    component: lazy(() => import('views/admin/index')),
+    guard: AuthGuard,
+    layout: AdminLayout,
     routes: [
       {
         exact: true,
-        guard: AuthGuard,
         path: '/admin',
-        component: lazy(() => import('views/admin/index'))
+        component: lazy(() => import('views/admin')),
       },
       {
         exact: true,
-        guard: AuthGuard,
+        path: '/admin/exercise',
+        component: lazy(() => import('views/admin/Exercise/List')),
+      },
+      {
+        exact: true,
+        path: '/admin/exercise/add',
+        component: lazy(() => import('views/admin/Exercise/AddPage')),
+      },
+      {
+        exact: true,
+        path: '/admin/user',
+        component: lazy(() => import('views/admin/User')),
+      },
+      {
+        exact: true,
+        path: '/admin/course',
+        component: lazy(() => import('views/admin/Course')),
+      },
+      {
+        exact: true,
         path: '/admin/lecture',
-        component: lazy(() => import('views/admin/Exercise/AddPage'))
-      }
-    ]
+        component: lazy(() => import('views/admin/Lecture')),
+      },
+    ],
   },
   {
     path: '/learning/:id/',

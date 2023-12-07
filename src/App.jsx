@@ -4,6 +4,7 @@ import { AuthProvider } from 'contexts/JWTAuthContext';
 import { ChakraProvider } from '@chakra-ui/react';
 import { toast, ToastContainer } from "react-toastify";
 
+import 'react-quill/dist/quill.snow.css';
 import 'styles/index.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

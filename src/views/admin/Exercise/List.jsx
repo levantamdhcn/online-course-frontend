@@ -5,7 +5,7 @@ import FilterDropdown from 'components/FilterDropdown';
 import axios from 'axios';
 import config from '../../../config';
 
-export const List = () => {
+const List = () => {
   const history = useHistory();
   const [subjects, setSubjects] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -52,7 +52,7 @@ export const List = () => {
       <button
         className="btn btn-primary float-right"
         onClick={() => {
-          history.push('admin/lecture');
+          history.push('exercise/add');
         }}
       >
         Thêm bài giảng
@@ -130,3 +130,5 @@ export const List = () => {
     </div>
   );
 };
+
+export default List;

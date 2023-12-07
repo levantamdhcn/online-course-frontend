@@ -11,10 +11,11 @@ const FormInput = ({
   element,
   disabled,
   maxW,
+  isRequired,
   ...inputProps
 }) => {
   return (
-    <FormControl isInvalid={!!error} isDisabled={disabled} maxW={maxW ? maxW : "375px"} minW={'60px'}>
+    <FormControl isRequired={isRequired} isInvalid={!!error} isDisabled={disabled} maxW={maxW ? maxW : "375px"} minW={'60px'}>
       {label && <FormLabel>{label}</FormLabel>}
       <Input
         value={value}

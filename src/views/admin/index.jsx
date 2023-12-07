@@ -1,18 +1,14 @@
 
 import React, { useCallback, useState } from 'react';
 import Course from './Course';
-import AdminNav from './Navbar';
+import AdminNav from '../../layouts/AdminLayout/Navbar';
 import User from './User';
 import Lecture from './Lecture';
 import { TABS } from './constant';
-import { List as ExerciseList } from './Exercise';
+import List from './Exercise/List';
 
 const AdminDashboard = () => {
   const [tab, setTab] = useState(TABS.user);
-
-  const handleSetTab = useCallback((tab) => {
-    setTab(tab);
-  }, [])
 
   const getTab = useCallback(() => {
     switch(tab) {
@@ -23,7 +19,7 @@ const AdminDashboard = () => {
       case TABS.user:
         return <User />;
       case TABS.exercise:
-        return <ExerciseList />;
+        return <List />;
       default: 
         return <User />;
     }
@@ -31,7 +27,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-page">
-      <AdminNav tab={tab} setTab={handleSetTab} />
       <div className="admin-page-children">
         {getTab()}  
       </div>

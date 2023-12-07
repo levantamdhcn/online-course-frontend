@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import useAuth from 'hooks/useAuth';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const navItems = [
+  {
+    link: '',
+    logo: 'dashboard',
+    label: 'Bảng điều khiển'
+  },
   {
     link: 'user',
     logo: 'user-filled',
@@ -28,7 +33,12 @@ const navItems = [
 const AdminNav = ({ tab, setTab }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const history = useHistory();
+  const location = useLocation();
+  console.log('location', location);
   const { user, logout } = useAuth();
+
+  const handleNavigate = (path) => history.push(path);
+
   return (
     <nav className="admin-nav">
       <div className="admin-nav-top">
@@ -71,11 +81,12 @@ const AdminNav = ({ tab, setTab }) => {
       </div>
       <div className="admin-nav-middle">
         {navItems.map((el) => {
+          const isActive = el.link === '' ? location.pathname === '/admin/' : location.pathname.includes(el.link);
           return (
             <div
               key={el.label}
-              className={`admin-nav-item ${tab === el.link ? 'active' : ''}`}
-              onClick={() => setTab(el.link)}
+              className={`admin-nav-item ${isActive ? 'active' : ''}`}
+              onClick={() => handleNavigate(`/admin/${el.link}`)}
             >
               <span className={`icon icon-${el.logo} hover-effect`}></span>
             </div>
