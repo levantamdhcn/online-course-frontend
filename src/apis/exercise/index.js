@@ -9,4 +9,8 @@ const fetchExercises = (filter) => {
   return axios.get(`${config.url}/${queryParam}`);
 };
 
-export { fetchExercises };
+const addExercise = (payload) => {
+  return axios.post(`${config.url}/exercise`, payload);
+}
+
+export { fetchExercises, addExercise };

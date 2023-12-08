@@ -5,11 +5,11 @@ import {
   Text,
   FormLabel,
   Input,
-  Flex
+  Flex,
+  Link
 } from '@chakra-ui/react';
 import { forwardRef } from 'react';
-import ImagePlaceholderIcon from '../../assets/image-placeholder.svg';
-
+import ImagePlaceholderIcon from '../../assets/images/text-file-placeholder.svg';
 
 const FormFile = forwardRef((props, ref) => {
   const {
@@ -27,10 +27,18 @@ const FormFile = forwardRef((props, ref) => {
   return (
     <FormControl isInvalid={!!error} isDisabled={disabled} maxW={maxW ? maxW : '375px'}>
       {label && <FormLabel>{label}</FormLabel>}
+      <Link
+        href="https://drive.google.com/file/d/1okWdXz31k3C5sqV6q4H6mgeVtB1r6iua/view?usp=sharing"
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "#00BFFE"}}
+      >
+        Tải tệp tin mẫu
+      </Link>
       <Input
         ref={ref}
         type="file"
-        accept={`image/png,image/jpg,image/jpeg, ${acceptVideo ? 'video/*' : ''}`}
+        accept=".txt"
         onChange={onChange}
         {...inputProps}
         display="none"
@@ -47,14 +55,15 @@ const FormFile = forwardRef((props, ref) => {
         cursor="pointer"
         onClick={() => ref.current.click()}
       >
-        <Image src={ImagePlaceholderIcon} mb="16px" />
+        <Image width={35} src={ImagePlaceholderIcon} mb="16px" />
         <Text color="neutral.900" mb="4px">
           <Text as="span" color="primary.500">
-            Upload a file
+            Tải lên 1 tệp tin
           </Text>{' '}
-          or drag and drop
+          hoặc kéo thả vào ô này
         </Text>
-        <Text>{acceptVideo ? 'Image or Video upto 5MB' : 'PNG & JPG upto 5MB'}</Text>
+        <Text>{'Tệp tin .txt dung lượng tối đa 5MB'}</Text>
+        <Text></Text>
       </Flex>
       <FormErrorMessage color="primary.500">{error?.message}</FormErrorMessage>
     </FormControl>

@@ -7,9 +7,11 @@ import {
   FormControl,
   Input,
   Spacer,
-  FormLabel
+  FormLabel,
+  Text
 } from '@chakra-ui/react';
 import { DeleteIcon, SmallAddIcon } from '@chakra-ui/icons';
+import { toast } from "react-toastify";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm, useFieldArray } from 'react-hook-form';
 import FormCard from 'components/FormCard';
@@ -20,6 +22,7 @@ import FormScript from 'components/FormScript';
 import FormSelect from 'components/FormSelect';
 import axios from 'axios';
 import config from '../../../../config';
+import FormFile from 'components/FormFile';
 
 const defaultValues = {
   title: '',
@@ -29,12 +32,16 @@ const defaultValues = {
   solution: '',
   solutionTester: '',
   demands: [],
-  subject_id: null
+  mappedTitle: '',
+  subject_id: null,
+  testCaseFile: null,
 };
 
 const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
   const [subjects, setSubjects] = React.useState([]);
   const [isConfirm, setIsConfirm] = React.useState(false);
+
+  const testCaseInputRef = React.useRef(null);
 
   const {
     handleSubmit,
@@ -70,10 +77,64 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
     getSubjects();
   }, []);
 
+  const onFileChange = (event) => {
+    const file = event.target.files[0];
+    if(file.type !== "text/plain") {
+      toast("Định dạng không hợp lệ", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
+      return;
+    }
+
+    let fileSize = file.size * 0.000001;
+    if(fileSize >= 5) {
+      toast("Tệp tin không được phép vượt quá 5MB", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+      });
+
+      return;
+    }
+    setValue('testCaseFile', file);
+  }
+
+  const trimString = (str) => {
+    // Replace spaces and all special characters with hyphens
+    return str.toLowerCase().replace(/[\s~`!@#$%^&*()_+={}[\]:;<>,.?\/\\|\\-]/g, '-');
+  };
+
   return (
     <FormCard>
       <SimpleGrid>
         <Stack spacing="24px">
+          <Controller
+              control={control}
+              name="questionName"
+              render={({ field }) => (
+                <FormInput
+                  isRequired
+                  value={field.value}
+                  onChange={field.onChange}
+                  type="text"
+                  label="Tên bài tập"
+                  error={errors.title}
+                  maxW="100%"
+                />
+              )}
+            />
           <HStack>
             <Controller
               control={control}
@@ -82,9 +143,12 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
                 <FormInput
                   isRequired
                   value={field.value}
-                  onChange={field.onChange}
+                  onChange={(e) => {
+                    setValue('mappedTitle', trimString(e.target.value));
+                    field.onChange(e);
+                  }}
                   type="text"
-                  label="Tiêu đề"
+                  label="Tên tóm tắt"
                   error={errors.title}
                   maxW="100%"
                 />
@@ -93,12 +157,10 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
 
             <Controller
               control={control}
-              name="title"
+              name="mappedTitle"
               render={({ field }) => (
                 <FormInput
-                  isRequired
                   value={field.value}
-                  onChange={field.onChange}
                   type="text"
                   label="Tên file trong máy chủ"
                   error={errors.title}
@@ -240,6 +302,20 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
               </Button>
             )}
           </FormControl>
+
+          <FormFile
+            {...register("testCaseFile")}
+            ref={testCaseInputRef}
+            onChange={onFileChange}
+            label="Tệp tin test cases"
+            isMultiple={false}
+          />
+
+          <Controller
+            control={control}
+            name="testCaseFile"
+            render={({ field }) => <Text color="primary.500">{field?.value?.name}</Text>}
+          />
         </Stack>
       </SimpleGrid>
 

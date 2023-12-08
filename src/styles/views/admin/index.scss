@@ -9,6 +9,10 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-right: 1px solid #ddd;
 }
 
 .admin-nav {
@@ -79,7 +83,9 @@
 }
 
 .admin-page-children {
-    width: 100%;
+    width: calc(100% - 65px);
+    margin-left: 65px;
+    height: 100vh;
     padding: 16px 24px 16px 12px;
     .search-bar {
         display: flex;
