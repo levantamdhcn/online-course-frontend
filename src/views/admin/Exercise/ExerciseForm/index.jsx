@@ -26,7 +26,9 @@ const defaultValues = {
   description: '',
   questionName: '',
   mainFunction: '',
-  demand: [],
+  solution: '',
+  solutionTester: '',
+  demands: [],
   subject_id: null
 };
 
@@ -133,7 +135,37 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
                 onChange={field.onChange}
                 label="Chương trình"
                 maxW="100%"
-                error={errors.description}
+                error={errors.mainFunction}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="solution"
+            render={({ field }) => (
+              <FormScript
+                isRequired
+                value={field.value}
+                onChange={field.onChange}
+                label="Đáp án"
+                maxW="100%"
+                error={errors.solution}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="solutionTester"
+            render={({ field }) => (
+              <FormScript
+                isRequired
+                value={field.value}
+                onChange={field.onChange}
+                label="Chương trình kiểm tra đáp án"
+                maxW="100%"
+                error={errors.solutionTester}
               />
             )}
           />
