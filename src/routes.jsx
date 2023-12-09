@@ -96,6 +96,11 @@ export const routes = [
       },
       {
         exact: true,
+        path: '/admin/exercise/:id',
+        component: lazy(() => import('views/admin/Exercise/EditPage')),
+      },
+      {
+        exact: true,
         path: '/admin/user',
         component: lazy(() => import('views/admin/User')),
       },

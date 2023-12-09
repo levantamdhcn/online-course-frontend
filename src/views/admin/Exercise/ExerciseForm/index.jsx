@@ -16,28 +16,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm, useFieldArray } from 'react-hook-form';
 import FormCard from 'components/FormCard';
 import FormInput from 'components/FormInput';
-import { validationNewExerciseSchema } from '../AddPage/form.validator';
+import { validationUpdateExerciseSchema } from '../AddPage/form.validator';
 import FormRichText from 'components/FormRichText';
 import FormScript from 'components/FormScript';
 import FormSelect from 'components/FormSelect';
 import axios from 'axios';
 import config from '../../../../config';
 import FormFile from 'components/FormFile';
+import ModalConFirmDelete from 'components/ModalConfirmDelete';
+import { useParams } from 'react-router-dom'; 
 
-const defaultValues = {
-  title: '',
-  description: '',
-  questionName: '',
-  mainFunction: '',
-  solution: '',
-  solutionTester: '',
-  demands: [],
-  mappedTitle: '',
-  subject_id: null,
-  testCaseFile: null,
-};
-
-const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
+const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues }) => {
+  const { id } = useParams();
   const [subjects, setSubjects] = React.useState([]);
   const [isConfirm, setIsConfirm] = React.useState(false);
 
@@ -53,7 +43,7 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
     reset
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(validationNewExerciseSchema),
+    resolver: yupResolver(validationUpdateExerciseSchema),
     defaultValues
   });
 
@@ -114,6 +104,13 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
   const trimString = (str) => {
     // Replace spaces and all special characters with hyphens
     return str.toLowerCase().replace(/[\s~`!@#$%^&*()_+={}[\]:;<>,.?\/\\|\\-]/g, '-');
+  };
+
+  const onDeleteExercise = async (id) => {
+    if (id && onDelete && isConfirm) {
+      onDelete(id);
+      setIsConfirm(false);
+    }
   };
 
   return (
@@ -335,6 +332,12 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
           Hủy
         </Button>
       </HStack>
+
+      <ModalConFirmDelete
+        show={!!isConfirm}
+        handleDeleted={() => onDeleteExercise(id)}
+        handleCancel={() => setIsConfirm(false)}
+      />
     </FormCard>
   );
 };

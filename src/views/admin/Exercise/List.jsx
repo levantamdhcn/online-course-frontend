@@ -4,9 +4,11 @@ import { useFetchExercises } from './hooks/useQuery';
 import FilterDropdown from 'components/FilterDropdown';
 import axios from 'axios';
 import config from '../../../config';
+import ModalConFirmDelete from 'components/ModalConfirmDelete';
 
 const List = () => {
   const history = useHistory();
+  const [isConfirm, setIsConfirm] = useState(false);
   const [subjects, setSubjects] = useState([]);
   const [selected, setSelected] = useState([]);
 
@@ -110,15 +112,9 @@ const List = () => {
                     <td class="px-6 py-4 text-right">
                       <button
                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        onClick={() => {}}
+                        onClick={() => history.push(`exercise/${exercise._id}`)}
                       >
                         Cập nhật
-                      </button>
-                      <button
-                        class="ml-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        onClick={() => {}}
-                      >
-                        Xóa
                       </button>
                     </td>
                   </tr>

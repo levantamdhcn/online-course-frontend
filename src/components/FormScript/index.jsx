@@ -14,6 +14,7 @@ const FormScript = ({ isRequired = false, label, error, value, height, onChange,
     <FormControl isRequired={isRequired} isInvalid={!!error} isDisabled={disabled} maxW={maxW ? maxW : '375px'}>
       {label && <FormLabel>{label}</FormLabel>}
       <Editor
+        value={value}
         height={height}
         defaultLanguage="javascript"
         defaultValue="// some comment"

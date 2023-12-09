@@ -20,3 +20,14 @@ export const validationNewExerciseSchema = object().shape({
       return file && file.size <= 2000000;
     })
 });
+
+export const validationUpdateExerciseSchema = object().shape({
+  title: string().required('Tiêu đề là trường bắt buộc'),
+  questionName: string().required('Tên bài tập là trường bắt buộc'),
+  description: string().required('Mô tả là trường bắt buộc'),
+  mainFunction: string().required('Mã Javascript là trường bắt buộc'),
+  solution: string().required('Đáp án là trường bắt buộc'),
+  solutionTester: string().required('Mã kiểm tra đáp án là trường bắt buộc'),
+  demands: array().required('Yêu cầu là trường bắt buộc'),
+  subject_id: string().required('Bài giảng là trường bắt buộc'),
+});

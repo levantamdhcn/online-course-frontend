@@ -14,15 +14,31 @@ const defaultValues = {
   description: '',
   questionName: '',
   mainFunction: '',
-  demand: [],
-  subject_id: null
+  solution: '',
+  solutionTester: '',
+  demands: [],
+  mappedTitle: '',
+  subject_id: null,
+  testCaseFile: null,
 };
+
+const requireFields = {
+  title: true,
+  description: true,
+  questionName: true,
+  mainFunction: true,
+  solution: true,
+  solutionTester: true,
+  demands: [],
+  mappedTitle: true,
+  subject_id: true,
+}
 
 const AddPage = () => {
   const history = useHistory();
 
   const { mutate, isLoading } = useAddExercises(() => {
-    toast("Update product successfully", {
+    toast("Thêm bài tập thành công", {
       position: "top-right",
       type: "success",
       hideProgressBar: true,
@@ -62,7 +78,7 @@ const AddPage = () => {
         isRenderBtn={false}
         breadcrumbs={[{ label: 'Quản lý bài tập', link: '/admin/exercise' }]}
       />
-      <ExerciseForm onSubmit={handleSubmit} handleClickCancelBtn={handleClickCancelBtn} />
+      <ExerciseForm onSubmit={handleSubmit} handleClickCancelBtn={handleClickCancelBtn} defaultValues={defaultValues} />
     </Container>
   );
 };
