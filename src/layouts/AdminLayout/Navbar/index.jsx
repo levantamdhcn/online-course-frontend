@@ -81,7 +81,10 @@ const AdminNav = ({ tab, setTab }) => {
       </div>
       <div className="admin-nav-middle">
         {navItems.map((el) => {
-          const isActive = el.link === '' ? location.pathname === '/admin/' : location.pathname.includes(el.link);
+          const isActive =
+            el.link === ''
+              ? location.pathname === '/admin/' || location.pathname === '/admin'
+              : location.pathname.includes(el.link);
           return (
             <div
               key={el.label}

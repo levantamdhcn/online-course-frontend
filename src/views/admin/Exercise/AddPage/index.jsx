@@ -33,10 +33,16 @@ const AddPage = () => {
 
   const handleSubmit = (values) => {
     const formData = new FormData();
-
+    console.log('values', values)
     for (const key in values) {
-      if (values.hasOwnProperty(key)) {
-        formData.append(key, values[key]);
+      if(key === 'demands') {
+        for (var i = 0; i < values.demands.length; i++) {
+          formData.append('demands[]', values.demands[i].value);
+        }
+      } else {
+        if (values.hasOwnProperty(key)) {
+          formData.append(key, values[key]);
+        }
       }
     }
 

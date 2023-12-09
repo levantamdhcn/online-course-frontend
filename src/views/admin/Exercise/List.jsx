@@ -102,7 +102,7 @@ const List = () => {
                       scope="row"
                       class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
                     >
-                      {exercise.question}
+                      {exercise.questionName}
                     </th>
                     <td class="px-6 py-4">{exercise.position}</td>
                     <td class="px-6 py-4">{statusCheck(exercise.isCompleted)}</td>

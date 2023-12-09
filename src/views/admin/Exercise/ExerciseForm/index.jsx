@@ -192,6 +192,7 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
             name="mainFunction"
             render={({ field }) => (
               <FormScript
+                height='200px'
                 isRequired
                 value={field.value}
                 onChange={field.onChange}
@@ -207,6 +208,7 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
             name="solution"
             render={({ field }) => (
               <FormScript
+                height='200px'
                 isRequired
                 value={field.value}
                 onChange={field.onChange}
@@ -222,6 +224,7 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
             name="solutionTester"
             render={({ field }) => (
               <FormScript
+                height='400px'
                 isRequired
                 value={field.value}
                 onChange={field.onChange}
@@ -296,7 +299,7 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete }) => {
                 colorScheme="blue"
                 variant="outline"
                 maxW="150px"
-                onClick={() => append({ name: 'name' })}
+                onClick={() => append({ name: 'demands' })}
               >
                 Thêm yêu cầu
               </Button>
