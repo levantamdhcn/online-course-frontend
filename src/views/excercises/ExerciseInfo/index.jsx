@@ -1,7 +1,10 @@
 import React from 'react';
+import moment from 'moment';
+import Parser from 'html-react-parser';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import { Box, Text } from '@chakra-ui/react';
+import BlockQuote from 'components/BlockQuote';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 
@@ -9,32 +12,22 @@ const ExerciseInfo = ({ exercise }) => {
   return (
     <>
       <div className="exercise-info">
-        <h1 className="question-title">Câu hỏi</h1>
-        <p className="exercise-demand">{exercise?.question}</p>
-        {
-          exercise?.sampleCode && (
-            <div className="sipsppet">
-              <SyntaxHighlighter
-                language="jsx"
-                style={materialDark}
-                customStyle={{ borderRadius: '6px', marginBottom: '20px' }}
-              >
-                {exercise?.sampleCode}
-              </SyntaxHighlighter>
-            </div>
-          )
-        }
-        <h1>Yêu cầu</h1>
-        <p className="exercise-demand">Nội dung yêu cầu: </p>
-        {
-          exercise?.demand && exercise?.demand?.map && (
-            <ul>
-              {
-                exercise?.demand.map(el => <li>- <strong>{el}</strong></li>)
-              }
-            </ul>
-          )
-        }
+        <Text fontWeight="700" fontSize="24px">{exercise?.questionName}</Text>
+        <Text fontSize="14px" color="#ccc">Cập nhật {moment(exercise?.createdAt).format("DD/MM/YYYY")}</Text>
+        <Box mt={8}>
+          {exercise?.description && Parser(exercise?.description)}
+        </Box>
+        <Box mt={8}>
+          {
+            exercise?.demands && exercise?.demands?.map && (
+              <>
+                {
+                  exercise?.demands.map(el => <BlockQuote key={el} quote={el} />)
+                }
+              </>
+            )
+          }
+        </Box>
       </div>
     </>
   );

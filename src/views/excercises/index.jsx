@@ -10,6 +10,7 @@ import axios from 'axios';
 const DoExercise = ({ handleRunTest }) => {
   const { subjectId, exerciseId } = useParams();
   const [exercise, setExercise] = useState(null);
+  const [subject, setSubject] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [currentTab, setCurrentTab] = useState('doing');
   const history = useHistory();
@@ -24,6 +25,17 @@ const DoExercise = ({ handleRunTest }) => {
 
     getEx();
   }, [exerciseId]);
+
+  useEffect(() => {
+    const getEx = async () => {
+      const res = await axios.get(`${config.url}/subject/${subjectId}`);
+      if (res.data) {
+        setSubject(res.data);
+      }
+    };
+
+    getEx();
+  }, [subjectId]);
 
   useEffect(() => {
     const getExs = async () => {
@@ -46,7 +58,7 @@ const DoExercise = ({ handleRunTest }) => {
         <div className="container flex items-center justify-between h-full w-full p-4">
           <div className="exercise-header-left">
             <span className="icon-arrow-left" onClick={history.goBack}></span>
-            <p>Tên bài học</p>
+            <p>{subject?.name}</p>
           </div>
           <div className="exercise-header-middle">
             <ul>
