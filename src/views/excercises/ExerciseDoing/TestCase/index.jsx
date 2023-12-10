@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TestCaseTab from './TestCaseTabs/TestCaseTabs';
+import ResultPanel from './ResultPanel';
 
 const TestCases = ({ cases, handleRunTest, handleSubmit }) => {
   // eslint-disable-next-line
@@ -44,18 +45,15 @@ const TestCases = ({ cases, handleRunTest, handleSubmit }) => {
 
   return (
     <div className="test-case-container">
-      <h1 className="test-case-heading">TEST CASE</h1>
+      <h1 className="test-case-heading">Bài kiểm tra</h1>
       <div className="test-case-body">
-        <TestCaseTab cases={cases} data={data} setData={setData} errorTab={errorTab} setErrorTab={setData} passedTab={passedTab} />
+        {/* <TestCaseTab cases={cases} data={data} setData={setData} errorTab={errorTab} setErrorTab={setData} passedTab={passedTab} /> */}
+        <ResultPanel />
       </div>
       <div className="test-case-footer">
-        <button className="btn btn-primary" onClick={handleRun}>
-          <span className="icon-control-forward"></span>
-          Chạy thử
-        </button>
-        <button className={`btn btn-submit ${errorTab.length > 0 ? 'disabled' : ''}`} onClick={submit}>
+        <button className={`btn btn-primary ${errorTab.length > 0 ? 'disabled' : ''}`} onClick={submit}>
           <span className="icon-save"></span>
-          Nộp bài
+          Kiểm tra &amp; Nộp bài
         </button>
       </div>
     </div>

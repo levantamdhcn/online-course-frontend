@@ -5,6 +5,7 @@ import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
+import FormScript from 'components/FormScript';
 
 const Editor = ({ currentCode, setCurrentCode }) => {
   const [showSelectLangugage, setShowSelectLanguage] = useState(false);
@@ -20,14 +21,14 @@ const Editor = ({ currentCode, setCurrentCode }) => {
 
   const resetCurrentCode = () => {
     setCurrentCode('');
-  }
+  };
 
   return (
-    <div className="editor-container">
+    <div className="editor-container no-border">
       <div className="editor-heading">
         <div className="reset-btn" onClick={resetCurrentCode}>
           <span className="icon-revert"></span>
-          Reset
+          Khôi phục
         </div>
         <div className="language-selector">
           <div className="current-language" onClick={() => setShowSelectLanguage((prev) => !prev)}>
@@ -52,17 +53,12 @@ const Editor = ({ currentCode, setCurrentCode }) => {
         </div>
       </div>
       <div>
-        <ControlledEditor
-          onBeforeChange={handleChange}
+        <FormScript
           value={currentCode}
-          className="codemirror-wrapper"
-          options={{
-            lineWrapping: true,
-            lint: true,
-            mode: currentLanguage,
-            theme: 'material',
-            lineNumbers: true
-          }}
+          className="editor-container no-border"
+          height="100vh"
+          maxW="100%"
+          theme="vs-dark"
         />
       </div>
     </div>

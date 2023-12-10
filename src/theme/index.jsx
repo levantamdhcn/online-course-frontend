@@ -67,5 +67,8 @@ export const theme = extendTheme({
       400: "#FBBF24",
       500: "#F59E0B",
     },
+    error: {
+      500: '#ff3333'
+    }
   },
 });

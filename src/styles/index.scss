@@ -185,4 +185,8 @@ body {
 .editor-container {
   border: 1px solid #ddd;
   width: 100%;
+
+  &.no-border {
+    border: none;
+  }
 }
