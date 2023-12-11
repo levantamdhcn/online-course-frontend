@@ -11,7 +11,7 @@ const Editor = ({ currentCode, setCurrentCode }) => {
   const [showSelectLangugage, setShowSelectLanguage] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState('javascript');
 
-  const handleChange = (editor, data, value) => {
+  const handleChange = (value) => {
     setCurrentCode(value);
   };
   const handleSelect = (language) => {
@@ -40,12 +40,6 @@ const Editor = ({ currentCode, setCurrentCode }) => {
             <span className="icon-arrow-down"></span>
           </div>
           <div className={`selection-wrapper ${showSelectLangugage && 'active'}`}>
-            <div className="selection" onClick={() => handleSelect('xml')}>
-              HTML
-            </div>
-            <div className="selection" onClick={() => handleSelect('css')}>
-              CSS
-            </div>
             <div className="selection" onClick={() => handleSelect('javascript')}>
               JS
             </div>
@@ -55,6 +49,7 @@ const Editor = ({ currentCode, setCurrentCode }) => {
       <div>
         <FormScript
           value={currentCode}
+          onChange={handleChange}
           className="editor-container no-border"
           height="100vh"
           maxW="100%"

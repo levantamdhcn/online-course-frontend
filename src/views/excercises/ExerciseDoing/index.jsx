@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom';
 import Editor from './Editor';
 import Splitter, { SplitDirection } from '@devbookhq/splitter';
 import TestCases from './TestCase';
-import axios from 'axios';
-import config from '../../../config';
 import useAuth from 'hooks/useAuth';
 import { useFetchExercise } from 'views/admin/Exercise/hooks/useQuery';
 import LoadingScreen from 'components/LoadingScreen';
@@ -13,12 +11,7 @@ import { useRunSubmission } from '../hooks/useQuery';
 const ExerciseDoing = () => {
   const { user } = useAuth();
   const { exerciseId } = useParams();
-  const [resultMessage, setResultMessage] = useState({
-    message: '',
-    runtime: 0,
-    runtimeLimit: 500,
-    status: 'fail',
-  });
+  const [resultMessage, setResultMessage] = useState();
   const [currentCode, setCurrentCode] = useState('');
 
   const { isLoading, data: exercise, refetch } = useFetchExercise(exerciseId);
@@ -31,20 +24,11 @@ const ExerciseDoing = () => {
     })
   });
 
-  console.log('resultMessage', resultMessage);
-
   useEffect(() => {
     setCurrentCode(exercise?.mainFunction);
   }, [exercise]);
 
   const handleRunTest = async () => {
-    //   {
-    //     "_id": "656769b0d17deae11ace1d10",
-    //     "user": "628671cc61c0aa3ddff1907f",
-    //     "exercise": "64da5cf19e21569da75cba19",
-    //     "language": "javascript",
-    //     "solution": "var reverseString = function(s) {\n  if (!s) {\n    return \"\";\n  }\n  answer = \"\";\n  for (i = s.length - 1; i >= 0; i--) {\n    answer = answer.concat(s[i]);\n  }\n  return answer;\n};"
-    // }
     try {
       const data = {};
       data.user = user._id;
@@ -64,7 +48,7 @@ const ExerciseDoing = () => {
     <>
       <Splitter direction={SplitDirection.Vertical} minHeights={[100, 100]}>
         <Editor currentCode={currentCode} setCurrentCode={setCurrentCode} />
-        <TestCases handleRunTest={handleRunTest} />
+        <TestCases resultMessage={resultMessage} handleRunTest={handleRunTest} />
       </Splitter>
     </>
   );

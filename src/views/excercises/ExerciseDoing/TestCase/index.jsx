@@ -1,13 +1,15 @@
 import React from 'react';
 import ResultPanel from './ResultPanel';
 
-const TestCases = ({ handleRunTest }) => {
+const TestCases = ({ resultMessage, handleRunTest }) => {
   return (
     <div className="test-case-container">
       <h1 className="test-case-heading">Bài kiểm tra</h1>
       <div className="test-case-body">
         {/* <TestCaseTab cases={cases} data={data} setData={setData} errorTab={errorTab} setErrorTab={setData} passedTab={passedTab} /> */}
-        <ResultPanel />
+        {
+          resultMessage && <ResultPanel resultMessage={resultMessage} />
+        }
       </div>
       <div className="test-case-footer">
         <button className={`btn btn-primary`} onClick={handleRunTest}>

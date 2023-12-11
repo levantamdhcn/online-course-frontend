@@ -2,11 +2,46 @@ import React from 'react';
 import { Box, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import BlockPre from 'components/BlockPre';
 
-const ResultPanel = ({ success, input, output, expectedOutput, executeTime, limitExecuteTime }) => {
+const getInput = (message) => {
+  if (message) {
+    let strs = message.split(';');
+    return strs[0];
+  }
+};
+
+const getYourAnswer = (message) => {
+  if (message) {
+    let strs = message.split(';');
+    return strs[1];
+  }
+};
+
+const getExpectedAnswer = (message) => {
+  if (message) {
+    let strs = message.split(';');
+    return strs[2];
+  }
+};
+
+const ResultPanel = ({ resultMessage }) => {
+  const data = React.useMemo(() => {
+    const success = resultMessage?.status === 'pass';
+    const input = getInput(resultMessage.message);
+    const output = getYourAnswer(resultMessage.message);
+    const expectedOutput = getExpectedAnswer(resultMessage.message);
+
+    return {
+      success,
+      input,
+      output,
+      expectedOutput
+    };
+  }, [resultMessage]);
+
   return (
     <SimpleGrid sx={styles.root}>
       <Stack>
-        {success ? (
+        {data?.success ? (
           <Box borderBottom="1px solid #fff" padding="10px">
             <Text color="success.500" fontWeight="700">
               Kết quả: Thành công
@@ -21,17 +56,22 @@ const ResultPanel = ({ success, input, output, expectedOutput, executeTime, limi
           </Box>
         )}
 
-        <Box padding="10px 10px 0 10px">
-          <BlockPre label="Dữ liệu đầu vào" value={input} />
-          <HStack mt={5} gap="30px">
-            <BlockPre label="Kết quả của bạn" value={output} />
-            <BlockPre label="Kết quả mong đợi" value={expectedOutput} />
-          </HStack>
-          <HStack mt={3} gap="30px">
-            <BlockPre label="Thời gian thực thi thực tế" value={executeTime} />
-            <BlockPre label="Thời gian thực thi tối đa" value={limitExecuteTime} />
-          </HStack>
-        </Box>
+        {!data.success && (
+          <Box padding="10px 10px 0 10px">
+            <BlockPre label="Dữ liệu đầu vào" value={data?.input} />
+            <HStack mt={5} gap="30px">
+              <BlockPre label="Kết quả của bạn" value={data?.output} />
+              <BlockPre label="Kết quả mong đợi" value={data?.expectedOutput} />
+            </HStack>
+            <HStack mt={3} gap="30px">
+              <BlockPre
+                label="Thời gian thực thi thực tế"
+                value={resultMessage?.newSubmission?.runtime}
+              />
+              <BlockPre label="Thời gian thực thi tối đa" value={500} />
+            </HStack>
+          </Box>
+        )}
       </Stack>
     </SimpleGrid>
   );
