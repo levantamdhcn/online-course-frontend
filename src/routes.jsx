@@ -82,7 +82,7 @@ export const routes = [
       {
         exact: true,
         path: '/admin',
-        component: lazy(() => import('views/admin')),
+        component: lazy(() => import('views/admin/Dashboard')),
       },
       {
         exact: true,

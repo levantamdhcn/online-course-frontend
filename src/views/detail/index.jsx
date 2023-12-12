@@ -59,7 +59,7 @@ const CourseDetail = () => {
               <BasicDetail
                 thumb={course.image}
                 name={course.name}
-                lectures={course.lectures}
+                lectures={course?.subjects?.length}
                 studentCount={studentCount}
                 overview={course.description}
                 enrolled={enrolled}

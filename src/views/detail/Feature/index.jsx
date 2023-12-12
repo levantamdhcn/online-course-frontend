@@ -13,7 +13,7 @@ const CourseFeature = ({ course, enrolled, studentCount }) => {
     {
       icon: 'play',
       name: 'Lectures',
-      value: course.lectures
+      value: course?.subjects?.length
     },
     {
       icon: 'quiz',

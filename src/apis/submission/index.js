@@ -4,4 +4,8 @@ const runSubmission = (payload) => {
   return axiosClient.post(`/submission/run`, payload);
 };
 
-export { runSubmission };
+const fetchLatestSubmission = (exerciseId) => {
+  return axiosClient.get(`/submission/exercise/${exerciseId}`);
+}
+
+export { runSubmission, fetchLatestSubmission };

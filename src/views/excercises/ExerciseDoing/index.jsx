@@ -6,7 +6,7 @@ import TestCases from './TestCase';
 import useAuth from 'hooks/useAuth';
 import { useFetchExercise } from 'views/admin/Exercise/hooks/useQuery';
 import LoadingScreen from 'components/LoadingScreen';
-import { useRunSubmission } from '../hooks/useQuery';
+import { useFetchLatestSubmission, useRunSubmission } from '../hooks/useQuery';
 
 const ExerciseDoing = () => {
   const { user } = useAuth();
@@ -14,7 +14,10 @@ const ExerciseDoing = () => {
   const [resultMessage, setResultMessage] = useState();
   const [currentCode, setCurrentCode] = useState('');
 
-  const { isLoading, data: exercise, refetch } = useFetchExercise(exerciseId);
+  const { isLoading, data: exercise } = useFetchExercise(exerciseId);
+
+  const { isLoading: loadSubmission, data: submission } = useFetchLatestSubmission(exerciseId);
+
 
   const { mutate, isLoading: running } = useRunSubmission((resp) => {
     setResultMessage({
@@ -25,8 +28,8 @@ const ExerciseDoing = () => {
   });
 
   useEffect(() => {
-    setCurrentCode(exercise?.mainFunction);
-  }, [exercise]);
+    setCurrentCode(submission?.solution || submission?.mainFunction);
+  }, [submission]);
 
   const handleRunTest = async () => {
     try {
@@ -42,7 +45,7 @@ const ExerciseDoing = () => {
     }
   };
 
-  if (isLoading | running) return <LoadingScreen />;
+  if (isLoading | running || loadSubmission) return <LoadingScreen />;
 
   return (
     <>

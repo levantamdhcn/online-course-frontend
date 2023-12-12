@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
-import { useMutation } from "react-query";
-import { runSubmission } from "apis/submission";
+import { useQuery, useMutation } from 'react-query';
+import { fetchLatestSubmission, runSubmission } from "apis/submission";
 
 export const useRunSubmission = (callback) => {
   return useMutation((payload) => runSubmission(payload), {
@@ -10,5 +10,12 @@ export const useRunSubmission = (callback) => {
     onError: (error) => {
       toast.error(error.response.data.message.toString());
     }
+  });
+};
+
+export const useFetchLatestSubmission = (exerciseId) => {
+  return useQuery(['submission-by-exercise-id', exerciseId], () => fetchLatestSubmission(exerciseId), {
+    refetchOnWindowFocus: false,
+    cacheTime: 0
   });
 };
