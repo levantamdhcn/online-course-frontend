@@ -4,7 +4,7 @@ import IconBox from 'components/Icons/IconBox';
 import { WalletIcon } from 'components/Icons/Icons';
 import React from 'react';
 
-const InfoCard = ({ title, value, icon, textColor, iconBlue, iconBoxInside }) => {
+const InfoCard = ({ title, value, icon, textColor, iconBlue, subValue }) => {
   return (
     <Card minH="125px" backgroundColor="#fff">
       <Flex direction="column">
@@ -24,10 +24,11 @@ const InfoCard = ({ title, value, icon, textColor, iconBlue, iconBoxInside }) =>
           </IconBox>
         </Flex>
         <Text color="gray.400" fontSize="sm">
+          <span>Đã thêm</span>
           <Text as="span" color="green.400" fontWeight="bold">
-            +3.48%{' '}
+          {' '}{subValue}{' '}
           </Text>
-          Since last month
+          trong tháng này
         </Text>
       </Flex>
     </Card>

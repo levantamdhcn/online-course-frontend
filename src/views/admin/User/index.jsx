@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import ModalCreateUser from './ModalCreateUser';
-import useAuth from 'hooks/useAuth';
+import { useFetchUsers } from './hook/useQuery';
+import LoadingScreen from 'components/LoadingScreen';
 
 const User = () => {
-  const { users } = useAuth();
   const history = useHistory();
   const [addUser, toggleAddUser] = useState(false);
+
+  const { data, isLoading } = useFetchUsers();
+
+  if(isLoading) return <LoadingScreen />
 
   return (
     <>
@@ -49,8 +53,8 @@ const User = () => {
               </tr>
             </thead>
             <tbody className="wrapper" style={{ maxHeight: '300px' }}>
-              {users &&
-                users.map((user) => {
+              {data &&
+                data.map((user) => {
                   return (
                     <tr
                       class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
