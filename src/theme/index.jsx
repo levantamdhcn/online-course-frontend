@@ -1,5 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
 import Button from "./Button";
+import Card from './Card';
 
 const config = {
   initialColorMode: 'light',
@@ -14,6 +15,7 @@ export const theme = extendTheme({
   },
   components: {
     Button,
+    Card
   },
   fontWeights: {
     hairline: 100,
