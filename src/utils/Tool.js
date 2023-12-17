@@ -1,6 +1,18 @@
 import { get } from "lodash";
-import { ColumnInterface } from "../interfaces";
-import { FIELD_TYPE } from "../lib/constants";
+
+export const FIELD_TYPE = {
+  STRING: "STRING",
+  EMAIL: "EMAIL",
+  INTEGER: "INTEGER",
+  BOOLEAN: "BOOLEAN",
+  FLOAT: "FLOAT",
+  DATE: "DATE",
+  DATETIME: "DATETIME",
+  CUSTOMDATETIME: "CUSTOMDATETIME",
+  IMAGE: "IMAGE",
+  FILE: "FILE",
+  ARRAY: "ARRAY"
+};
 
 export default class Tools {
   static dateFormat(date, locale = "FR-FR") {

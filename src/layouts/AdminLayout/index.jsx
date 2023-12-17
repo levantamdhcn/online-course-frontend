@@ -4,7 +4,7 @@ import AdminNav from './Navbar';
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="admin-page">
+    <div className="admin-page scroll-wrapper">
       <AdminNav />
       <div className="admin-page-children">
         {children}

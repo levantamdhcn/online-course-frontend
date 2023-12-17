@@ -9,6 +9,56 @@ export const lineChartData = [
   }
 ];
 
+export const columnsOptions = {
+  chart: {
+    type: 'bar',
+    height: 350
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      columnWidth: '55%',
+      endingShape: 'rounded'
+    },
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    show: true,
+    width: 2,
+    colors: ['transparent']
+  },
+  xaxis: {
+    categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    labels: {
+      style: {
+        colors: '#A098AE',
+        fontSize: '12px',
+        width: '20px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }
+    }
+  },
+  yaxis: {
+    title: {
+      text: ''
+    }
+  },
+  fill: {
+    opacity: 1
+  },
+  tooltip: {
+    y: {
+      formatter: function (val) {
+        return val
+      }
+    }
+  }
+}
+
 export const lineChartOptions = {
   chart: {
     toolbar: {
@@ -66,5 +116,22 @@ export const lineChartOptions = {
   grid: {
     strokeDashArray: 5
   },
-  colors: ['#fff', '#3182CE']
+  colors: ['#3182CE']
 };
+
+export const donutOptions = {
+  chart: {
+    type: 'donut',
+  },
+  responsive: [{
+    breakpoint: 480,
+    options: {
+      chart: {
+        width: 200
+      },
+      legend: {
+        position: 'bottom'
+      }
+    }
+  }]
+}

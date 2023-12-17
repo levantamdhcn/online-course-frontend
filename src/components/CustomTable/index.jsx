@@ -59,6 +59,7 @@ const CustomTable = (props) => {
 
   return (
     <TableContainer
+      bgColor="#fff"
       borderRadius="6px"
       border="1px solid"
       borderColor="neutral.200"
@@ -124,7 +125,8 @@ const CustomTable = (props) => {
                             }),
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
-                            textOverflow: 'ellipsis'
+                            textOverflow: 'ellipsis',
+                            backgroundColor: '#fff',
                           }}
                         >
                           {
