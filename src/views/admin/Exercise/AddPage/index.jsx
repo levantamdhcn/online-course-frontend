@@ -49,7 +49,6 @@ const AddPage = () => {
 
   const handleSubmit = (values) => {
     const formData = new FormData();
-    console.log('values', values)
     for (const key in values) {
       if(key === 'demands') {
         for (var i = 0; i < values.demands.length; i++) {

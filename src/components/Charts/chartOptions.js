@@ -119,9 +119,40 @@ export const lineChartOptions = {
   colors: ['#3182CE']
 };
 
+export const donutChartData = {
+  series: [44, 55, 13, 33],
+  labels: ['Apple', 'Mango', 'Orange', 'Watermelon']
+}
+
 export const donutOptions = {
   chart: {
     type: 'donut',
+  },
+  colors: ['#bcd4d4', '#a82e2e', '#6cc070', '#E91E63', '#FF9800'],
+  plotOptions: {
+    pie: {
+      expandOnClick: false,
+      donut: {
+        labels: {
+          show: true,
+          value: {
+            fontSize: "80px",
+            fontWeight: 900
+          },
+          total: {
+            show: true,
+            showAlways: true,
+            fontSize: "0px",
+            label: "",
+            formatter: function (w) {
+              return w.globals.seriesTotals.reduce((a, b) => {
+                return a + b;
+              }, 0);
+            }
+          }
+        }
+      }
+    }
   },
   responsive: [{
     breakpoint: 480,

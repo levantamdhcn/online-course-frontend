@@ -16,8 +16,6 @@ const Courses = () => {
     getCategories();
   }, []);
 
-  console.log('categories', categories);
-
   return (
     <div className="mx-auto px-44 pt-40">
       {categories &&

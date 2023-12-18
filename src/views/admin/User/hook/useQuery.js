@@ -1,9 +1,9 @@
-import { fetchReportUsers } from "apis/report";
+import { fetchUsers } from "apis/user";
 import { useQuery } from "react-query";
 
 export const useFetchUsers = () => {
-    return useQuery(['user'], () => fetchReportUsers(), {
-      refetchOnWindowFocus: false,
-      cacheTime: 0
-    });
-  };
+  return useQuery(['user'], () => fetchUsers(), {
+    refetchOnWindowFocus: false,
+    cacheTime: 0
+  });
+};

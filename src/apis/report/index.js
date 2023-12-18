@@ -1,6 +1,10 @@
 import qs from "query-string";
 import axiosClient from 'utils/axios';
 
+const fetchReportOverview = () => {
+  return axiosClient.get(`/report/overview`);
+};
+
 const fetchReportCourse = () => {
   return axiosClient.get(`/report/course`);
 };
@@ -21,4 +25,4 @@ const fetchReportEnrollment = (filter) => {
   return axiosClient.get(`/report/enrollment?${qs.stringify(filter)}`);
 };
 
-export { fetchReportCourse, fetchReportViews, fetchReportUsers, fetchReportSubmissions, fetchReportEnrollment };
+export { fetchReportCourse, fetchReportViews, fetchReportUsers, fetchReportSubmissions, fetchReportEnrollment, fetchReportOverview };

@@ -1,5 +1,12 @@
-import { fetchReportCourse, fetchReportEnrollment, fetchReportSubmissions, fetchReportUsers, fetchReportViews } from 'apis/report';
+import { fetchReportCourse, fetchReportEnrollment, fetchReportOverview, fetchReportSubmissions, fetchReportUsers, fetchReportViews } from 'apis/report';
 import { useQuery } from 'react-query';
+
+export const useFetchReportOverview = () => {
+  return useQuery(['report-overview'], () => fetchReportOverview(), {
+    refetchOnWindowFocus: false,
+    cacheTime: 0
+  });
+};
 
 export const useFetchReportCourse = () => {
   return useQuery(['report-course'], () => fetchReportCourse(), {

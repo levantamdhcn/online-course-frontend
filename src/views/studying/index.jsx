@@ -7,306 +7,36 @@ import ListComments from './Comments/ListComments';
 import Avatar from 'assets/images/avatar.jpg';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from 'axios';
-import config from '../../config';
 import moment from 'moment';
-
-const courseLearningInfo = {
-  id: 1,
-  courseName: 'HTML, CSS từ Zero đến Hero',
-  lectureSection: [
-    {
-      id: 0,
-      name: 'Bắt đầu',
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 0,
-          name: 'Làm được gì sau khóa học',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 0,
-              isCompleted: true
-            },
-            {
-              id: 1,
-              isCompleted: false
-            },
-            {
-              id: 2,
-              isCompleted: false
-            }
-          ]
-        },
-        {
-          id: 1,
-          name: 'HTML, CSS là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: false,
-          exercises: [
-            {
-              id: 0,
-              isCompleted: false
-            },
-            {
-              id: 1,
-              isCompleted: false
-            }
-          ]
-        },
-        {
-          id: 1,
-          name: 'HTML, CSS là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: false,
-          exercises: [
-            {
-              id: 0,
-              isCompleted: true
-            },
-            {
-              id: 1,
-              isCompleted: false
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 1,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 4,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 5,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 6,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 7,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 8,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 9,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 10,
-      name: 'Môi trường, con người IT',
-      isCompleted: false,
-      time: '1:46:14',
-      lecturesList: [
-        {
-          id: 1,
-          name: 'Mô hình Client - Server là gì?',
-          time: '11:35',
-          video: 'https://youtu.be/egSxAF-Sak4',
-          isCompleted: true,
-          exercises: [
-            {
-              id: 1,
-              isCompleted: true
-            }
-          ]
-        }
-      ]
-    }
-  ]
-};
+import { useFetchSubject, useSetCompleteSubject } from './hook/useQuery';
+import { toast } from 'react-toastify';
 
 const Studying = () => {
   const history = useHistory()
   const { id } = useParams();
 
-  const [subjects, setSubjects] = useState([]);
   const [currentSubject, setCurrentSubject] = useState(null);
 
-  useEffect(() => {
-    const getSubject = async () => {
-      const res = await axios.get(`${config.url}/subject/course/${id}`);
-      if(res.data) {
-        setSubjects(res.data);
-      }
+  const { data: subjects, isLoading, refetch } = useFetchSubject(id);
+
+  const { mutate, isLoading: completing } = useSetCompleteSubject(() => {
+    toast("Đã hoàn thành bài giảng", {
+      position: "top-right",
+      type: "success",
+      hideProgressBar: true,
+    });
+
+    refetch()
+  });
+
+  const handleCompleteSubject = () => {
+    const data = {
+      courseId: id,
+      subjectId: currentSubject._id,
     }
 
-    getSubject();
-  }, [id])
+    mutate(data);
+  }
 
   useEffect(() => {
     if(subjects.length > 0) {
@@ -322,6 +52,8 @@ const Studying = () => {
   }, [subjects]);
   
   const completedSubject = subjects.filter(el => el.isCompleted).length;
+
+  // if(isLoading) return <LoadingScreen />;
 
   return (
     <div className="studying">
@@ -359,7 +91,7 @@ const Studying = () => {
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12">
                 <div className="scroll-wrapper">
-                  <VideoViewer videoId={currentSubject?.video} />
+                  <VideoViewer onVideoEnd={handleCompleteSubject} videoId={currentSubject?.video} />
                   <div className="lecture-name">{currentSubject?.name}</div>
                   <div className="lecture-update">Cập nhật {moment(currentSubject?.updatedAt || '').lang('vi').format('HH:mm, DD/MM/YYYY')}</div>
                   <ListComments avatar={Avatar} />

@@ -34,7 +34,6 @@ const AdminNav = ({ tab, setTab }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const history = useHistory();
   const location = useLocation();
-  console.log('location', location);
   const { user, logout } = useAuth();
 
   const handleNavigate = (path) => history.push(path);

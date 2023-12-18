@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import YouTube from 'react-youtube';
 
-const VideoViewer = ({ videoId }) => {
+const opts = {
+  playerVars: {
+    // https://developers.google.com/youtube/player_parameters
+    autoplay: 1
+  }
+};
+
+const VideoViewer = ({ onVideoEnd, videoId }) => {
   if (!videoId) {
     return <></>;
   }
+
+  const checkElapsedTime = (e) => {
+    if(e.data === 0) {
+      onVideoEnd();
+    }
+  }
   return (
     <div className="video-viewer">
-      <div>
-        <iframe
-          src={`https://www.youtube.com/embed/${videoId}`}
-          fsdfs
-          frameBorder="0"
-          title="Video player"
-          allowFullScreen
-        ></iframe>
-      </div>
+      <YouTube
+          videoId={videoId}
+          containerClassName="embed embed-youtube"
+          onStateChange={(e) => checkElapsedTime(e)}
+          opts={opts}
+        />
     </div>
   );
 };

@@ -9,7 +9,6 @@ const TrackList = ({ handleActiveSubject, subjects }) => {
     return <></>;
   }
 
-  console.log('subjects', subjects);
   return (
     <div className="track-list-wrapper">
       {

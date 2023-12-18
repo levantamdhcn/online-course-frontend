@@ -64,7 +64,6 @@ const CreateCourseModal = ({ onClose }) => {
     try {
       setLoading(true);
       const res = await axios.post(`${config.url}/course`, formData);
-      console.log('res', res);
       setLoading(false);
     } catch (error) {
       console.log(error);

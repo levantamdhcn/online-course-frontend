@@ -31,7 +31,6 @@ const ModalCreateUser = ({ onClose }) => {
     // }
     const formData = new FormData();
     data.admin = selectedOption.value;
-    console.log('avatar', data.avatar);
     for (const key in data) {
       if (!!data[key]) {
         formData.append(key, JSON.stringify(data[key]));

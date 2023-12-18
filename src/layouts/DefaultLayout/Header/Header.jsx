@@ -11,8 +11,6 @@ const Header = () => {
   const history = useHistory();
   const { isAuthenticated, logout, user } = useAuth();
 
-  console.log('currentTab', currentTab);
-
   return (
     <>
       <div className="header mx-auto px-44">
