@@ -42,11 +42,11 @@ const BasicDetail = ({
               <div className="course-info">
                 <div className="course-info-item">
                   <span className="icon-play size-icon-3"></span>
-                  {lectures} Lectures
+                  {lectures} Bài giảng
                 </div>
                 <div className="course-info-item">
                   <span className="icon-user size-icon-3"></span>
-                  {studentCount} Student enrolled
+                  {studentCount} Học viên
                 </div>
               </div>
               <div className="course-desc">{overview}</div>

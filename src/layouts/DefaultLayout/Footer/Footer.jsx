@@ -120,7 +120,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-span-3">
-            <h4 className="footer-list-title">Navigations</h4>
+            <h4 className="footer-list-title">Điều hướng</h4>
             <ul className="footer-list">
               {footerList.navigation.map((item) => {
                 return (
@@ -132,7 +132,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-span-3">
-            <h4 className="footer-list-title">New Categories</h4>
+            <h4 className="footer-list-title">Khóa học mới</h4>
             <ul className="footer-list">
               {footerList.navigation.map((item) => {
                 return (
@@ -144,7 +144,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-span-3">
-            <h4 className="footer-list-title">Help & Support</h4>
+            <h4 className="footer-list-title">Hỗ trợ</h4>
             <ul className="footer-list">
               {footerList.support.map((item) => {
                 return (

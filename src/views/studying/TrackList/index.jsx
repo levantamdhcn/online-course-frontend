@@ -24,7 +24,7 @@ const TrackList = ({ handleActiveSubject, subjects }) => {
               _id={el._id}
               index={index + 1}
               name={el.name}
-              isCompleted={el.isCompleted}
+              isCompleted={true}
               time={el.duration}
               isOpen={isOpen}
               exerciseList={el.exercises}

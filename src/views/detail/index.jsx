@@ -75,11 +75,11 @@ const CourseDetail = () => {
                   <div className="col-span-8 ">
                     <div className="course-detail-element">
                       <div className="course-overview-wrapper">
-                        <div className="course-overview-title">Course Overview</div>
+                        <div className="course-overview-title">Tổng quan</div>
                         <p className="course-overview">{course.description}</p>
                       </div>
                       <div className="course-requirements-wrapper">
-                        <div className="course-overview-title">Requirements</div>
+                        <div className="course-overview-title">Yêu cầu</div>
                         <ul className="course-requirements-list">
                           {course.demands &&
                             course.demands.map((el) => {
@@ -105,13 +105,13 @@ const CourseDetail = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-span-12">
+              {/* <div className="col-span-12">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-8">
                     <CourseCircullum />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

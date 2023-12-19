@@ -7,24 +7,19 @@ const CourseFeature = ({ course, enrolled, studentCount }) => {
   const features = [
     {
       icon: 'user',
-      name: 'Student Enrolled',
+      name: 'Học viên',
       value: studentCount
     },
     {
       icon: 'play',
-      name: 'Lectures',
+      name: 'Bài giảng',
       value: course?.subjects?.length
     },
     {
       icon: 'quiz',
-      name: 'Exercise',
+      name: 'Bài tập',
       value: 40
     },
-    {
-      icon: 'clock',
-      name: 'Duration',
-      value: course.hours
-    }
   ];
 
   const history = useHistory();
@@ -42,7 +37,7 @@ const CourseFeature = ({ course, enrolled, studentCount }) => {
 
   return (
     <div className="course-feature-wrapper ">
-      <div className="course-overview-title">Course Features</div>
+      <div className="course-overview-title">Tính năng</div>
       <ul className="feature-list">
         {features &&
           features.map((el) => {

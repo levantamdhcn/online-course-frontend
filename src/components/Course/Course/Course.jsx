@@ -11,7 +11,7 @@ const Course = ({ image, title, views, time, lectures, id }) => {
           <div className="course-info">
             <div className="course-views">
               <span className="icon-eye size-icon-2"></span>
-              {views} views
+              {views} lượt xem
             </div>
             <div className="course-time">
               <span className="icon-clock size-icon-2"></span>
@@ -19,7 +19,7 @@ const Course = ({ image, title, views, time, lectures, id }) => {
             </div>
             <div className="course-lectures">
               <span className="icon-play size-icon-2"></span>
-              {lectures} lectures
+              {lectures} bài giảng
             </div>
           </div>
         </div>

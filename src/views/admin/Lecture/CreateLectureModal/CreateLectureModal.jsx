@@ -3,6 +3,7 @@ import config from '../../../../config';
 import React, { useState, useEffect } from 'react';
 import { DotLoader } from 'react-spinners';
 import useSubject from 'hooks/useSubject';
+import { toast } from "react-toastify";
 
 const required = {
   title: 'Tiêu đề',
@@ -77,6 +78,8 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       }
 
       getSubject(courseId);
+
+      return toast.success(`Tải lên video thành công`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -133,7 +136,7 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       {videoUploadType === 'upload' ? (
         <>
           <div className="custom-input">
-            <div className="custom-input-label">Thumbnail</div>
+            <div className="custom-input-label">Ảnh thu nhỏ</div>
             <input
               className="custom-input-file"
               type={'file'}
@@ -176,14 +179,7 @@ const CreateLectureModal = ({ courseId, onClose }) => {
         <input type={'text'} className="custom-input-field" />
       </div>
       <div className="button-group flex justify-end">
-        {!user ? (
-          <button className="btn btn-primary  mr-4">
-            <a href={url ? url : ''} rel="noreferrer">
-              Đăng nhập
-            </a>
-          </button>
-        ) : (
-          <>
+      <>
             <button
               className="btn btn-primary mr-4 flex items-center justify-center"
               onClick={handleSubmit}
@@ -206,7 +202,6 @@ const CreateLectureModal = ({ courseId, onClose }) => {
               Hủy
             </button>
           </>
-        )}
       </div>
     </div>
   );
