@@ -109,7 +109,7 @@ const UpdateCourseModal = ({ onClose, course }) => {
             type={'text'}
             className="custom-input-field"
             value={form.demand}
-            onChange={(e) => setForm({ ...form, demands: e.target.value })}
+            onChange={(e) => setForm({ ...form, demand: e.target.value })}
           />
         </div>
         <div className="button-group float-right">

@@ -54,7 +54,7 @@ const PopularCoursesList = () => {
                       title={el.name}
                       views={el.views}
                       time={el.hours}
-                      lectures={el.lectures}
+                      lectures={el?.subjects?.length}
                     />
                   </div>
                 );

@@ -30,7 +30,7 @@ const Courses = () => {
                   title={course.name}
                   views={course.views}
                   time={course.hours}
-                  lectures={course.lectures} 
+                  lectures={course.subjects.length} 
                 />
               ))}
             </div>

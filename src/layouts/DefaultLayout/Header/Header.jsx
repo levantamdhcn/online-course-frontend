@@ -43,9 +43,9 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="header-search">
+        {/* <div className="header-search">
           <Search />
-        </div>
+        </div> */}
         <div className="header-right">
           {isAuthenticated ? (
             <>

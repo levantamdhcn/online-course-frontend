@@ -37,7 +37,7 @@ const ModalCreateUser = ({ onClose }) => {
       }
       else {
         if(key === 'username') {
-          setError(`Username không được để trống.`);
+          setError(`Tên người dùng không được để trống.`);
           return;
         }
         if(key === 'fullname') {

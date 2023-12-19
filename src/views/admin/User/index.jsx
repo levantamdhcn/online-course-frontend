@@ -33,7 +33,7 @@ const User = () => {
                   ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Username
+                  Tên người dùng
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Họ và tên

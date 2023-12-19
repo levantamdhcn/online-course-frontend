@@ -48,7 +48,7 @@ const PopularCategoryList = () => {
   return (
     <>
       <div className="px-44 pt-20 pb-50" style={{ backgroundColor: '#f4f8fa' }}>
-        <div className="popular-list-title mb-4">Got & Popular Categories</div>
+        <div className="popular-list-title mb-4">Danh mục phổ biến</div>
         <div className="popular-list">
           <Slider {...settings} ref={categoryRef}>
             {courses &&

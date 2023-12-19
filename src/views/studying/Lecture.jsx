@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import config from '../../config';
+import convertSecondsToHMS from 'utils/convertSecondsToTime';
 
 const Lecture = ({
   _id,
@@ -30,14 +31,25 @@ const Lecture = ({
     getExercises();
   }, [_id]);
 
+  const handleClick = () => {
+    if(!isOpen) return;
+    handleActiveSubject(_id)
+  }
+
+  const handleSetCurrent = () => {
+    if(!isOpen) return;
+
+    setCurrentLecture(index);
+  }
+
   return (
     <div
       className={`exercise-wrapper ${!isOpen ? 'disable' : ''} ${
         currentLecture === index ? 'current' : ''
       }`}
-      onClick={() => handleActiveSubject(_id)}
+      onClick={handleClick}
     >
-      <div className="exercise-info" onClick={() => setCurrentLecture(index)}>
+      <div className="exercise-info" onClick={handleSetCurrent}>
         <h3 className="exercise-info-title">
           {index}. {name}
           <span
@@ -48,10 +60,10 @@ const Lecture = ({
         </h3>
         <div className="exercise-info-desc">
           <span className="icon-play-fullfil"></span>
-          <p>{time}</p>
+          <p>{convertSecondsToHMS(time)}</p>
         </div>
       </div>
-      {isOpen && (
+      {isOpen && exerciseList?.length > 0 &&  (
         <div className="quiz-list-wrapper shadow-md">
           <p>Bài tập: </p>
           <ul className="quiz-list">

@@ -159,7 +159,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="container px-44 flex justify-between">
-          <h4 className="copyright">© 2020 LearnUp. Designd By Themezhub.</h4>
+          <h4 className="copyright">© 2023 Copyright</h4>
           <ul className="socials-list">
             {footerList.socials.map((item) => {
               return (

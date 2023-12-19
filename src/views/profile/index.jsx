@@ -76,11 +76,11 @@ const Profile = () => {
       }
       else {
         if(key === 'email') {
-          alert(`Email name can not be empty.`);
+          alert(`Email không được để trống.`);
           return;
         }
         if(key === 'username') {
-          alert(`Username can not be empty.`);
+          alert(`Tên người dùng không được để trống.`);
           return;
         }
       }
@@ -152,7 +152,7 @@ const Profile = () => {
                   <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-8">
                       <div className="custom-input">
-                        <label className="custom-input-label">Bio</label>
+                        <label className="custom-input-label">Tiểu sử</label>
                         <input
                           disabled={editting !== 'bio'}
                           type="text"
@@ -161,7 +161,7 @@ const Profile = () => {
                           onChange={(e) => handleChangeField('bio', e.target.value)}
                         />
                         <div className="desc">
-                          Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của bạn.
+                          Tiểu sử hiển thị trên trang cá nhân và trong các bài viết (blog) của bạn.
                         </div>
                       </div>
                     </div>
@@ -186,7 +186,7 @@ const Profile = () => {
                   <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-8">
                       <div className="custom-input">
-                        <label className="custom-input-label">Avatar</label>
+                        <label className="custom-input-label">Ảnh đại diện</label>
                         <div className="desc">
                           Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.
                         </div>
@@ -223,7 +223,7 @@ const Profile = () => {
                   <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-8">
                       <div className="custom-input">
-                        <label className="custom-input-label">Username</label>
+                        <label className="custom-input-label">Tên người dùng</label>
                         <input
                           type="text"
                           disabled

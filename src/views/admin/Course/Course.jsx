@@ -90,7 +90,10 @@ const Course = () => {
                     </td>
                     <td class="px-6 py-4">{course.demand}</td>
                     <td class="px-6 py-4 text-right">
-                      <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => toggleEditCourse(true)}>
+                      <button
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        onClick={() => toggleEditCourse(course)}
+                      >
                         Cập nhật
                       </button>
                       <button
@@ -99,13 +102,6 @@ const Course = () => {
                       >
                         Xóa
                       </button>
-
-                      <ModalWrapper
-                        title={'Cập nhật khóa học'}
-                        toggleShow={toggleEditCourse}
-                        show={editCourse}
-                        children={<UpdateCourseModal onClose={() => toggleEditCourse(false)} course={course}/>}
-                      ></ModalWrapper>
                     </td>
                   </tr>
                 );
@@ -119,6 +115,15 @@ const Course = () => {
         show={addCourse}
         children={<CreateCourseModal onClose={() => toggleAddCourse(false)} />}
       ></ModalWrapper>
+
+      {editCourse && (
+        <ModalWrapper
+          title={'Cập nhật khóa học'}
+          toggleShow={toggleEditCourse}
+          show={!!editCourse}
+          children={<UpdateCourseModal onClose={() => toggleEditCourse(null)} course={editCourse} />}
+        ></ModalWrapper>
+      )}
     </div>
   );
 };

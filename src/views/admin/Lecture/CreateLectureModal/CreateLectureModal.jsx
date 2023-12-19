@@ -70,8 +70,9 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       } else {
         const newSubject = {
           name: title,
-          content: description,
+          description: description,
           video: form.video,
+          tags: form.tags,
         };
 
         await axios.post(`${config.url}/subject/${courseId}`, newSubject);
@@ -125,11 +126,11 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       </div>
       <div className="custom-input">
         <div className='mb-2'>
-          <input type="radio" id="html" name="fav_language" value="HTML" onInput={() => handleChooseUploadType('upload')}/>
+          <input checked={videoUploadType === 'upload'} type="radio" id="html" name="fav_language" value="HTML" onInput={() => handleChooseUploadType('upload')}/>
           <label for="html" className='ml-2'>Tải video lên Youtube</label><br/> 
         </div>
         <div>
-          <input type="radio" id="css" name="fav_language" value="CSS" onInput={() => handleChooseUploadType('video_id')} />
+          <input checked={videoUploadType === 'video_id'} type="radio" id="css" name="fav_language" value="CSS" onInput={() => handleChooseUploadType('video_id')} />
           <label for="css" className='ml-2'>Nhập ID của video</label><br/>
         </div>
       </div>
@@ -161,11 +162,10 @@ const CreateLectureModal = ({ courseId, onClose }) => {
         <div className="custom-input">
           <div
             className="custom-input-label"
-            onChange={(e) => setForm({ ...form, video: e.target.value })}
           >
             Video
           </div>
-          <input type={'text'} className="custom-input-field" />
+          <input type={'text'} className="custom-input-field" onChange={(e) => setForm({ ...form, video: e.target.value })} />
         </div>
       )}
 

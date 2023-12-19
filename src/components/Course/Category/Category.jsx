@@ -11,7 +11,7 @@ const Category = ({ image, title, courses }) => {
           <div className="course-info">
             <div className="course-lectures">
               <span className="icon-play size-icon-2"></span>
-              {courses} courses
+              {courses} khóa học
             </div>
           </div>
         </div>

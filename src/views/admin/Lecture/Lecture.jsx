@@ -40,9 +40,6 @@ const Lecture = () => {
                 Hình ảnh
               </th>
               <th scope="col" class="px-6 py-3">
-                Yêu cầu
-              </th>
-              <th scope="col" class="px-6 py-3">
                 <span class="sr-only">Hành động</span>
               </th>
             </tr>
@@ -68,7 +65,7 @@ const Lecture = () => {
                     >
                       {course.name}
                     </th>
-                    <td class="px-6 py-4">{course.description}</td>
+                    <td class="px-6 py-4">{course.content}</td>
                     <td class="px-6 py-4">
                       <img
                         width="40"
@@ -77,7 +74,6 @@ const Lecture = () => {
                         style={{ borderRadius: '50%' }}
                       />
                     </td>
-                    <td class="px-6 py-4">{course.demand}</td>
                     <td class="px-6 py-4 text-right">
                       <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => toggleEditLecture(true)}>
                         Cập nhật

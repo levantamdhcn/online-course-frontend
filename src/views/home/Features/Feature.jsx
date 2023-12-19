@@ -2,18 +2,18 @@ import React from 'react';
 
 const features = [
   {
-    name: '100.000 Online Courses',
-    desc: 'Nor again is there anyone who loves or pursues or desires',
+    name: 'Hơn 100 Khóa học trực tuyến',
+    desc: 'Cung cấp kiến thức chuyên sâu cho từng lĩnh vực',
     icon: 'camera'
   },
   {
-    name: '100.000 Online Courses',
-    desc: 'Nor again is there anyone who loves or pursues or desires',
+    name: 'Hơn 100 chứng chỉ được cấp',
+    desc: 'Chứng chỉ cấp ngay sau khi hoàn thành',
     icon: 'medal'
   },
   {
-    name: '100.000 Online Courses',
-    desc: 'Nor again is there anyone who loves or pursues or desires',
+    name: 'Học mọc lúc, mọi nơi',
+    desc: 'Không giới hạn về không gian và thời gian học',
     icon: 'infinite'
   }
 ];
