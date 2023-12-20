@@ -16,7 +16,7 @@ const CourseDetail = () => {
   useEffect(() => {
     const getCourse = async () => {
       const res = await axios.get(`${config.url}/course/${id}`);
-
+      console.log('res', res)
       if (res.data) {
         setCourse(res.data);
       }
@@ -81,8 +81,8 @@ const CourseDetail = () => {
                       <div className="course-requirements-wrapper">
                         <div className="course-overview-title">Yêu cầu</div>
                         <ul className="course-requirements-list">
-                          {course.demands &&
-                            course.demands.map((el) => {
+                          {course.demand &&
+                            course.demand?.[0]?.split(',').map((el) => {
                               return (
                                 <li className="course-requirements-item">
                                   <span className="icon-check"></span>
@@ -100,6 +100,7 @@ const CourseDetail = () => {
                         course={course}
                         enrolled={enrolled}
                         studentCount={studentCount}
+                        setEnrolled={setEnrolled}
                       />
                     </div>
                   </div>

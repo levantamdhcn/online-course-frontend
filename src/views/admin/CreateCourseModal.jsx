@@ -9,7 +9,7 @@ const required = {
   file: 'Video'
 };
 
-const CreateCourseModal = ({ onClose }) => {
+const CreateCourseModal = ({ onSubmit, onClose }) => {
   // const [url, setUrl] = useState(null);
   // const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ const CreateCourseModal = ({ onClose }) => {
     title: '',
     description: '',
     image: null,
-    demands: ''
+    demand: ''
   });
   const [error, setError] = useState('');
 
@@ -63,7 +63,15 @@ const CreateCourseModal = ({ onClose }) => {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${config.url}/course`, formData);
+      await onSubmit(formData);
+      setForm({
+        name: '',
+        title: '',
+        description: '',
+        image: null,
+        demand: ''
+      });
+      onClose();
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -114,7 +122,7 @@ const CreateCourseModal = ({ onClose }) => {
             placeholder="Yêu cầu, mỗi yêu cầu cách nhau bởi dấu ,"
             type={'text'}
             className="custom-input-field"
-            onChange={(e) => setForm({ ...form, demands: e.target.value })}
+            onChange={(e) => setForm({ ...form, demand: e.target.value })}
           />
         </div>
         <div className="button-group float-right">

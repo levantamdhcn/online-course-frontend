@@ -27,7 +27,10 @@ const ResultPanel = ({ resultMessage }) => {
   const data = React.useMemo(() => {
     const success = resultMessage?.status === 'pass';
     const input = getInput(resultMessage.message);
-    const output = getYourAnswer(resultMessage.message);
+    let output = getYourAnswer(resultMessage.message);
+    if(resultMessage?.status !== 'pass' && resultMessage?.status !== 'fail') {
+      output = resultMessage.message;
+    }
     const expectedOutput = getExpectedAnswer(resultMessage.message);
 
     return {

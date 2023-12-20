@@ -5,8 +5,11 @@ import CreateLectureModal from './CreateLectureModal';
 import useSubject from 'hooks/useSubject';
 import UpdateLectureModal from './UpdateLectureModal';
 
+import Course from '../../../assets/images/course.jpg';
+
 const Lecture = () => {
   const { getSubject, deleteSubject, subjects } = useSubject();
+  const [search, setSearch] = useState('');
   const [value, setValue] = useState(null);
   const [addLecture, toggleAddLecture] = useState(false);
   const [editLecture, toggleEditLecture] = useState(false);
@@ -14,16 +17,20 @@ const Lecture = () => {
     getSubject(value?._id);
   }, [value]);
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  }
+
   return (
     <div>
       <div className="search-bar">
-        <input type="text" className="custom-input-field" placeholder="Tìm kiếm..." />
+        <input type="text" className="custom-input-field" placeholder="Tìm kiếm..." onChange={handleSearch} />
       </div>
       <button className="btn btn-primary float-right" onClick={() => toggleAddLecture(true)}>
         Thêm bài giảng
       </button>
       <CourseList value={value} setValue={setValue} />
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-8" >
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -47,7 +54,7 @@ const Lecture = () => {
           <tbody>
             {subjects &&
               subjects.length > 0 &&
-              subjects.map((course) => {
+              subjects.filter(el => el.name.toLowerCase().includes(search.toLowerCase())).map((course) => {
                 return (
                   <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -69,9 +76,13 @@ const Lecture = () => {
                     <td class="px-6 py-4">
                       <img
                         width="40"
-                        src={course.image}
+                        src={course.image || Course}
                         alt="avatar"
                         style={{ borderRadius: '50%' }}
+                        onError={function(e) {
+                          this.onerror = null;
+                          this.src = '../../../assets/images/course.jpg';
+                        }}
                       />
                     </td>
                     <td class="px-6 py-4 text-right">

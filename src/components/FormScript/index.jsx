@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import Editor from '@monaco-editor/react';
 
-const FormScript = ({ className, theme, isRequired = false, label, error, value, height, onChange, placeholder, disabled, maxW }) => {
+const FormScript = ({ defaultValue, className, theme, isRequired = false, label, error, value, height, onChange, placeholder, disabled, maxW }) => {
   const editorRef = useRef(null);
 
   function handleEditorDidMount(editor, monaco) {
@@ -17,7 +17,7 @@ const FormScript = ({ className, theme, isRequired = false, label, error, value,
         value={value}
         height={height}
         defaultLanguage="javascript"
-        defaultValue="// some comment"
+        defaultValue={defaultValue || "// some comment"}
         onMount={handleEditorDidMount}
         className={className ? className : 'editor-container'}
         onChange={onChange}

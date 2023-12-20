@@ -3,19 +3,20 @@ import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import CreateCourseModal from '../CreateCourseModal';
-import LoadingScreen from "components/LoadingScreen"
+import LoadingScreen from 'components/LoadingScreen';
 import UpdateCourseModal from './UpdateCourseModal/UpdateCourseModal';
 import useCourse from 'hooks/useCourse';
 
 const Course = () => {
-  const { courses, deleteCourse,getCourse } = useCourse();
+  const { addCourse: add, courses, deleteCourse, getCourse } = useCourse();
+  const [search, setSearch] = useState('');
   const [addCourse, toggleAddCourse] = useState(false);
   const [editCourse, toggleEditCourse] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   useEffect(() => {
     getCourse();
-  }, [])
+  }, []);
 
   const handleDeleteCourse = async (id) => {
     try {
@@ -27,14 +28,27 @@ const Course = () => {
       setLoading(false);
     }
   };
-  
-  if(loading) {
-    return(<LoadingScreen />)
+
+  const handleAddCourse = async (data) => {
+    await add(data);
+  }
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
   }
   return (
     <div>
       <div className="search-bar">
-        <input type="text" className="custom-input-field" placeholder="Tìm kiếm..." />
+        <input
+          type="text"
+          className="custom-input-field"
+          placeholder="Tìm kiếm..."
+          onChange={handleSearch}
+        />
       </div>
       <button className="btn btn-primary" onClick={() => toggleAddCourse(true)}>
         Thêm khóa học
@@ -66,46 +80,52 @@ const Course = () => {
           <tbody>
             {courses &&
               courses.length > 0 &&
-              courses.map((course) => {
-                return (
-                  <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                    key={course._id}
-                  >
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+              courses
+                .filter(
+                  (el) =>
+                    el.name.toLowerCase().includes(search.toLowerCase()) ||
+                    el.description.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((course) => {
+                  return (
+                    <tr
+                      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      key={course._id}
                     >
-                      {course._id}
-                    </th>
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
-                    >
-                      {course.name}
-                    </th>
-                    <td class="px-6 py-4">{course.description}</td>
-                    <td class="px-6 py-4">
-                      <img width="80" src={course.image} alt="avatar" />
-                    </td>
-                    <td class="px-6 py-4">{course.demand}</td>
-                    <td class="px-6 py-4 text-right">
-                      <button
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        onClick={() => toggleEditCourse(course)}
+                      <th
+                        scope="row"
+                        class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
                       >
-                        Cập nhật
-                      </button>
-                      <button
-                        class="ml-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        onClick={() => handleDeleteCourse(course._id)}
+                        {course._id}
+                      </th>
+                      <th
+                        scope="row"
+                        class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
                       >
-                        Xóa
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+                        {course.name}
+                      </th>
+                      <td class="px-6 py-4">{course.description}</td>
+                      <td class="px-6 py-4">
+                        <img width="80" src={course.image} alt="avatar" />
+                      </td>
+                      <td class="px-6 py-4">{course.demand}</td>
+                      <td class="px-6 py-4 text-right">
+                        <button
+                          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          onClick={() => toggleEditCourse(course)}
+                        >
+                          Cập nhật
+                        </button>
+                        <button
+                          class="ml-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          onClick={() => handleDeleteCourse(course._id)}
+                        >
+                          Xóa
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
       </div>
@@ -113,7 +133,7 @@ const Course = () => {
         title={'Thêm khóa học'}
         toggleShow={toggleAddCourse}
         show={addCourse}
-        children={<CreateCourseModal onClose={() => toggleAddCourse(false)} />}
+        children={<CreateCourseModal onSubmit={handleAddCourse} onClose={() => toggleAddCourse(false)} />}
       ></ModalWrapper>
 
       {editCourse && (
@@ -121,7 +141,9 @@ const Course = () => {
           title={'Cập nhật khóa học'}
           toggleShow={toggleEditCourse}
           show={!!editCourse}
-          children={<UpdateCourseModal onClose={() => toggleEditCourse(null)} course={editCourse} />}
+          children={
+            <UpdateCourseModal onClose={() => toggleEditCourse(null)} course={editCourse} />
+          }
         ></ModalWrapper>
       )}
     </div>

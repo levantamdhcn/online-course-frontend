@@ -15,9 +15,9 @@ const BasicDetail = ({
 }) => {
   const history = useHistory();
 
-  const handleEnroll = () => {
+  const handleEnroll = async () => {
     try {
-      const res = axios.post(`${config.url}/enrollment`, {
+      const res = await axios.post(`${config.url}/enrollment`, {
         id: course._id
       });
       if (res.data._id) {

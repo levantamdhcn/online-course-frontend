@@ -25,6 +25,7 @@ import config from '../../../../config';
 import FormFile from 'components/FormFile';
 import ModalConFirmDelete from 'components/ModalConfirmDelete';
 import { useParams } from 'react-router-dom'; 
+import { value as defaultSolution } from './solutionTesterDefault';
 
 const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues }) => {
   const { id } = useParams();
@@ -118,20 +119,20 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
       <SimpleGrid>
         <Stack spacing="24px">
           <Controller
-              control={control}
-              name="questionName"
-              render={({ field }) => (
-                <FormInput
-                  isRequired
-                  value={field.value}
-                  onChange={field.onChange}
-                  type="text"
-                  label="Tên bài tập"
-                  error={errors.title}
-                  maxW="100%"
-                />
-              )}
-            />
+            control={control}
+            name="questionName"
+            render={({ field }) => (
+              <FormInput
+                isRequired
+                value={field.value}
+                onChange={field.onChange}
+                type="text"
+                label="Tên bài tập"
+                error={errors.title}
+                maxW="100%"
+              />
+            )}
+          />
           <HStack>
             <Controller
               control={control}
@@ -189,7 +190,8 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
             name="mainFunction"
             render={({ field }) => (
               <FormScript
-                height='200px'
+                defaultValue={`var mainFunction = function() {};`}
+                height="200px"
                 isRequired
                 value={field.value}
                 onChange={field.onChange}
@@ -205,7 +207,8 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
             name="solution"
             render={({ field }) => (
               <FormScript
-                height='200px'
+                defaultValue={`var mainFunction = function() {};`}
+                height="200px"
                 isRequired
                 value={field.value}
                 onChange={field.onChange}
@@ -221,12 +224,13 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
             name="solutionTester"
             render={({ field }) => (
               <FormScript
-                height='400px'
+                height="400px"
                 isRequired
                 value={field.value}
                 onChange={field.onChange}
                 label="Chương trình kiểm tra đáp án"
                 maxW="100%"
+                defaultValue={defaultSolution}
                 error={errors.solutionTester}
               />
             )}
@@ -304,7 +308,7 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
           </FormControl>
 
           <FormFile
-            {...register("testCaseFile")}
+            {...register('testCaseFile')}
             ref={testCaseInputRef}
             onChange={onFileChange}
             label="Tệp tin test cases"

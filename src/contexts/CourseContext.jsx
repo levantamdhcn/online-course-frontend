@@ -72,6 +72,21 @@ export const CourseProvider = ({ children }) => {
     }
   };
 
+  const addCourse = async (data) => {
+    try {
+      const res = await axios.post(`${config.url}/course`, data);
+
+      dispatch({
+        type: 'ADD_COURSE',
+        payload: {
+          data: res.data,
+        }
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
   const updateCourse = async (courseId, data) => {
     try {
       if(!courseId) throw new Error('Subject is not defined');
@@ -110,7 +125,8 @@ export const CourseProvider = ({ children }) => {
         ...state,
         getCourse,
         updateCourse,
-        deleteCourse
+        deleteCourse,
+        addCourse
       }}
     >
       {children}

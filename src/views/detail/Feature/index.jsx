@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import config from '../../../config';
 
-const CourseFeature = ({ course, enrolled, studentCount }) => {
+const CourseFeature = ({ course, enrolled, studentCount, setEnrolled }) => {
   const features = [
     {
       icon: 'user',
@@ -18,18 +18,21 @@ const CourseFeature = ({ course, enrolled, studentCount }) => {
     {
       icon: 'quiz',
       name: 'Bài tập',
-      value: 40
+      value: course?.exercises?.length
     },
   ];
 
   const history = useHistory();
 
-  const handleEnroll = () => {
+  const handleEnroll = async () => {
     try {
-      const res = axios.post(`${config.url}/enrollment`, {
+      const res = await axios.post(`${config.url}/enrollment`, {
         id: course._id
       });
-      console.log(res)
+
+      if(res.data._id) {
+        setEnrolled(true);
+      }
     } catch (error) {
       console.log(error);
     }

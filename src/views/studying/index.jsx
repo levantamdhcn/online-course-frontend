@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import moment from 'moment';
 import { useFetchSubject, useSetCompleteSubject } from './hook/useQuery';
 import { toast } from 'react-toastify';
+import LoadingScreen from 'components/LoadingScreen';
 
 const Studying = () => {
   const history = useHistory()
@@ -53,7 +54,7 @@ const Studying = () => {
   
   const completedSubject = subjects.filter(el => el.isCompleted).length;
 
-  // if(isLoading) return <LoadingScreen />;
+  if(isLoading) return <LoadingScreen />;
 
   return (
     <div className="studying">
@@ -94,7 +95,7 @@ const Studying = () => {
                   <VideoViewer onVideoEnd={handleCompleteSubject} videoId={currentSubject?.video} />
                   <div className="lecture-name">{currentSubject?.name}</div>
                   <div className="lecture-update">Cập nhật {moment(currentSubject?.updatedAt || '').lang('vi').format('HH:mm, DD/MM/YYYY')}</div>
-                  <ListComments avatar={Avatar} />
+                  {/* <ListComments avatar={Avatar} /> */}
                 </div>
               </div>
             </div>

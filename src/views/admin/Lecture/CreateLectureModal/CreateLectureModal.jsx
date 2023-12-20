@@ -3,7 +3,7 @@ import config from '../../../../config';
 import React, { useState, useEffect } from 'react';
 import { DotLoader } from 'react-spinners';
 import useSubject from 'hooks/useSubject';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 const required = {
   title: 'Tiêu đề',
@@ -49,7 +49,7 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       }
     }
     try {
-      if(videoUploadType === 'upload') {
+      if (videoUploadType === 'upload') {
         setUploading(true);
         let formData = new FormData();
         formData.append('title', title);
@@ -70,9 +70,9 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       } else {
         const newSubject = {
           name: title,
-          description: description,
+          content: description,
           video: form.video,
-          tags: form.tags,
+          tags: form.tags
         };
 
         await axios.post(`${config.url}/subject/${courseId}`, newSubject);
@@ -103,7 +103,7 @@ const CreateLectureModal = ({ courseId, onClose }) => {
 
   const handleChooseUploadType = (type) => {
     setVideoUploadType(type);
-  }
+  };
 
   return (
     <div className="create-course-modal">
@@ -125,13 +125,35 @@ const CreateLectureModal = ({ courseId, onClose }) => {
         />
       </div>
       <div className="custom-input">
-        <div className='mb-2'>
-          <input checked={videoUploadType === 'upload'} type="radio" id="html" name="fav_language" value="HTML" onInput={() => handleChooseUploadType('upload')}/>
-          <label for="html" className='ml-2'>Tải video lên Youtube</label><br/> 
+        <div className="mb-2">
+          <input
+            checked={videoUploadType === 'upload'}
+            type="radio"
+            id="html"
+            name="fav_language"
+            value="HTML"
+            onInput={() => handleChooseUploadType('upload')}
+            onClick={() => handleChooseUploadType('upload')}
+          />
+          <label for="html" className="ml-2">
+            Tải video lên Youtube
+          </label>
+          <br />
         </div>
         <div>
-          <input checked={videoUploadType === 'video_id'} type="radio" id="css" name="fav_language" value="CSS" onInput={() => handleChooseUploadType('video_id')} />
-          <label for="css" className='ml-2'>Nhập ID của video</label><br/>
+          <input
+            checked={videoUploadType === 'video_id'}
+            type="radio"
+            id="css"
+            name="fav_language"
+            value="CSS"
+            onInput={() => handleChooseUploadType('video_id')}
+            onClick={() => handleChooseUploadType('video_id')}
+          />
+          <label for="css" className="ml-2">
+            Nhập ID của video
+          </label>
+          <br />
         </div>
       </div>
       {videoUploadType === 'upload' ? (
@@ -160,12 +182,12 @@ const CreateLectureModal = ({ courseId, onClose }) => {
         </>
       ) : (
         <div className="custom-input">
-          <div
-            className="custom-input-label"
-          >
-            Video
-          </div>
-          <input type={'text'} className="custom-input-field" onChange={(e) => setForm({ ...form, video: e.target.value })} />
+          <div className="custom-input-label">Video</div>
+          <input
+            type={'text'}
+            className="custom-input-field"
+            onChange={(e) => setForm({ ...form, video: e.target.value })}
+          />
         </div>
       )}
 
@@ -179,29 +201,29 @@ const CreateLectureModal = ({ courseId, onClose }) => {
         <input type={'text'} className="custom-input-field" />
       </div>
       <div className="button-group flex justify-end">
-      <>
-            <button
-              className="btn btn-primary mr-4 flex items-center justify-center"
-              onClick={handleSubmit}
-            >
-              <span className="mr-2">Thêm</span>
-              {uploading && <DotLoader size={15} color="#fff" />}
-            </button>
-            <button
-              className="btn btn-dark"
-              onClick={() => {
-                setForm({
-                  title: '',
-                  description: '',
-                  file: null,
-                  tags: ''
-                });
-                handleClose();
-              }}
-            >
-              Hủy
-            </button>
-          </>
+        <>
+          <button
+            className="btn btn-primary mr-4 flex items-center justify-center"
+            onClick={handleSubmit}
+          >
+            <span className="mr-2">Thêm</span>
+            {uploading && <DotLoader size={15} color="#fff" />}
+          </button>
+          <button
+            className="btn btn-dark"
+            onClick={() => {
+              setForm({
+                title: '',
+                description: '',
+                file: null,
+                tags: ''
+              });
+              handleClose();
+            }}
+          >
+            Hủy
+          </button>
+        </>
       </div>
     </div>
   );
