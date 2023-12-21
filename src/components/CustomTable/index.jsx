@@ -11,7 +11,8 @@ const SortOrder = {
 };
 
 const CustomTable = (props) => {
-  const { columns, data, form, onSort, sortState, isLoading } = props;
+  const { columns, data, form, onSort, sortState, isLoading, tableRef } = props;
+  console.log('tableRef', tableRef);
   const dataMap = React.useMemo(
     () =>
       data.map((item, idx) => ({
@@ -63,10 +64,9 @@ const CustomTable = (props) => {
       borderRadius="6px"
       border="1px solid"
       borderColor="neutral.200"
-      mt="24px"
       boxShadow=" 0px 1px 2px rgba(16, 24, 40, 0.05)"
     >
-      <Table {...getTableProps()}>
+      <Table {...getTableProps()} ref={tableRef}>
         <Thead>
           {
             // Loop over the header rows

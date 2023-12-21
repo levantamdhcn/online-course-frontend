@@ -8,4 +8,8 @@ const fetchLatestSubmission = (exerciseId) => {
   return axiosClient.get(`/submission/exercise/${exerciseId}`);
 }
 
-export { runSubmission, fetchLatestSubmission };
+const fetchSubmissions = (exerciseId) => {
+  return axiosClient.get(`/submission/byExercise/${exerciseId}`);
+}
+
+export { runSubmission, fetchLatestSubmission, fetchSubmissions };

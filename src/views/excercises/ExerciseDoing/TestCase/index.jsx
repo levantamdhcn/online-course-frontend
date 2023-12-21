@@ -1,7 +1,8 @@
 import React from 'react';
 import ResultPanel from './ResultPanel';
+import { Button, Spinner } from '@chakra-ui/react';
 
-const TestCases = ({ resultMessage, handleRunTest }) => {
+const TestCases = ({ running, resultMessage, handleRunTest }) => {
   return (
     <div className="test-case-container">
       <h1 className="test-case-heading">Bài kiểm tra</h1>
@@ -12,10 +13,18 @@ const TestCases = ({ resultMessage, handleRunTest }) => {
         }
       </div>
       <div className="test-case-footer">
-        <button className={`btn btn-primary`} onClick={handleRunTest}>
-          <span className="icon-save"></span>
-          Kiểm tra &amp; Nộp bài
-        </button>
+        <Button className={`btn btn-primary`} onClick={handleRunTest}>
+          {
+            running ? <Spinner color='white' /> : (
+              <>
+                <span className="icon-save"></span>
+                Kiểm tra &amp; Nộp bài
+              </>
+            )
+          }
+          
+          
+        </Button>
       </div>
     </div>
   );

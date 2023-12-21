@@ -190,7 +190,8 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
             name="mainFunction"
             render={({ field }) => (
               <FormScript
-                defaultValue={`var mainFunction = function() {};`}
+                defaultValue={`var mainFunction = function() {};\nmodule.exports = mainFunction;
+                `}
                 height="200px"
                 isRequired
                 value={field.value}
@@ -207,7 +208,8 @@ const ExerciseForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
             name="solution"
             render={({ field }) => (
               <FormScript
-                defaultValue={`var mainFunction = function() {};`}
+                defaultValue={`var mainFunction = function() {};\nmodule.exports = mainFunction;
+                `}
                 height="200px"
                 isRequired
                 value={field.value}

@@ -1,4 +1,5 @@
 import { fetchReportCourse, fetchReportEnrollment, fetchReportOverview, fetchReportSubmissions, fetchReportUsers, fetchReportViews } from 'apis/report';
+import { fetchSubmissions } from 'apis/submission';
 import { useQuery } from 'react-query';
 
 export const useFetchReportOverview = () => {
@@ -39,6 +40,14 @@ export const useFetchReportViews = () => {
 
 export const useFetchReportSubmissions = () => {
   return useQuery(['report-submissions'], () => fetchReportSubmissions(), {
+    refetchOnWindowFocus: false,
+    cacheTime: 0
+  });
+};
+
+export const useFetchSubmissionByExercise = (exerciseId) => {
+  console.log('exerciseId', exerciseId);
+  return useQuery(['submission-by-exercise', exerciseId], () => fetchSubmissions(exerciseId), {
     refetchOnWindowFocus: false,
     cacheTime: 0
   });

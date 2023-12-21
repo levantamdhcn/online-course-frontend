@@ -28,7 +28,7 @@ const ExerciseDoing = () => {
   });
 
   useEffect(() => {
-    setCurrentCode(submission?.solution || submission?.mainFunction);
+    setCurrentCode(submission?.mainFunction);
   }, [submission]);
 
   const handleRunTest = async () => {
@@ -45,13 +45,13 @@ const ExerciseDoing = () => {
     }
   };
 
-  if (isLoading | running || loadSubmission) return <LoadingScreen />;
+  if (isLoading || loadSubmission) return <LoadingScreen />;
 
   return (
     <>
       <Splitter direction={SplitDirection.Vertical} minHeights={[100, 100]}>
         <Editor currentCode={currentCode} setCurrentCode={setCurrentCode} />
-        <TestCases resultMessage={resultMessage} handleRunTest={handleRunTest} />
+        <TestCases running={running} resultMessage={resultMessage} handleRunTest={handleRunTest} />
       </Splitter>
     </>
   );

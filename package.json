@@ -29,6 +29,7 @@
     "react-circular-progressbar": "^2.0.4",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^18.2.0",
+    "react-export-table-to-excel": "^1.0.6",
     "react-facebook-emoji": "^1.0.12",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",

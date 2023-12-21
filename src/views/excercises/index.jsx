@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import config from '../../config';
 import axios from 'axios';
+import SubmissionReport from './ExerciseDoing/SubmissionReport';
 
 const DoExercise = ({ handleRunTest }) => {
   const { subjectId, exerciseId } = useParams();
@@ -67,8 +68,8 @@ const DoExercise = ({ handleRunTest }) => {
                 exercises?.map((item, idx) => {
                   return (
                     <li
-                      className={`${exercise._id === item._id ? 'active' : ''}`}
-                      onClick={() => handleGoToExcerise(item._id)}
+                      className={`${exercise?._id === item?._id ? 'active' : ''}`}
+                      onClick={() => handleGoToExcerise(item?._id)}
                     >
                       {idx + 1}
                     </li>
@@ -99,7 +100,9 @@ const DoExercise = ({ handleRunTest }) => {
 
         <div className="do-exercise">
           <Splitter direction={SplitDirection.Horizontal}>
-            <ExerciseInfo exercise={exercise} />
+            {
+              currentTab === 'doing' ? <ExerciseInfo exercise={exercise} /> : <SubmissionReport />
+            }
             <ExerciseDoing exercise={exercise} handleRunTest={handleRunTest} subjectId={subjectId}/>
           </Splitter>
         </div>

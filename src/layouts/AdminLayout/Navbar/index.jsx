@@ -73,6 +73,15 @@ const AdminNav = ({ tab, setTab }) => {
                 >
                   Đăng xuất
                 </div>
+
+                <div
+                  className="option"
+                  onClick={() => {
+                    history.push('/');
+                  }}
+                >
+                  Trang chủ
+                </div>
               </div>
             </div>
           )}

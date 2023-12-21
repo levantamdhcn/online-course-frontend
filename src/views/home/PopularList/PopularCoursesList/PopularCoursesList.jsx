@@ -7,22 +7,22 @@ import axios from 'axios';
 import config from '../../../../config';
 import LoadingScreen from 'components/LoadingScreen';
 
-const settings = {
-  accessibility: false,
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplay: false,
-  cssEase: 'linear'
-};
-
 const PopularCoursesList = () => {
   const sliderRef = useRef();
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const settings = {
+    accessibility: false,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: courses?.length <= 2 ? courses?.length : 3,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: false,
+    cssEase: 'linear'
+  };
 
   useEffect(() => {
     try {
