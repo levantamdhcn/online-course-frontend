@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import config from '../config';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from '../components/LoadingScreen';
 
 const initialAuthState = {
   isAuthenticated: false,

@@ -1,12 +1,12 @@
-import axios from 'axios';
-import config from '../../config';
 import React, { useState } from 'react';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const required = {
+  name: 'Tên khóa học',
   title: 'Tiêu đề',
   description: 'Mô tả',
-  file: 'Video'
+  file: 'Ảnh thumbnail',
+  image: 'Ảnh thumbnail',
 };
 
 const CreateCourseModal = ({ onSubmit, onClose }) => {
@@ -50,12 +50,20 @@ const CreateCourseModal = ({ onSubmit, onClose }) => {
         formData.append(key, form[key]);
       }
       else {
+        if(key === 'name') {
+          setError(`Tiêu đề không được để trống.`);
+          return;
+        }
         if(key === 'title') {
           setError(`Tiêu đề không được để trống.`);
           return;
         }
         if(key === 'description') {
           setError(`Mô tả không được để trống.`);
+          return;
+        }
+        if(key === 'image') {
+          setError(`Ảnh thumbnail không được để trống.`);
           return;
         }
       }
@@ -80,10 +88,12 @@ const CreateCourseModal = ({ onSubmit, onClose }) => {
   return (
     <>
       <div className="create-course-modal">
-        {error}
+        <span id='error-text'>{error}</span>
         <div className="custom-input">
-          <div className="custom-input-label">Tên khóa học</div>
+          <label htmlFor='name' className="custom-input-label">Tên khóa học</label>
           <input
+            id='name'
+            name='name'
             type={'text'}
             className="custom-input-field"
             placeholder="Tên khóa học"
@@ -91,8 +101,10 @@ const CreateCourseModal = ({ onSubmit, onClose }) => {
           />
         </div>
         <div className="custom-input">
-          <div className="custom-input-label">Tiêu đề</div>
+          <label htmlFor='title' className="custom-input-label">Tiêu đề</label>
           <input
+            id='title'
+            name='title'
             type={'text'}
             className="custom-input-field"
             placeholder="Tiêu đề"
@@ -100,8 +112,10 @@ const CreateCourseModal = ({ onSubmit, onClose }) => {
           />
         </div>
         <div className="custom-input">
-          <div className="custom-input-label">Mô tả</div>
+          <label htmlFor='description' className="custom-input-label">Mô tả</label>
           <input
+            name='description'
+            id='description'
             type={'text'}
             placeholder="Mô tả"
             className="custom-input-field"
@@ -109,16 +123,20 @@ const CreateCourseModal = ({ onSubmit, onClose }) => {
           />
         </div>
         <div className="custom-input">
-          <div className="custom-input-label">Hình ảnh</div>
+          <label htmlFor='image' className="custom-input-label">Hình ảnh</label>
           <input
+            id='image'
+            name='image'
             className="custom-input-file"
             type={'file'}
             onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
           />
         </div>
         <div className="custom-input">
-          <div className="custom-input-label">Yêu cầu</div>
+          <label htmlFor='demands' className="custom-input-label">Yêu cầu</label>
           <input
+            id='demands'
+            name='demands'
             placeholder="Yêu cầu, mỗi yêu cầu cách nhau bởi dấu ,"
             type={'text'}
             className="custom-input-field"

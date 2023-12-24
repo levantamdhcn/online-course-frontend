@@ -105,7 +105,13 @@ const User = () => {
                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                             onClick={() => history.push(`/profile/${user && user._id}`)}
                           >
-                            Edit
+                            Sửa
+                          </button>
+                          <button
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-2"
+                            onClick={() => console.log('delete')}
+                          >
+                            Xóa
                           </button>
                         </td>
                       </tr>

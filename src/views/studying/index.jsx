@@ -69,8 +69,8 @@ const Studying = () => {
           <div className="studying-header-right">
             <div className="progress">
               <CircularProgressbar
-                value={Math.round(completedSubject/subjects.length)}
-                text={`${Math.round(completedSubject/subjects.length)}%`}
+                value={Math.round(completedSubject/subjects.length * 100 || 0)}
+                text={`${completedSubject/subjects.length * 100 || 0}%`}
                 styles={buildStyles({
                   textSize: '35px',
                   textColor: '#ffffff',

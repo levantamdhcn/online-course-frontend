@@ -2,13 +2,14 @@ import axios from 'axios';
 import config from '../../../../config';
 import React, { useState, useEffect } from 'react';
 import { DotLoader } from 'react-spinners';
-import useSubject from 'hooks/useSubject';
 import { toast } from 'react-toastify';
+import useSubject from '../../../../hooks/useSubject';
 
 const required = {
   title: 'Tiêu đề',
   description: 'Mô tả',
-  file: 'Video'
+  file: 'Video',
+  video: 'Video'
 };
 
 const CreateLectureModal = ({ courseId, onClose }) => {
@@ -107,18 +108,26 @@ const CreateLectureModal = ({ courseId, onClose }) => {
 
   return (
     <div className="create-course-modal">
-      {error}
+      <span id='error-text'>{error}</span>
       <div className="custom-input">
-        <div className="custom-input-label">Tiêu đề</div>
+        <label htmlFor="title" className="custom-input-label">
+          Tiêu đề
+        </label>
         <input
+          id="title"
+          name="title"
           type={'text'}
           className="custom-input-field"
           onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
       </div>
       <div className="custom-input">
-        <div className="custom-input-label">Mô tả</div>
+        <label htmlFor="description" className="custom-input-label">
+          Mô tả
+        </label>
         <input
+          id="description"
+          name="description"
           type={'text'}
           className="custom-input-field"
           onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -130,12 +139,12 @@ const CreateLectureModal = ({ courseId, onClose }) => {
             checked={videoUploadType === 'upload'}
             type="radio"
             id="html"
-            name="fav_language"
+            name="upload_type"
             value="HTML"
-            onInput={() => handleChooseUploadType('upload')}
+            onChange={() => handleChooseUploadType('upload')}
             onClick={() => handleChooseUploadType('upload')}
           />
-          <label for="html" className="ml-2">
+          <label htmlFor="html" className="ml-2">
             Tải video lên Youtube
           </label>
           <br />
@@ -145,12 +154,12 @@ const CreateLectureModal = ({ courseId, onClose }) => {
             checked={videoUploadType === 'video_id'}
             type="radio"
             id="css"
-            name="fav_language"
+            name="upload_type"
             value="CSS"
-            onInput={() => handleChooseUploadType('video_id')}
+            onChange={() => handleChooseUploadType('video_id')}
             onClick={() => handleChooseUploadType('video_id')}
           />
-          <label for="css" className="ml-2">
+          <label htmlFor="css" className="ml-2">
             Nhập ID của video
           </label>
           <br />
@@ -159,8 +168,12 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       {videoUploadType === 'upload' ? (
         <>
           <div className="custom-input">
-            <div className="custom-input-label">Ảnh thu nhỏ</div>
+            <label htmlFor="thumbnail" className="custom-input-label">
+              Ảnh thu nhỏ
+            </label>
             <input
+              id="thumbnail"
+              name="thumbnail"
               className="custom-input-file"
               type={'file'}
               onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
@@ -169,6 +182,8 @@ const CreateLectureModal = ({ courseId, onClose }) => {
           <div className="custom-input">
             <div className="custom-input-label">Video</div>
             <input
+              id="video_custom"
+              name="video_custom"
               className="custom-input-file"
               type={'file'}
               onChange={(e) => setForm({ ...form, video: e.target.files[0] })}
@@ -184,6 +199,8 @@ const CreateLectureModal = ({ courseId, onClose }) => {
         <div className="custom-input">
           <div className="custom-input-label">Video</div>
           <input
+            id="video_custom"
+            name="video_youtube"
             type={'text'}
             className="custom-input-field"
             onChange={(e) => setForm({ ...form, video: e.target.value })}
@@ -192,13 +209,14 @@ const CreateLectureModal = ({ courseId, onClose }) => {
       )}
 
       <div className="custom-input">
-        <div
-          className="custom-input-label"
+        <label htmlFor='tags' className="custom-input-label">Tags</label>
+        <input
+          id='tags'
+          name="tags"
+          type={'text'}
+          className="custom-input-field"
           onChange={(e) => setForm({ ...form, tags: e.target.value })}
-        >
-          Tags
-        </div>
-        <input type={'text'} className="custom-input-field" />
+        />
       </div>
       <div className="button-group flex justify-end">
         <>

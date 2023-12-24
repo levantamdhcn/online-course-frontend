@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import config from '../../../config'
-import useAuth from 'hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import { useHistory } from 'react-router-dom';
 
 const SignUp = () => {
+  const history = useHistory();
   const { loginWithGoogle } = useAuth();
   const [error, setError] = useState(null);
   const {
@@ -51,14 +52,15 @@ const SignUp = () => {
       </div>
       <form className="form-wrapper" onSubmit={handleSubmit(onsubmit)}>
         <div className='text-center'>
-          <span className='text-red-500 font-medium'>{error && error}</span>
+          <span id='error-text' className='text-red-500 font-medium'>{error && error}</span>
         </div>
         <div className="custom-input">
-          <label className="custom-input-label">
+          <label htmlFor='username' className="custom-input-label">
             Tên người dùng
             <span className="icon-require-mark"></span>
           </label>
           <input
+            id='username'
             name={'username'}
             type="text"
             placeholder={'Enter your full name'}
@@ -70,11 +72,12 @@ const SignUp = () => {
           {errors['username'] && <p className="error-msg">{errors.username.message}</p>}
         </div>
         <div className="custom-input">
-          <label className="custom-input-label">
+          <label htmlFor='email' className="custom-input-label">
             Email
             <span className="icon-require-mark"></span>
           </label>
           <input
+            id='email'
             name={'Email'}
             type="email"
             placeholder={'Enter your email'}
@@ -87,11 +90,12 @@ const SignUp = () => {
           {errors['email'] && <p className="error-msg">{errors.email.message}</p>}
         </div>
         <div className="custom-input">
-          <label className="custom-input-label">
+          <label htmlFor='fullname' className="custom-input-label">
             Họ và tên
             <span className="icon-require-mark"></span>
           </label>
           <input
+            id='fullname'
             name={'fullname'}
             type="text"
             placeholder={'Enter your fullname'}
@@ -103,10 +107,11 @@ const SignUp = () => {
           {errors['fullname'] && <p className="error-msg">{errors.fullname.message}</p>}
         </div>
         <div className="custom-input">
-          <label className="custom-input-label">
+          <label htmlFor='password' className="custom-input-label">
             Mật khẩu <span className="icon-require-mark"></span>
           </label>
           <input
+            id='password'
             type={'password'}
             placeholder={'Enter your password'}
             className="custom-input-field"
@@ -121,9 +126,11 @@ const SignUp = () => {
           />
           {errors['password'] && <p className="error-msg">{errors.password.message}</p>}
         </div>
-        <button className="btn btn-primary btn-submit hover-effect" type="submit">
-          Đăng ký
-        </button>
+        <div className='flex justify-center'>
+          <button className="btn btn-primary btn-submit hover-effect" type="submit">
+            Đăng ký
+          </button>
+        </div>
       </form>
       <div className="auth-option-wrapper">
         <div className="auth-option-title">
@@ -152,9 +159,9 @@ const SignUp = () => {
         </div>
         <div className="text-center mt-4">
           Bạn đã có tài khoản?{' '}
-          <Link to="/login" className="main-color">
+          <a href='/login' className="main-color">
             Đăng nhập
-          </Link>
+          </a>
         </div>
       </div>
     </div>

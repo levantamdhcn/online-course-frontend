@@ -1,13 +1,13 @@
-import useAuth from 'hooks/useAuth';
 import React, { useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
-const Login = () => {
+const Login = ({ submit }) => {
   const history = useHistory();
   const { login, loginWithGoogle } = useAuth();
   const [error, setError] = useState(null)
@@ -28,7 +28,6 @@ const Login = () => {
   };
 
   const responseGoogle = async (response) => {
-    console.log(response);
     try {
       const res = await axios.post(`${config.url}/auth/google`, { tokenId: response.tokenId });
       loginWithGoogle(res.data);
@@ -49,16 +48,17 @@ const Login = () => {
       <div className="auth-form-title">
         Đăng <span>Nhập</span>
       </div>
-      <form className="form-wrapper" onSubmit={handleSubmit(onsubmit)}>
+      <form className="form-wrapper" onSubmit={handleSubmit(submit ? submit : onsubmit)}>
         <div className='text-center'>
-          <span className='text-red-500 font-medium'>{error && error}</span>
+          <span id='error-text' className='text-red-500 font-medium'>{error && error}</span>
         </div>
         <div className="custom-input">
-          <label className="custom-input-label">
+          <label htmlFor='email' className="custom-input-label">
             Email
             <span className="icon-require-mark"></span>
           </label>
           <input
+            id='email'
             name={'Email'}
             type="email"
             placeholder={'Enter your email'}
@@ -71,10 +71,11 @@ const Login = () => {
           {errors['email'] && <p className="error-msg">{errors.email.message}</p>}
         </div>
         <div className="custom-input">
-          <label className="custom-input-label">
+          <label htmlFor='password' className="custom-input-label">
             Mật khẩu <span className="icon-require-mark"></span>
           </label>
           <input
+            id='password'
             type={'password'}
             placeholder={'Enter your password'}
             className="custom-input-field"
@@ -89,12 +90,14 @@ const Login = () => {
           />
           {errors['password'] && <p className="error-msg">{errors.password.message}</p>}
         </div>
-        <button className="btn btn-primary btn-submit hover-effect" type="submit">
-          Đăng nhập
-        </button>
+        <div className='flex justify-center'>
+          <button className="btn btn-primary btn-submit hover-effect" type="submit">
+            Đăng nhập
+          </button>
+        </div>
       </form>
       <div className="auth-function">
-        <Link to="/forgot">Quên mật khẩu ?</Link>
+        <span onClick={() => history.push('/forgot')}></span>
       </div>
       <div className="auth-option-wrapper">
         <div className="auth-option-title">

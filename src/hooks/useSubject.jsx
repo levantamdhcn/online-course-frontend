@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import SubjectContext from 'contexts/SubjectContext';
+import SubjectContext from '../contexts/SubjectContext';
 
 const useSubject = () => useContext(SubjectContext);
 

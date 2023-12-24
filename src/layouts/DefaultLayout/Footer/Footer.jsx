@@ -5,18 +5,6 @@ import Logo from 'assets/images/logo.png';
 
 const footerList = {
   contacts: [
-    {
-      link: './',
-      label: '4967 Sardis Sta, Victoria 8007, Montreal.'
-    },
-    {
-      link: './',
-      label: '+1 246-345-0695'
-    },
-    {
-      link: './',
-      label: 'info@learnup.com'
-    }
   ],
   navigation: [
     {

@@ -49,7 +49,7 @@ const Header = () => {
         <div className="header-right">
           {isAuthenticated ? (
             <>
-              <div className="my-course">Khóa học của tôi</div>
+              {/* <div className="my-course">Khóa học của tôi</div> */}
               <div className="setting-modal-wrapper">
                 <img
                   src={user?.avatar}
