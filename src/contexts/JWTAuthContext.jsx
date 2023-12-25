@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import config from '../config';
 import LoadingScreen from '../components/LoadingScreen';
+import { toast } from 'react-toastify';
 
 const initialAuthState = {
   isAuthenticated: false,
@@ -145,6 +146,7 @@ export const AuthProvider = ({ children }) => {
         }
       });
     } catch (error) {
+      toast.error(JSON.stringify(error))
       return Promise.reject(error);
     }
   };

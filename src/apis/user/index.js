@@ -4,4 +4,8 @@ const fetchUsers = () => {
   return axiosClient.get(`/user`);
 }
 
-export { fetchUsers };
+const removeUser = (id) => {
+  return axiosClient.delete(`/user/${id}`);
+}
+
+export { fetchUsers, removeUser };

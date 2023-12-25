@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const history = useHistory();
@@ -26,6 +27,7 @@ const SignUp = () => {
       registerAction(fullname, email, username, password);
     } catch (error) {
       setError(error.response.data.message);
+      toast.error(JSON.stringify(error))
     } 
   };
 

@@ -4,19 +4,37 @@ import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import ModalCreateUser from './ModalCreateUser';
 import { useFetchUsers } from './hook/useQuery';
 import LoadingScreen from 'components/LoadingScreen';
+import { useDeleteExercise } from '../Exercise/hooks/useQuery';
+import { toast } from 'react-toastify';
+import { removeUser } from 'apis/user';
 
 const User = () => {
   const history = useHistory();
+  const [deleting, setDeleting] = useState(false);
   const [search, setSearch] = useState('');
   const [addUser, toggleAddUser] = useState(false);
 
-  const { data, isLoading } = useFetchUsers();
+  const { refetch, data, isLoading } = useFetchUsers();
 
   if (isLoading) return <LoadingScreen />;
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+
+  const handleDelete = async (id) => {
+    try {
+      setDeleting(true)
+      await removeUser(id);
+
+      toast.success('Xóa người dùng thành công !');
+      refetch();
+    } catch (error) {
+      toast.error(JSON.stringify(error))
+    } finally {
+      setDeleting(false);
+    }
+  } 
 
   return (
     <>
@@ -109,7 +127,7 @@ const User = () => {
                           </button>
                           <button
                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-2"
-                            onClick={() => console.log('delete')}
+                            onClick={() => handleDelete(user._id)}
                           >
                             Xóa
                           </button>
