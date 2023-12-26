@@ -92,7 +92,7 @@ const EditPage = () => {
   return (
     <Container maxW="7xl" minH="calc(100vh - 230px)" pt="24px">
       <PageHeader
-        title="Cập nhật bài tập"
+        title="Cập nhật danh mục"
         isRenderBtn={false}
         breadcrumbs={[{ label: 'Quản lý bài tập', link: '/admin/exercise' }]}
       />

@@ -27,6 +27,11 @@ const navItems = [
     link: 'exercise',
     logo: 'exercise',
     label: 'Bài tập'
+  },
+  {
+    link: 'category',
+    logo: 'category',
+    label: 'Danh mục'
   }
 ];
 

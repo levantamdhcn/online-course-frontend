@@ -101,6 +101,21 @@ export const routes = [
       },
       {
         exact: true,
+        path: '/admin/category',
+        component: lazy(() => import('views/admin/Category/List')),
+      },
+      {
+        exact: true,
+        path: '/admin/category/add',
+        component: lazy(() => import('views/admin/Exercise/AddPage')),
+      },
+      {
+        exact: true,
+        path: '/admin/category/:id',
+        component: lazy(() => import('views/admin/Category/EditPage')),
+      },
+      {
+        exact: true,
         path: '/admin/user',
         component: lazy(() => import('views/admin/User')),
       },
