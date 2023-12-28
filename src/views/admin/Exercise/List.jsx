@@ -57,7 +57,7 @@ const List = () => {
           history.push('exercise/add');
         }}
       >
-        Thêm bài giảng
+        Thêm bài tập
       </button>
       {/* <CourseList value={value} setValue={setValue} /> */}
       <FilterDropdown label="Chọn bài giảng" options={options} value={selected} onChange={setSelected} />

@@ -16,7 +16,7 @@ const PopularCategoryList = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: courses?.length <= 3 ? courses?.length : 3,
     slidesToScroll: 1,
     arrows: false,
     autoplay: false,
@@ -60,7 +60,7 @@ const PopularCategoryList = () => {
                       title={el.name}
                       views={el.views}
                       time={el.hours}
-                      courses={el.courses.length}
+                      courses={el?.courses?.length}
                     />
                   </div>
                 );

@@ -79,7 +79,7 @@ const Course = () => {
           </thead>
           <tbody>
             {courses &&
-              courses.length > 0 &&
+              courses?.length > 0 &&
               courses
                 .filter(
                   (el) =>

@@ -52,7 +52,7 @@ const EditPage = () => {
     history.push('/admin/exercise');
   });
 
-  const { mutateAsync, isLoading: deleting } = useDeleteExercise(id, () => {
+  const { mutateAsync, isLoading: deleting } = useDeleteExercise(() => {
     toast("Xóa bài tập thành công", {
       position: "top-right",
       type: "success",

@@ -2,7 +2,7 @@ const outputMessage = "`[Fail]${testcase.s};${result};${testcase.expected}`"
 
 const splitRegrex = "/\s+/g";
 
-const validateRegrex = "/\r?\x0A|\r/g";
+const regexValue = /\r?\n|\r|\n/g;
 
 
 export const value = `
@@ -15,7 +15,7 @@ export const value = `
     const file = resolve(__dirname, 'testcase.txt');
     const data = readFileSync(file);
     // console.log('data', data.toString());
-    let lines = data.toString().split(${splitRegrex});
+    let lines = data.toString().split(${regexValue});
     // console.log(lines);
     var testcases = [];
     for (let i = 0; i < lines.length; i = i + 2) {

@@ -4,7 +4,6 @@ import ModalWrapper from 'components/ModalWrapper/ModalWrapper';
 import ModalCreateUser from './ModalCreateUser';
 import { useFetchUsers } from './hook/useQuery';
 import LoadingScreen from 'components/LoadingScreen';
-import { useDeleteExercise } from '../Exercise/hooks/useQuery';
 import { toast } from 'react-toastify';
 import { removeUser } from 'apis/user';
 

@@ -65,6 +65,14 @@ const AdminNav = ({ tab, setTab }) => {
               <div className="modal-options">
                 <div
                   className="option"
+                  onClick={() => {
+                    history.push('/');
+                  }}
+                >
+                  Trang chủ
+                </div>
+                <div
+                  className="option"
                   onClick={() => history.push(`/profile/${user && user?._id}`)}
                 >
                   Cài đặt
@@ -77,15 +85,6 @@ const AdminNav = ({ tab, setTab }) => {
                   }}
                 >
                   Đăng xuất
-                </div>
-
-                <div
-                  className="option"
-                  onClick={() => {
-                    history.push('/');
-                  }}
-                >
-                  Trang chủ
                 </div>
               </div>
             </div>

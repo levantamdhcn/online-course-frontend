@@ -111,7 +111,7 @@ export const routes = [
       },
       {
         exact: true,
-        path: '/admin/category/:id',
+        path: '/admin/category/edit/:id',
         component: lazy(() => import('views/admin/Category/EditPage')),
       },
       {

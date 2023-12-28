@@ -3,10 +3,15 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { validationUpdateCategorySchema } from './form.validation';
 import FormCard from 'components/FormCard';
-import { SimpleGrid, Stack } from '@chakra-ui/react';
+import { Button, HStack, SimpleGrid, Stack } from '@chakra-ui/react';
 import FormInput from 'components/FormInput';
+import ModalConFirmDelete from 'components/ModalConfirmDelete';
+import { useParams } from 'react-router-dom';
 
 const CategoryForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues }) => {
+  const { id } = useParams();
+  const [isConfirm, setIsConfirm] = React.useState(false);
+
   const {
     handleSubmit,
     control,
@@ -18,8 +23,25 @@ const CategoryForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
   } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(validationUpdateCategorySchema),
-    defaultValues
+    defaultValues: {
+      name: defaultValues?.name,
+      slug: defaultValues?.slug
+    }
   });
+
+  React.useEffect(() => {
+    reset({
+      name: defaultValues?.name,
+      slug: defaultValues?.slug
+    });
+  }, [defaultValues, reset]);
+
+  const onDeleteCategory = async (id) => {
+    if (id && onDelete && isConfirm) {
+      onDelete(id);
+      setIsConfirm(false);
+    }
+  };
 
   return (
     <FormCard>
@@ -50,13 +72,32 @@ const CategoryForm = ({ onSubmit, handleClickCancelBtn, onDelete, defaultValues 
                 onChange={field.onChange}
                 type="text"
                 label="Tên rút gọn"
-                error={errors.name}
+                error={errors.slug}
                 maxW="100%"
               />
             )}
           />
         </Stack>
       </SimpleGrid>
+
+      <HStack spacing="32px" mt="32px">
+        <Button variant="primary" onClick={handleSubmit(onSubmit)}>
+          Lưu &amp; Tiếp tục
+        </Button>
+        {!!onDelete && (
+          <Button variant="outline" onClick={() => setIsConfirm(true)}>
+            Xóa danh mục
+          </Button>
+        )}
+        <Button variant="primary-alpha" onClick={handleClickCancelBtn}>
+          Hủy
+        </Button>
+      </HStack>
+      <ModalConFirmDelete
+        show={!!isConfirm}
+        handleDeleted={() => onDeleteCategory(id)}
+        handleCancel={() => setIsConfirm(false)}
+      />
     </FormCard>
   );
 };

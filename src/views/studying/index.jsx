@@ -54,6 +54,9 @@ const Studying = () => {
   
   const completedSubject = subjects.filter(el => el.isCompleted).length;
 
+  console.log('completedSubject', completedSubject);
+  console.log('subjects', Math.round(completedSubject/subjects?.length * 100 || 0));
+
   if(isLoading) return <LoadingScreen />;
 
   return (
@@ -69,8 +72,8 @@ const Studying = () => {
           <div className="studying-header-right">
             <div className="progress">
               <CircularProgressbar
-                value={Math.round(completedSubject/subjects.length * 100 || 0)}
-                text={`${completedSubject/subjects.length * 100 || 0}%`}
+                value={Math.round(completedSubject/subjects?.length * 100 || 0)}
+                text={`${Math.round(completedSubject/subjects?.length * 100 || 0)}%`}
                 styles={buildStyles({
                   textSize: '35px',
                   textColor: '#ffffff',
